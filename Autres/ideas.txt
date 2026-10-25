@@ -3,10 +3,4 @@ Nom de l'agent :
 
 Marche en nimporte quelle langue
 
-Datasets :
-- AMI
-- ICSI
-- MeetingBank
-- QMSum
-
 A transformer en JSON
