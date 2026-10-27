@@ -29,18 +29,20 @@ Details: Data\Processed\qmsum_retrieval_validation_comparison.jsonl
 
 Execute :
 .\.venv\Scripts\python.exe "Data Analysis/evaluate_qmsum_retrieval.py"
-.\.venv\Scripts\python.exe "Data Analysis/recherche_ebeddings.py"
+.\.venv\Scripts\python.exe "Data Analysis/recherche_embeddings.py"
 
 Pour créer 
 qmsum_retrieval_validation_results.jsonl
 et
 qmsum_retrieval_validation_comparison.jsonl
 
+-> Donne une comparaison entre les 3 méthodes : TF-IDF, BM25, et pretained embeddings (modèle multilingual-e5-small)
 
+Prochaine étape : fine-tuner
 
+Création de : finetune_qmsum_e5.py
 
-
-
+Création du Model fine-tuné : Models/qmsum-e5-small qui associe le texte à des vecteurs
 
 
 

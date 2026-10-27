@@ -20,3 +20,32 @@ Ce dépôt contient le cadrage initial du projet. Le prototype, les données, le
 - Évaluer séparément le retrieval, les relations, les intentions et le système complet.
 
 Le cahier des charges détaille le périmètre, les exigences, les critères de recette, les livrables et le calendrier.
+
+## Fine-tuning E5 sur QMSum
+
+Le script [finetune_qmsum_e5.py](Data%20Analysis/finetune_qmsum_e5.py) adapte `intfloat/multilingual-e5-small` à la recherche de passages de réunion. Il construit des paires question/passage à partir de `Data/Processed/qmsum.jsonl` et `qmsum_10_tours.jsonl`. Seul le split `train` sert à l'entraînement ; les 237 questions du split `validation` servent à comparer Hit@5, Recall@5 et MRR@5 avant et après.
+
+```powershell
+python -m pip install -U sentence-transformers datasets accelerate
+python "Data Analysis/finetune_qmsum_e5.py" --prepare-only
+python "Data Analysis/finetune_qmsum_e5.py" --epochs 2 --batch-size 16
+```
+
+Le modèle final est le dernier checkpoint dans `Models/qmsum-e5-small/checkpoints/` ; les mesures sont dans `Models/qmsum-e5-small/metrics.json`. Le script ne crée pas une troisième copie du modèle après l'entraînement. La loss contrastive traite les 16 paires par blocs de 2 (`--mini-batch-size`) pour limiter l'utilisation de la mémoire ; sur CPU, l'entraînement complet peut prendre plusieurs heures. Utiliser `--fp16` seulement avec un GPU compatible. Les passages pertinents sont définis par chevauchement des tours annotés dans QMSum ; ces labels sont approximatifs, particulièrement pour les longues discussions.
+
+### GPU NVIDIA sous Windows
+
+Le venv `.venv` de cette machine contient une version CPU de PyTorch. Le venv `.venv-gpu` contient `torch 2.14.1+cu130` et détecte la RTX 4060. Pour entraîner sur GPU, appeler explicitement son Python, même si `.venv` est activé dans PowerShell :
+
+```powershell
+.venv-gpu\Scripts\python.exe -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+.venv-gpu\Scripts\python.exe "Data Analysis\finetune_qmsum_e5.py" --epochs 2 --batch-size 16
+```
+
+Après un entraînement terminé, si seule la sauvegarde finale ou l'évaluation a échoué, évaluer directement le dernier checkpoint sans réentraîner :
+
+```powershell
+.venv-gpu\Scripts\python.exe "Data Analysis\finetune_qmsum_e5.py" --evaluate-checkpoint "Models\qmsum-e5-small\checkpoints\checkpoint-842"
+```
+
+Pour recréer ce venv sur une machine compatible : installer une version CUDA de PyTorch selon le [sélecteur officiel PyTorch](https://pytorch.org/get-started/locally/), puis `sentence-transformers`, `datasets` et `accelerate`. Le script affiche le périphérique utilisé avant de démarrer l'entraînement.

@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.venv-gpu/
 venv/
 .env
 .env.*
@@ -8,7 +9,6 @@ venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-models/
 checkpoints/
 runs/
 tmp/

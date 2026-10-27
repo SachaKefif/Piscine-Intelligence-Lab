@@ -1,0 +1,16 @@
+{
+  "model": "intfloat/multilingual-e5-small",
+  "model_path": "C:\\Users\\Sacha Kefif\\Desktop\\Maker Intelligence Lab\\Piscine\\Models\\qmsum-e5-small\\checkpoints\\checkpoint-842",
+  "training_pairs": 6734,
+  "validation_questions": 237,
+  "pretrained": {
+    "hit_at_5": 0.7975,
+    "recall_at_5": 0.4112,
+    "mrr_at_5": 0.5982
+  },
+  "fine_tuned": {
+    "hit_at_5": 0.865,
+    "recall_at_5": 0.4694,
+    "mrr_at_5": 0.6598
+  }
+}
