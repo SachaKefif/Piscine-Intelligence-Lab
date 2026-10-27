@@ -1,0 +1,12 @@
+Importé les consignes
+
+Importé les 4 datasets
+
+Transformé les 4 datasets en 5 fichiers .jsonl
+
+partir de qmsum.jsonl et obtenir, pour une question, une liste de 5 passages classés avec leurs textes :
+- Creer un nouveau fichier .jsonl "qmsum_10_passages.jsonl", contenant des passages de 10 tours
+- Utiliser TF-IDF ou BM25 pour obtenir un score pour ce passage
+
+
+

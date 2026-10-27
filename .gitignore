@@ -12,3 +12,5 @@ models/
 checkpoints/
 runs/
 tmp/
+
+Data/Processed/

@@ -1,6 +1,3 @@
 Nom de l'agent : 
 
-
 Marche en nimporte quelle langue
-
-A transformer en JSON
