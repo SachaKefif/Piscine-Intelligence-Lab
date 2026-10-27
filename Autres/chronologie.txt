@@ -8,5 +8,40 @@ partir de qmsum.jsonl et obtenir, pour une question, une liste de 5 passages cla
 - Creer un nouveau fichier .jsonl "qmsum_10_passages.jsonl", contenant des passages de 10 tours
 - Utiliser TF-IDF ou BM25 pour obtenir un score pour ce passage
 
+Comparé les deux méthodes avec evaluate_qmsum_retrieval.py
+
+Ajout de la recherche embeddings
+bibliothèque : python -m pip install sentence-transformers
+
+Creation de recherche_embeddings
+
+PS C:\Users\Sacha Kefif\Desktop\Maker Intelligence Lab\Piscine> .\.venv\Scripts\python.exe "Data Analysis/recherche_ebeddings.py"
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████████| 199/199 [00:00<00:00, 2916.14it/s]
+Model: intfloat/multilingual-e5-small; maximum input: 512 tokens; passages over limit: 188/2030
+Loaded 2030 cached passage embeddings.
+Batches: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:01<00:00, 14.28it/s]
+Evaluated 237 questions from 35 validation meetings.
+Method                Hit@5   Recall@5   MRR@5
+TF-IDF                0.734     0.359      0.517
+BM25                  0.802     0.410      0.578
+Pretrained embeddings 0.797     0.411      0.598
+Details: Data\Processed\qmsum_retrieval_validation_comparison.jsonl
+
+Execute :
+.\.venv\Scripts\python.exe "Data Analysis/evaluate_qmsum_retrieval.py"
+.\.venv\Scripts\python.exe "Data Analysis/recherche_ebeddings.py"
+
+Pour créer 
+qmsum_retrieval_validation_results.jsonl
+et
+qmsum_retrieval_validation_comparison.jsonl
+
+
+
+
+
+
+
+
 
 
