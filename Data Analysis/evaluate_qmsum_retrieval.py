@@ -62,7 +62,7 @@ def gold_passage_ids(passages, spans):
 
 def evaluate_ranking(passages, scores, gold_ids):
     ranked_indices = sorted(range(len(passages)), key=lambda i: scores[i], reverse=True)
-    top_indices = [i for i in ranked_indices if scores[i] > 0][:TOP_K]
+    top_indices = ranked_indices[:TOP_K]
     results = [
         {
             "passage_id": passages[i]["passage_id"],

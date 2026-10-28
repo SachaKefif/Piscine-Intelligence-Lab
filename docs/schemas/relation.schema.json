@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Relation between semantic units",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["from_id", "to_id", "relation", "evidence_source_id"],
+  "properties": {
+    "from_id": { "type": "string", "minLength": 1 },
+    "to_id": { "type": "string", "minLength": 1 },
+    "relation": {
+      "enum": ["supports", "contradicts", "supersedes", "creates_action", "answers", "unrelated"]
+    },
+    "evidence_source_id": { "type": "string", "minLength": 1 }
+  }
+}

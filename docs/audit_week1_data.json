@@ -1,0 +1,153 @@
+{
+  "corpora": {
+    "ami": {
+      "records": 171,
+      "splits": {
+        "unassigned": 171
+      },
+      "specific_questions": null,
+      "missing_source_date": 171,
+      "missing_source_files": 0,
+      "missing_source_paths": 0,
+      "duplicate_ids_within_split": 0,
+      "cross_split_overlap": [],
+      "sha256": "15363a7a209a72077be6eb92580af79a1eaf1e623efa0f18d5a8b2f755903c6a"
+    },
+    "icsi": {
+      "records": 75,
+      "splits": {
+        "unassigned": 75
+      },
+      "specific_questions": null,
+      "missing_source_date": 75,
+      "missing_source_files": 0,
+      "missing_source_paths": 0,
+      "duplicate_ids_within_split": 0,
+      "cross_split_overlap": [],
+      "sha256": "a646e0f244f3149a01930794d85653d28a8547e58b2e07a090a626c94a945476"
+    },
+    "meetingbank": {
+      "records": 6892,
+      "splits": {
+        "test": 862,
+        "train": 5169,
+        "validation": 861
+      },
+      "specific_questions": null,
+      "missing_source_date": 6892,
+      "missing_source_files": 0,
+      "missing_source_paths": 0,
+      "duplicate_ids_within_split": 0,
+      "cross_split_overlap": [
+        {
+          "splits": [
+            "test",
+            "train"
+          ],
+          "same_id": 0,
+          "same_exact_transcript": 0
+        },
+        {
+          "splits": [
+            "test",
+            "validation"
+          ],
+          "same_id": 0,
+          "same_exact_transcript": 0
+        },
+        {
+          "splits": [
+            "train",
+            "validation"
+          ],
+          "same_id": 0,
+          "same_exact_transcript": 0
+        }
+      ],
+      "sha256": "aaa7b5819a3c783ddd4817fdf6b51965f0c0321ad698cf1e2f22fc341d8fde5d"
+    },
+    "qmsum": {
+      "records": 232,
+      "splits": {
+        "test": 35,
+        "train": 162,
+        "validation": 35
+      },
+      "specific_questions": {
+        "test": 244,
+        "train": 1095,
+        "validation": 237
+      },
+      "missing_source_date": 232,
+      "missing_source_files": 0,
+      "missing_source_paths": 0,
+      "duplicate_ids_within_split": 0,
+      "cross_split_overlap": [
+        {
+          "splits": [
+            "test",
+            "train"
+          ],
+          "same_id": 0,
+          "same_exact_transcript": 0
+        },
+        {
+          "splits": [
+            "test",
+            "validation"
+          ],
+          "same_id": 0,
+          "same_exact_transcript": 0
+        },
+        {
+          "splits": [
+            "train",
+            "validation"
+          ],
+          "same_id": 0,
+          "same_exact_transcript": 0
+        }
+      ],
+      "sha256": "f93c3439fcde8cd7ba17f7e49d0ece935040c4e0a2d52f9d6849b279b690817b"
+    }
+  },
+  "qmsum_passages": {
+    "records": 13022,
+    "splits": {
+      "test": 2086,
+      "train": 8906,
+      "validation": 2030
+    },
+    "empty_texts": 0,
+    "duplicate_passage_ids": 0,
+    "coverage_errors": 0,
+    "split_mismatches": 0,
+    "invalid_question_spans": 0,
+    "questions_without_gold_passage": 0,
+    "gold_passages_per_question_median": 3.0,
+    "gold_passages_per_question_max": 59,
+    "questions_with_more_than_10_gold_passages": 242,
+    "sha256": "d2978012c0bb013cc14f207949c0ad9bc606440b304961fb6943ab07db98f058"
+  },
+  "meetingbank_meeting_group_audit": {
+    "heuristic": "first two underscore-delimited UID fields: city and date",
+    "inferred_meetings": 1249,
+    "malformed_uids": 0,
+    "meetings_in_multiple_splits": 791,
+    "meetings_in_train_and_validation": 535,
+    "meetings_in_train_and_test": 529,
+    "meetings_in_validation_and_test": 291
+  },
+  "qmsum_overlap_with_source_corpora": {
+    "ami": {
+      "test": 20,
+      "train": 97,
+      "validation": 20
+    },
+    "icsi": {
+      "test": 9,
+      "train": 41,
+      "validation": 9
+    }
+  }
+}

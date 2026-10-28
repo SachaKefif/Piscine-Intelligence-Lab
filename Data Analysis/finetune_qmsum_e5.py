@@ -184,6 +184,8 @@ def main():
             per_device_train_batch_size=args.batch_size,
             learning_rate=args.learning_rate,
             warmup_steps=0.1,
+            seed=42,
+            data_seed=42,
             fp16=args.fp16,
             batch_sampler=BatchSamplers.NO_DUPLICATES,
             dataloader_pin_memory=False,

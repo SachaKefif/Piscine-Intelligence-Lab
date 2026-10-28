@@ -4,12 +4,19 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Ce dépôt contient le cadrage initial du projet. Le prototype, les données, les expériences et la démonstration restent à réaliser.
+Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La validation retrieval est mesurée ; l'évaluation test finale, les relations, l'agent et la démonstration restent à réaliser.
 
 ## Cahier des charges
 
-- [Version éditable](docs/cahier_des_charges.md)
-- [Version PDF](output/pdf/cahier-des-charges.pdf)
+- [Version éditable](Consignes/cahier_des_charges.md)
+- [Version PDF](Consignes/cahier-des-charges.pdf)
+
+## Documentation des données et de l'évaluation
+
+- [Fiches des quatre corpus](docs/datasets.md) : provenance, licence, préparation, effectifs et limites.
+- [Schéma d'annotation](docs/schema_annotation.md) : unités, statuts, preuves, relations et contrats JSON.
+- [Protocole d'évaluation](docs/protocole_evaluation.md) : splits, paramètres, métriques et règles contre la fuite de données.
+- [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés
 

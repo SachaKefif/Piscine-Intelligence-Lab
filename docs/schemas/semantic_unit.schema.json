@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Semantic unit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "unit_id", "source_id", "source_date", "type", "statement", "evidence",
+    "start_turn", "end_turn", "status", "speaker", "owner", "due_date", "project_id"
+  ],
+  "properties": {
+    "unit_id": { "type": "string", "minLength": 1 },
+    "source_id": { "type": "string", "minLength": 1 },
+    "source_date": { "type": ["string", "null"], "format": "date" },
+    "type": {
+      "enum": ["decision", "action", "commitment", "question", "answer", "fact", "risk", "idea"]
+    },
+    "statement": { "type": "string", "minLength": 1 },
+    "evidence": { "type": "string", "minLength": 1 },
+    "start_turn": { "type": "integer", "minimum": 0 },
+    "end_turn": { "type": "integer", "minimum": 0 },
+    "status": {
+      "enum": ["proposed", "confirmed", "rejected", "hypothetical", "superseded", "asserted", "unknown"]
+    },
+    "speaker": { "type": ["string", "null"] },
+    "owner": { "type": ["string", "null"] },
+    "due_date": { "type": ["string", "null"], "format": "date" },
+    "project_id": { "type": ["string", "null"] }
+  }
+}
