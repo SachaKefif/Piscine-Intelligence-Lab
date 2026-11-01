@@ -1,0 +1,27 @@
+{
+  "source": "Data\\Processed\\qmsum_hard_negative_candidates.jsonl",
+  "reviewed_count": 38,
+  "accepted_count": 25,
+  "rejected_count": 13,
+  "accepted_by_domain": {
+    "Academic": 6,
+    "Product": 19
+  },
+  "rejected": {
+    "Bro007:1": "Le candidat discute aussi de la d?tection du silence ; la question est assez large pour qu'il puisse r?pondre partiellement.",
+    "IS1008a:2": "Le candidat r?pond partiellement avec l'attrait visuel et la simplicit? d'utilisation.",
+    "ES2002d:4": "Le positif ne couvre qu'une partie de la r?ponse de r?f?rence ? cette question large.",
+    "ES2014d:1": "Le candidat donne aussi l'avis de l'Industrial Designer sur l'aspect et la sensation du produit.",
+    "IS1000c:2": "Le candidat contient un avis pertinent du chef de projet sur les coques interchangeables.",
+    "IS1007b:2": "Le positif attribue le motif principal ? Marketing, alors que la question demande l'avis de l'Industrial Designer.",
+    "ES2005d:4": "Le positif explique la m?thode d'?valuation, mais pas le r?sultat final demand?.",
+    "Bro008:5": "Le positif ne contient pas l'avis de PhD C demand? avec celui du professeur.",
+    "IS1002c:1": "Le candidat mentionne d?j? la solution plastique et caoutchouc et peut r?pondre partiellement.",
+    "IS1009d:7": "Le candidat d?crit l'apparence comme argument de vente, ce qui r?pond ? une partie de la question.",
+    "ES2013c:2": "Le candidat poursuit la m?me explication de l'interface simple et peut servir de preuve.",
+    "TS3005c:2": "Le positif omet les pr?f?rences des personnes ?g?es pr?sentes dans la r?ponse de r?f?rence.",
+    "ES2014d:4": "Le candidat contient aussi une appr?ciation du chef de projet sur les id?es trouv?es et peut r?pondre partiellement ? la question sur la cr?ativit?."
+  },
+  "review_method": "single assistant semantic review of full candidate passage, positive passage, and reference answer; revisited for the review queue",
+  "limitation": "QMSum span labels are approximate; independent human review is still advisable before a final data release."
+}
