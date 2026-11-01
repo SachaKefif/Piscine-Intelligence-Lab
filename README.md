@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La validation retrieval est mesurée ; l'évaluation test finale, les relations, l'agent et la démonstration restent à réaliser.
+Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. Les relations, l'agent et la démonstration restent à réaliser.
 
 ## Cahier des charges
 
@@ -16,6 +16,7 @@ Le dépôt contient les quatre corpus normalisés, les baselines de recherche QM
 - [Fiches des quatre corpus](docs/datasets.md) : provenance, licence, préparation, effectifs et limites.
 - [Schéma d'annotation](docs/schema_annotation.md) : unités, statuts, preuves, relations et contrats JSON.
 - [Protocole d'évaluation](docs/protocole_evaluation.md) : splits, paramètres, métriques et règles contre la fuite de données.
+- [Rapport final de recherche](docs/rapport_retrieval_final.md) : validation, test, résultats par domaine, erreurs et coûts.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés

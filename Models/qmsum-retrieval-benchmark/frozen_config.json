@@ -1,0 +1,40 @@
+{
+  "hybrid_weight_e5": 0.75,
+  "rrf_k": 60,
+  "candidate_weights": [
+    {
+      "weight_e5": 0.25,
+      "hit_at_5": 0.8354,
+      "recall_at_5": 0.4393,
+      "mrr_at_5": 0.6258,
+      "ndcg_at_5": 0.4857
+    },
+    {
+      "weight_e5": 0.5,
+      "hit_at_5": 0.8354,
+      "recall_at_5": 0.448,
+      "mrr_at_5": 0.6566,
+      "ndcg_at_5": 0.5163
+    },
+    {
+      "weight_e5": 0.75,
+      "hit_at_5": 0.8565,
+      "recall_at_5": 0.472,
+      "mrr_at_5": 0.6694,
+      "ndcg_at_5": 0.537
+    }
+  ],
+  "selection_metric_order": [
+    "mrr_at_5",
+    "ndcg_at_5",
+    "hit_at_5"
+  ],
+  "selected_retriever": "hybride",
+  "batch_size": 16,
+  "fingerprints": {
+    "meetings": "f93c3439fcde8cd7ba17f7e49d0ece935040c4e0a2d52f9d6849b279b690817b",
+    "passages": "d2978012c0bb013cc14f207949c0ad9bc606440b304961fb6943ab07db98f058",
+    "adapted_model": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46",
+    "benchmark_code": "9cb1c090c776801edf107f3057c4ee33fdfa4290825ed7b125ce98079165d0f9"
+  }
+}

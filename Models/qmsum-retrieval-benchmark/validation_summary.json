@@ -1,0 +1,194 @@
+{
+  "split": "validation",
+  "meeting_count": 35,
+  "question_count": 237,
+  "passage_count": 2030,
+  "candidate_scope": "question meeting only",
+  "gold_rule": "any inclusive turn overlap with QMSum relevant_text_span",
+  "top_k": 5,
+  "hybrid": {
+    "rule": "weighted reciprocal rank fusion",
+    "rrf_k": 60,
+    "weight_e5": 0.75,
+    "weight_bm25": 0.25
+  },
+  "selected_retriever_on_validation": "hybride",
+  "methods": {
+    "tf_idf": {
+      "global": {
+        "questions": 237,
+        "hit_at_5": 0.7342,
+        "recall_at_5": 0.3594,
+        "mrr_at_5": 0.517,
+        "ndcg_at_5": 0.3889
+      },
+      "domains": {
+        "Academic": {
+          "questions": 45,
+          "hit_at_5": 0.6889,
+          "recall_at_5": 0.2263,
+          "mrr_at_5": 0.4996,
+          "ndcg_at_5": 0.3014
+        },
+        "Committee": {
+          "questions": 67,
+          "hit_at_5": 0.8806,
+          "recall_at_5": 0.7249,
+          "mrr_at_5": 0.7129,
+          "ndcg_at_5": 0.6378
+        },
+        "Product": {
+          "questions": 125,
+          "hit_at_5": 0.672,
+          "recall_at_5": 0.2113,
+          "mrr_at_5": 0.4183,
+          "ndcg_at_5": 0.2869
+        }
+      }
+    },
+    "bm25": {
+      "global": {
+        "questions": 237,
+        "hit_at_5": 0.8017,
+        "recall_at_5": 0.4097,
+        "mrr_at_5": 0.5781,
+        "ndcg_at_5": 0.4447
+      },
+      "domains": {
+        "Academic": {
+          "questions": 45,
+          "hit_at_5": 0.6889,
+          "recall_at_5": 0.2579,
+          "mrr_at_5": 0.5126,
+          "ndcg_at_5": 0.337
+        },
+        "Committee": {
+          "questions": 67,
+          "hit_at_5": 1.0,
+          "recall_at_5": 0.8157,
+          "mrr_at_5": 0.8433,
+          "ndcg_at_5": 0.7592
+        },
+        "Product": {
+          "questions": 125,
+          "hit_at_5": 0.736,
+          "recall_at_5": 0.2467,
+          "mrr_at_5": 0.4596,
+          "ndcg_at_5": 0.3149
+        }
+      }
+    },
+    "e5_initial": {
+      "global": {
+        "questions": 237,
+        "hit_at_5": 0.7975,
+        "recall_at_5": 0.4112,
+        "mrr_at_5": 0.5982,
+        "ndcg_at_5": 0.4682
+      },
+      "domains": {
+        "Academic": {
+          "questions": 45,
+          "hit_at_5": 0.7556,
+          "recall_at_5": 0.2725,
+          "mrr_at_5": 0.473,
+          "ndcg_at_5": 0.3399
+        },
+        "Committee": {
+          "questions": 67,
+          "hit_at_5": 0.8806,
+          "recall_at_5": 0.7465,
+          "mrr_at_5": 0.7331,
+          "ndcg_at_5": 0.6805
+        },
+        "Product": {
+          "questions": 125,
+          "hit_at_5": 0.768,
+          "recall_at_5": 0.2815,
+          "mrr_at_5": 0.5711,
+          "ndcg_at_5": 0.4007
+        }
+      }
+    },
+    "e5_adapte": {
+      "global": {
+        "questions": 237,
+        "hit_at_5": 0.865,
+        "recall_at_5": 0.4694,
+        "mrr_at_5": 0.6598,
+        "ndcg_at_5": 0.5362
+      },
+      "domains": {
+        "Academic": {
+          "questions": 45,
+          "hit_at_5": 0.7556,
+          "recall_at_5": 0.2715,
+          "mrr_at_5": 0.5141,
+          "ndcg_at_5": 0.35
+        },
+        "Committee": {
+          "questions": 67,
+          "hit_at_5": 0.8955,
+          "recall_at_5": 0.754,
+          "mrr_at_5": 0.7522,
+          "ndcg_at_5": 0.6927
+        },
+        "Product": {
+          "questions": 125,
+          "hit_at_5": 0.888,
+          "recall_at_5": 0.388,
+          "mrr_at_5": 0.6628,
+          "ndcg_at_5": 0.5194
+        }
+      }
+    },
+    "hybride": {
+      "global": {
+        "questions": 237,
+        "hit_at_5": 0.8565,
+        "recall_at_5": 0.472,
+        "mrr_at_5": 0.6694,
+        "ndcg_at_5": 0.537
+      },
+      "domains": {
+        "Academic": {
+          "questions": 45,
+          "hit_at_5": 0.7333,
+          "recall_at_5": 0.2692,
+          "mrr_at_5": 0.5478,
+          "ndcg_at_5": 0.3609
+        },
+        "Committee": {
+          "questions": 67,
+          "hit_at_5": 0.9104,
+          "recall_at_5": 0.7726,
+          "mrr_at_5": 0.7799,
+          "ndcg_at_5": 0.7162
+        },
+        "Product": {
+          "questions": 125,
+          "hit_at_5": 0.872,
+          "recall_at_5": 0.3838,
+          "mrr_at_5": 0.654,
+          "ndcg_at_5": 0.5043
+        }
+      }
+    }
+  },
+  "timing_seconds": {
+    "tf_idf": 0.46615649957675487,
+    "bm25": 1.2694220998091623,
+    "e5_initial": 12.96,
+    "e5_adapte": 10.878
+  },
+  "peak_gpu_allocated_bytes": {
+    "e5_initial": 634618880,
+    "e5_adapte": 635274240
+  },
+  "fingerprints": {
+    "meetings": "f93c3439fcde8cd7ba17f7e49d0ece935040c4e0a2d52f9d6849b279b690817b",
+    "passages": "d2978012c0bb013cc14f207949c0ad9bc606440b304961fb6943ab07db98f058",
+    "adapted_model": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46",
+    "benchmark_code": "9cb1c090c776801edf107f3057c4ee33fdfa4290825ed7b125ce98079165d0f9"
+  }
+}

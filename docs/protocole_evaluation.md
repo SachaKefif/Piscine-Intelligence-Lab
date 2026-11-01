@@ -1,6 +1,6 @@
 # Protocole d'évaluation — recherche de preuves QMSum
 
-Version 1 consignée le 28 octobre 2026, **après** les premières mesures de validation et **avant** tout score de retrieval sur le split test. Ce protocole décrit l'expérience déjà réalisée et fixe les règles des comparaisons suivantes. Il ne transforme pas rétrospectivement les résultats de validation en test indépendant.
+Version 1 consignée le 28 octobre 2026, **après** les premières mesures de validation et **avant** tout score de retrieval sur le split test. Un addendum du 1er novembre 2026 consigne le gel de la fusion puis l'évaluation finale, décrite dans le [rapport retrieval](rapport_retrieval_final.md). Les résultats de validation restent distincts du test indépendant.
 
 ## 1. Question expérimentale et périmètre
 
@@ -14,13 +14,13 @@ Les [fiches de données](datasets.md), le [schéma d'annotation](schema_annotati
 |---|---:|---:|---:|---|
 | Train | 162 | 1 095 | 8 906 | Fine-tuning ; 6 734 paires positives obtenues par chevauchement. |
 | Validation | 35 | 237 | 2 030 | Choix du modèle, comparaison des méthodes et analyse d'erreurs. |
-| Test | 35 | 244 | 2 086 | Évaluation finale après gel des choix. Aucun score du modèle n'a encore été calculé sur ce split dans ce dépôt. |
+| Test | 35 | 244 | 2 086 | Évaluation finale après gel des choix, exécutée le 1er novembre 2026. |
 
 Le split est celui fourni par QMSum, au niveau de la **réunion**. L'audit ne trouve aucun `meeting_id` ou transcript exactement identique entre ses trois splits, aucun span de question hors limites, aucun trou de couverture dans les passages, et aucune question spécifique sans passage positif. Les fichiers exacts sont identifiés par SHA-256 dans [`audit_week1_data.json`](audit_week1_data.json). Les questions générales sont exclues : elles n'ont pas de spans localisant la preuve.
 
 **Règle contre la fuite entre corpus :** QMSum réutilise 137 réunions AMI et 59 ICSI présentes dans les exports locaux. Les 20 réunions AMI et 9 ICSI de la validation QMSum, ainsi que les 20 AMI et 9 ICSI du test QMSum, ne doivent jamais entrer dans un train complémentaire AMI/ICSI. Un mélange de corpus doit affecter le split par identité de réunion commune. MeetingBank n'est pas utilisé dans ce benchmark : son split actuel est par ligne/segment et 791 réunions inférées apparaissent dans plusieurs splits.
 
-L'audit du test n'a contrôlé que la structure et quelques exemples de questions pour vérifier les spans ; **aucun score test** n'a servi à choisir l'encodeur ou ses paramètres. Ne pas examiner les erreurs test avant de figer les variantes et objectifs.
+Avant le gel, l'audit du test n'avait contrôlé que la structure et quelques exemples de questions pour vérifier les spans ; **aucun score test** n'a servi à choisir l'encodeur ou ses paramètres. Les erreurs test n'ont été examinées qu'après l'évaluation finale figée.
 
 ## 3. Candidats et vérité de référence
 
@@ -63,9 +63,25 @@ Les métriques sont moyennées **par question** :
 
 Sources : [`qmsum_retrieval_validation_comparison.jsonl`](../Data/Processed/qmsum_retrieval_validation_comparison.jsonl) et [`metrics.json`](../Models/qmsum-e5-small/metrics.json). Les deux sorties sont des **résultats de validation**, pas des performances finales généralisables.
 
+### Gel de la comparaison finale avant le test — 1er novembre 2026
+
+Le script [`benchmark_qmsum_final.py`](../Data%20Analysis/benchmark_qmsum_final.py) recalcule les cinq méthodes avec les mêmes passages et labels et ajoute nDCG@5. Il reproduit Hit@5, Recall@5 et MRR@5 des quatre méthodes déjà mesurées. La fusion hybride utilise les rangs BM25 et E5 adapté dans la réunion de la question : `score = (1-w)/(60 + rang_BM25) + w/(60 + rang_E5)`. Seuls `w = 0,25`, `0,50` et `0,75` ont été comparés sur la validation ; le choix maximise MRR@5, puis nDCG@5 et Hit@5 en cas d'égalité. **Le poids figé avant le test est `w = 0,75` et le retriever sélectionné est l'hybride.** Le modèle E5 adapté reste `checkpoint-842` ; l'essai avec 26 triplets réels, moins bon en MRR@5 sur validation, n'entre pas dans la comparaison finale.
+
+| Méthode | Hit@5 | Recall@5 | MRR@5 | nDCG@5 |
+|---|---:|---:|---:|---:|
+| TF-IDF | 0,7342 | 0,3594 | 0,5170 | 0,3889 |
+| BM25 | 0,8017 | 0,4097 | 0,5781 | 0,4447 |
+| E5 initial | 0,7975 | 0,4112 | 0,5982 | 0,4682 |
+| E5 adapté | **0,8650** | 0,4694 | 0,6598 | 0,5362 |
+| Hybride BM25 + E5 adapté | 0,8565 | **0,4720** | **0,6694** | **0,5370** |
+
+L'hybride gagne en MRR@5 sur Academic et Committee, mais baisse sur Product (`0,6628` à `0,6540`) ; son Hit@5 global est aussi inférieur à celui d'E5 adapté seul. Les [résultats détaillés](../Models/qmsum-retrieval-benchmark/validation_details.jsonl), le [résumé](../Models/qmsum-retrieval-benchmark/validation_summary.json) et les [réglages figés avec empreintes](../Models/qmsum-retrieval-benchmark/frozen_config.json) ont été enregistrés **avant** tout calcul de score test. Le test a utilisé les cinq mêmes méthodes, `k=5`, le poids hybride figé et les objectifs pré-déclarés ci-dessous ; aucun réglage n'a été ajusté à ses résultats.
+
+Le [rapport final](rapport_retrieval_final.md) présente maintenant les résultats test globaux et par domaine, les objectifs atteints ou non, les erreurs qualitatives, la troncature, les temps mesurés et les limites. Le test n'a pas servi à modifier le poids de fusion ou le modèle.
+
 **Objectifs consignés avant l'évaluation test :** le modèle adapté doit dépasser E5 initial d'au moins `+0,03` en MRR@5 global et atteindre au moins le Hit@5 de BM25. Une baisse dans un domaine doit être rapportée explicitement même si l'objectif global est atteint. Ces objectifs sont des critères de lecture du test, non des seuils imposés par le sujet.
 
-## 6. Ordre des prochaines expériences
+## 6. Plan expérimental consigné avant le test
 
 1. Sur train/validation seulement, constituer des négatifs difficiles contrôlant statut, négation, personne, date et nombre. Vérifier qu'ils ne sont pas en réalité des réponses valides.
 2. Comparer une variante avec négatifs difficiles à l'E5 adapté actuel, puis une ablation isolant cet ajout. Étudier les échecs et les passages tronqués sur validation. Fixer aussi la règle de fusion hybride BM25+dense et le calcul nDCG avant de regarder les scores test.
@@ -85,4 +101,4 @@ Depuis la racine du dépôt, avec les fichiers `Data/Datasets/` présents :
 .venv-gpu\Scripts\python.exe "Data Analysis\finetune_qmsum_e5.py" --evaluate-checkpoint "Models\qmsum-e5-small\checkpoints\checkpoint-842"
 ```
 
-Régénérer `Data/Processed/` modifie potentiellement ses empreintes. Si l'audit après régénération ne correspond pas au [rapport de référence](audit_week1_data.json), consigner la différence avant de comparer les scores. Les scripts `recherche_embeddings.py` et `finetune_qmsum_e5.py` évaluent actuellement la **validation** ; le protocole test ci-dessus reste à implémenter avant l'exécution finale.
+Régénérer `Data/Processed/` modifie potentiellement ses empreintes. Si l'audit après régénération ne correspond pas au [rapport de référence](audit_week1_data.json), consigner la différence avant de comparer les scores. Les scripts `recherche_embeddings.py` et `finetune_qmsum_e5.py` évaluent la **validation** ; [`benchmark_qmsum_final.py`](../Data%20Analysis/benchmark_qmsum_final.py) a exécuté la validation puis le test avec les réglages figés. Il refuse d'écraser les résultats test déjà présents.
