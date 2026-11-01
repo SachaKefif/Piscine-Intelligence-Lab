@@ -90,3 +90,11 @@ Ajouté predict_relations.py : classifieur prudent à règles pour proposer un l
 Ajouté evaluate_relations.py et un jeu de contrôle synthétique séparé de la démo Atlas : Boréal et Cèdre, 12 paires, deux par classe. Macro-F1 0,9444, précision et rappel par classe et matrice de confusion enregistrés dans relation_eval_metrics.json. Une relation supersedes est laissée en abstention ; le petit jeu synthétique ne mesure pas la généralisation aux réunions réelles. Rapport détaillé : docs/rapport_relations_ef04.md.
 
 Vérification : 20 tests automatiques passent ; la validation CLI couvre 13 unités, 6 relations et 2 sujets. Les données Atlas ont été étendues pour illustrer explicitement les six liens, et le diagnostic EF-02 a été recalculé sur les 13 unités.
+
+1er novembre 2026 — EF-05 : mémoire entre conversations
+
+Ajouté semantic_memory.py et quatre sujets Atlas annotés (budget, livraison, prix des capteurs, approvisionnement), chacun suivi dans deux conversations. Le module valide les sources, unités et relations, puis expose une chronologie par sujet avec dates, citations, statuts et liens pertinents.
+
+La proposition de livraison du 12 novembre est signalée obsolète grâce au lien supersedes qui établit la décision du 19 novembre. Les affirmations opposées sur le prix Nova sont conservées avec leurs preuves et signalées comme contradiction non résolue. Une date plus récente ou une paire non revue ne produit pas de remplacement automatique.
+
+Documentation ajoutée dans docs/memoire_ef05.md et README.md. Vérification : 26 tests automatiques passent ; la validation CLI couvre 13 unités, 6 relations et 4 sujets traversant chacun deux conversations. La démonstration repose sur des annotations synthétiques ; la découverte automatique de sujets et l'évaluation sur réunions réelles restent hors de ce jalon.

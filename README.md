@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02 et EF-04 sont implémentées et vérifiées sur des démonstrations synthétiques** : EF-04 couvre les six relations, propose un lien pour une nouvelle paire avec abstention, et contrôle la décision courante. Son évaluation sur deux projets synthétiques tenus à l'écart ne prouve pas une généralisation aux réunions réelles. La mémoire EF-05 et l'agent restent à réaliser.
+Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02, EF-04 et EF-05 sont implémentées et vérifiées sur des démonstrations synthétiques** : EF-04 couvre les six relations, propose un lien pour une nouvelle paire avec abstention, et contrôle la décision courante. EF-05 expose une mémoire chronologique par sujet sur plusieurs conversations, avec remplacements et contradictions sourcés. L'évaluation d'EF-04 sur deux projets synthétiques tenus à l'écart ne prouve pas une généralisation aux réunions réelles. L'agent reste à réaliser.
 
 ## Cahier des charges
 
@@ -18,6 +18,7 @@ Le dépôt contient les quatre corpus normalisés, les baselines de recherche QM
 - [Protocole d'évaluation](docs/protocole_evaluation.md) : splits, paramètres, métriques et règles contre la fuite de données.
 - [Rapport final de recherche](docs/rapport_retrieval_final.md) : validation, test, résultats par domaine, erreurs et coûts.
 - [Rapport EF-04](docs/rapport_relations_ef04.md) : règles de classification, métriques par classe, confusion et limites.
+- [Mémoire EF-05](docs/memoire_ef05.md) : sujets, chronologie, signalements et reproduction.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés
@@ -154,4 +155,17 @@ Après l'ingestion EF-01 ci-dessus, le [module relations et temporalité](Data%2
 
 Le module vérifie les unités citées, la présence de la citation dans la réunion indiquée, les types des liens `answers` et `creates_action`, ainsi que l'ordre chronologique d'un `supersedes`. `classify` consulte uniquement les annotations validées : une paire non annotée renvoie `relation: null`. `predict` propose une relation sans la valider. Les [sujets de décision](Data/Curated/atlas_decision_topics.jsonl) regroupent explicitement les unités pertinentes. Une décision est courante si elle est `confirmed`, appuyée par sa preuve, non remplacée et sans contradiction annotée. Plusieurs décisions confirmées sans remplacement prouvé donnent `ambiguous`, même si l'une est plus récente. Une simple proposition n'est jamais présentée comme décision courante.
 
-Pour un autre corpus, fournir `--conversations`, `--units`, `--relations` et `--topics` **avant** la sous-commande. `predict` applique un classifieur **à règles**, sans entraînement, à une paire non annotée ; il cite la preuve et s'abstient si elle est insuffisante. Ses sorties restent des propositions `reviewed: false` et ne modifient pas les relations validées. Sur 12 paires synthétiques tenues à l'écart (deux par classe), le macro-F1 est `0,9444`, avec 11/12 paires qualifiées ; une relation `supersedes` a été laissée en abstention. La [matrice de confusion et les limites](docs/rapport_relations_ef04.md) sont documentées. EF-05 pourra utiliser les mêmes unités et liens pour construire la mémoire entre conversations.
+Pour un autre corpus, fournir `--conversations`, `--units`, `--relations` et `--topics` **avant** la sous-commande. `predict` applique un classifieur **à règles**, sans entraînement, à une paire non annotée ; il cite la preuve et s'abstient si elle est insuffisante. Ses sorties restent des propositions `reviewed: false` et ne modifient pas les relations validées. Sur 12 paires synthétiques tenues à l'écart (deux par classe), le macro-F1 est `0,9444`, avec 11/12 paires qualifiées ; une relation `supersedes` a été laissée en abstention. La [matrice de confusion et les limites](docs/rapport_relations_ef04.md) sont documentées.
+
+## EF-05 — Mémoire entre conversations
+
+Le [module de mémoire](Data%20Analysis/semantic_memory.py) utilise les unités et relations validées d'EF-04 ainsi que [quatre sujets Atlas annotés](Data/Curated/atlas_memory_topics.jsonl), chacun présent dans les deux conversations. Il renvoie la chronologie avec citations, les liens pertinents, les unités obsolètes et les contradictions non résolues. La proposition de livraison du 12 novembre est obsolète car le lien `supersedes` prouve son remplacement par la décision du 19 novembre. Les affirmations contradictoires sur le prix Nova restent toutes deux visibles ; aucune n'est choisie sans preuve de résolution.
+
+```powershell
+.venv-gpu\Scripts\python.exe "Data Analysis\semantic_memory.py" validate
+.venv-gpu\Scripts\python.exe "Data Analysis\semantic_memory.py" list
+.venv-gpu\Scripts\python.exe "Data Analysis\semantic_memory.py" show atlas_delivery
+.venv-gpu\Scripts\python.exe "Data Analysis\semantic_memory.py" show atlas_sensor_price
+```
+
+Pour un autre corpus, fournir `--conversations`, `--units`, `--relations` et `--topics` **avant** la sous-commande. Les sujets sont annotés explicitement ; le module ne découvre pas automatiquement de nouveaux sujets ni ne valide les propositions `reviewed: false` d'EF-04. La [documentation EF-05](docs/memoire_ef05.md) précise le contrat et les limites.
