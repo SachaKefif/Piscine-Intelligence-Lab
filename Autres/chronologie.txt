@@ -44,6 +44,14 @@ Création de : finetune_qmsum_e5.py
 
 Création du Model fine-tuné : Models/qmsum-e5-small qui associe le texte à des vecteurs
 
+Documentation
 
+FIN SEMAINE 1 !!!!
 
+Préparer des négatifs difficiles :
+Exemple fictif :
+Question : « Quel budget a été approuvé pour le prototype ? »
+Positif : « Le budget de 40 000 € est approuvé. »
+Négatif facile : une discussion sur la météo.
+Négatif difficile : « Un budget de 40 000 € est proposé, mais la décision est reportée. »
 
