@@ -1,0 +1,384 @@
+{
+  "candidate_units": 10,
+  "questions": 9,
+  "top_k": 5,
+  "metrics": {
+    "bm25": {
+      "hit_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 0.9444
+    },
+    "e5": {
+      "hit_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 0.8333
+    },
+    "hybrid": {
+      "hit_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "mrr_at_k": 0.8333
+    }
+  },
+  "details": {
+    "bm25": [
+      {
+        "query_id": "atlas:budget_confirmed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:4-4:0",
+          "Synthetic:Atlas-01:2-2:0"
+        ]
+      },
+      {
+        "query_id": "atlas:budget_proposed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:budget_history",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.5,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-02:3-3:0"
+        ]
+      },
+      {
+        "query_id": "atlas:delivery_proposed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-02:4-4:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-01:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:delivery_confirmed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-01:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:devis_owner",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:sensors_order",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-01:2-2:0"
+        ]
+      },
+      {
+        "query_id": "atlas:sensors_price",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:4-4:0",
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:1-1:0"
+        ]
+      },
+      {
+        "query_id": "atlas:open_devis",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-02:4-4:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      }
+    ],
+    "e5": [
+      {
+        "query_id": "atlas:budget_confirmed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.5,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:2-2:0"
+        ]
+      },
+      {
+        "query_id": "atlas:budget_proposed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.5,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:3-3:0"
+        ]
+      },
+      {
+        "query_id": "atlas:budget_history",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:2-2:0"
+        ]
+      },
+      {
+        "query_id": "atlas:delivery_proposed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-01:3-3:0"
+        ]
+      },
+      {
+        "query_id": "atlas:delivery_confirmed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:devis_owner",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:sensors_order",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-02:4-4:0"
+        ]
+      },
+      {
+        "query_id": "atlas:sensors_price",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.5,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-02:4-4:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:open_devis",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-01:2-2:0"
+        ]
+      }
+    ],
+    "hybrid": [
+      {
+        "query_id": "atlas:budget_confirmed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.5,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:2-2:0"
+        ]
+      },
+      {
+        "query_id": "atlas:budget_proposed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.5,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:3-3:0"
+        ]
+      },
+      {
+        "query_id": "atlas:budget_history",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-02:0-0:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:2-2:0"
+        ]
+      },
+      {
+        "query_id": "atlas:delivery_proposed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-01:3-3:0"
+        ]
+      },
+      {
+        "query_id": "atlas:delivery_confirmed",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:devis_owner",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:4-4:0",
+          "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:1-1:0",
+          "Synthetic:Atlas-02:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:sensors_order",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-02:4-4:0"
+        ]
+      },
+      {
+        "query_id": "atlas:sensors_price",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.5,
+        "top_unit_ids": [
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-02:4-4:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:2-2:0",
+          "Synthetic:Atlas-01:0-0:0"
+        ]
+      },
+      {
+        "query_id": "atlas:open_devis",
+        "hit_at_k": 1,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 1.0,
+        "top_unit_ids": [
+          "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-01:3-3:0",
+          "Synthetic:Atlas-01:1-1:0",
+          "Synthetic:Atlas-02:1-1:0"
+        ]
+      }
+    ]
+  },
+  "unit_file": "Data\\Processed\\semantic_units.jsonl",
+  "question_file": "Data\\Curated\\atlas_unit_queries.jsonl",
+  "note": "Diagnostic synthétique ; ne remplace pas un test indépendant sur unités réelles."
+}

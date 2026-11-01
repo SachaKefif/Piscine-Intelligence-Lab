@@ -66,3 +66,17 @@ Mesure	Référence	Nouveau
 Hit@5	0,8650	0,8565
 Recall@5	0,4694	0,4725
 MRR@5	0,6598	0,6513
+
+1er novembre 2026 — EF-01 / EF-02 implémentées et vérifiées sur la démo
+
+Créé deux conversations Atlas synthétiques et datées, dix unités annotées avec citation et provenance, ainsi que neuf questions reliées à des identifiants d'unités pertinents.
+
+Ajouté ingest_semantic_units.py : contrôle du contrat JSON, des identifiants, dates, tours, locuteurs et citations exactes avant de produire Data/Processed/semantic_units.jsonl. Le contrôle exige deux conversations distinctes. Les jugements sémantiques restent à revoir humainement pour tout nouveau corpus.
+
+Ajouté search_semantic_units.py : recherche dans toutes les unités des deux conversations avec BM25, E5 adapté et fusion hybride ; chaque résultat expose score, source, statut et preuve. Les trois méthodes sont évaluées sur les mêmes unités et les mêmes questions.
+
+Statut : les critères fonctionnels EF-01 et EF-02 sont couverts par cette démonstration sur deux conversations distinctes. L'annotation des unités est manuelle ; leur extraction automatique n'est pas exigée par le cahier des charges.
+
+Diagnostic de la démo à k=5 : MRR BM25 0,9444 ; E5 0,8333 ; hybride 0,8333. Ces chiffres viennent de neuf questions synthétiques et ne remplacent pas le test QMSum ni une évaluation indépendante sur unités réelles.
+
+Suite : implémenter les relations et la temporalité EF-04, puis la mémoire EF-05. Une annotation et une évaluation complémentaires sur plusieurs réunions réelles renforceraient EF-01/EF-02, sans être un critère de clôture explicite.

@@ -1,0 +1,9 @@
+{"query_id":"atlas:budget_confirmed","query":"Quel budget a été approuvé pour le prototype Atlas ?","relevant_unit_ids":["Synthetic:Atlas-02:0-0:0"]}
+{"query_id":"atlas:budget_proposed","query":"Quel budget avait été proposé avant la décision ?","relevant_unit_ids":["Synthetic:Atlas-01:0-0:0"]}
+{"query_id":"atlas:budget_history","query":"Quelles propositions et décisions concernent le budget Atlas ?","relevant_unit_ids":["Synthetic:Atlas-01:0-0:0","Synthetic:Atlas-02:0-0:0"]}
+{"query_id":"atlas:delivery_proposed","query":"Quelle date de livraison avait été envisagée sans confirmation ?","relevant_unit_ids":["Synthetic:Atlas-01:1-1:0"]}
+{"query_id":"atlas:delivery_confirmed","query":"Quelle date de livraison du prototype Atlas a été fixée ?","relevant_unit_ids":["Synthetic:Atlas-02:1-1:0"]}
+{"query_id":"atlas:devis_owner","query":"Qui enverra le devis du prototype Atlas et quand ?","relevant_unit_ids":["Synthetic:Atlas-01:2-2:0"]}
+{"query_id":"atlas:sensors_order","query":"Qui enverra la commande des capteurs et à quelle date ?","relevant_unit_ids":["Synthetic:Atlas-02:2-2:0"]}
+{"query_id":"atlas:sensors_price","query":"Quel prix Nova a-t-il confirmé pour les capteurs ?","relevant_unit_ids":["Synthetic:Atlas-02:4-4:0"]}
+{"query_id":"atlas:open_devis","query":"Que reste-t-il à vérifier avant de lancer la commande ?","relevant_unit_ids":["Synthetic:Atlas-02:3-3:0"]}

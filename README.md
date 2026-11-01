@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. Les relations, l'agent et la démonstration restent à réaliser.
+Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01 et EF-02 sont implémentées et vérifiées sur deux conversations de démonstration synthétiques**, conformément à leurs critères fonctionnels. Une évaluation complémentaire sur des unités de réunions réelles renforcerait ce résultat. Les relations et l'agent restent à réaliser.
 
 ## Cahier des charges
 
@@ -96,3 +96,42 @@ Pour utiliser directement les 25 exemples déjà revus par l'assistant, sans pro
 ```
 
 **Essai exploratoire déjà exécuté :** un run a chargé 26 triplets avant la dernière revue. Sur la validation QMSum, Hit@5 est passé de 0,8650 à 0,8565, Recall@5 de 0,4694 à 0,4725 et MRR@5 de 0,6598 à 0,6513. Il n'améliore pas le classement global ; conserver le checkpoint de référence. La revue a ensuite retiré un triplet ambigu et le fichier courant contient 25 lignes. Pendant ce run, l'empreinte du fichier a été calculée après l'entraînement, au moment où le fichier avait déjà changé : elle ne décrit pas exactement les 26 lignes chargées. Le script corrigé copie désormais les triplets dans le dossier de sortie **avant** l'entraînement et calcule l'empreinte de cette copie. Utiliser un nouveau dossier de sortie pour tout nouvel essai.
+
+## EF-01 — Implémentée et vérifiée sur la démo
+
+Le jeu de démonstration contient [deux conversations Atlas datées](Data/Synthetic/atlas_conversations.jsonl) et [dix unités annotées](Data/Curated/atlas_semantic_units.jsonl). Il est **synthétique**, distinct de QMSum. Chaque unité exprime une seule information et conserve un identifiant stable, son type, son statut, sa source, sa date, ses tours et une citation exacte ; locuteur, responsable et échéance restent `null` quand la source ne les établit pas. Le format suit le [contrat existant](docs/schemas/semantic_unit.schema.json). Par exemple, la proposition de 40 000 € du 20 octobre et son approbation du 3 novembre sont deux unités distinctes. Les dates absolues des échéances de la démo sont résolues avec la date explicite de leur réunion.
+
+Depuis la racine du dépôt :
+
+```powershell
+.venv-gpu\Scripts\python.exe "Data Analysis\ingest_semantic_units.py"
+```
+
+Le script contrôle le schéma, l'unicité des identifiants, les sources, les dates, les bornes de tours, les locuteurs et la présence **exacte** de chaque citation dans la transcription. Il exige au moins deux conversations représentées dans les unités puis écrit `Data/Processed/semantic_units.jsonl` ; ce fichier généré est ignoré par Git. Une vérification automatique de la citation ne prouve pas que la reformulation, le statut ou le responsable sont justes : les [annotations](Data/Curated/atlas_semantic_units.jsonl) ont été relues pour la démo et de nouvelles unités demandent une revue humaine. Les spans de pertinence QMSum ne doivent pas être convertis automatiquement en décisions.
+
+Pour utiliser d'autres transcriptions normalisées, produire un JSONL de conversations au format `dataset`, `meeting_id`, `source_date`, `segments`, puis un JSONL d'unités conforme au schéma. Les indices `start_turn` et `end_turn` désignent les positions inclusives dans `segments`. Lancer ensuite :
+
+```powershell
+.venv-gpu\Scripts\python.exe "Data Analysis\ingest_semantic_units.py" --conversations CHEMIN\conversations.jsonl --units CHEMIN\units_annotees.jsonl --output Data\Processed\semantic_units.jsonl
+```
+
+Une date inconnue doit rester `null`. Ne pas déduire de chronologie entre réunions QMSum sans date fiable.
+
+## EF-02 — Implémentée et vérifiée sur la démo
+
+Le [moteur de recherche](Data%20Analysis/search_semantic_units.py) classe **toutes** les unités du fichier ingéré, sans imposer la réunion d'origine. `bm25` emploie la recherche lexicale existante ; `e5` emploie le checkpoint E5 adapté ; `hybrid` fusionne leurs rangs par RRF avec `k=60` et un poids E5 de `0,75`. Ce poids vient du benchmark de **passages QMSum** : il sert ici de point de départ et n'a pas été optimisé pour les unités. Chaque résultat contient score, identifiant, énoncé, statut, source, date et citation. Les scores BM25, cosinus E5 et RRF ont des échelles différentes ; comparer les rangs ou les métriques, pas leurs valeurs brutes. `e5` et `hybrid` demandent le checkpoint local `Models/qmsum-e5-small/checkpoints/checkpoint-842`, ignoré par Git ; `--model` permet de désigner une autre copie locale. BM25 fonctionne sans ce modèle.
+
+```powershell
+.venv-gpu\Scripts\python.exe "Data Analysis\search_semantic_units.py" --query "Quel budget a été approuvé pour le prototype Atlas ?" --method hybrid
+.venv-gpu\Scripts\python.exe "Data Analysis\search_semantic_units.py" --query "Quelles propositions et décisions concernent le budget Atlas ?" --method bm25
+```
+
+Pour comparer les trois méthodes sur les **mêmes dix unités** et les [neuf questions annotées avec `relevant_unit_ids`](Data/Curated/atlas_unit_queries.jsonl) :
+
+```powershell
+.venv-gpu\Scripts\python.exe "Data Analysis\search_semantic_units.py" --questions Data\Curated\atlas_unit_queries.jsonl --output Data\Curated\atlas_unit_retrieval_metrics.json --device cpu
+```
+
+Le [diagnostic enregistré](Data/Curated/atlas_unit_retrieval_metrics.json) donne à `k=5` un MRR de `0,9444` pour BM25 et `0,8333` pour E5 et l'hybride. Les trois trouvent au moins une unité pertinente pour les neuf questions ; la requête « propositions et décisions » renvoie des sources issues des deux conversations. Pour la question sur le budget **approuvé**, l'hybride place pourtant la proposition avant l'approbation : le statut doit donc rester visible et la recherche seule ne décide pas de l'état courant. **Ces neuf questions synthétiques sont une démonstration fonctionnelle, pas un test indépendant sur corpus réel.** Elles ne remplacent pas le benchmark QMSum et ne justifient pas un nouveau choix de modèle.
+
+Les critères fonctionnels EF-01/EF-02 sont couverts par cette démonstration : ingestion de deux conversations avec provenance, puis recherche classée avec score, source et preuve et comparaison des trois méthodes sur les mêmes questions. L'extraction des unités reste une étape d'annotation ; le cahier des charges n'impose pas qu'elle soit automatique. **Approfondissement possible, sans en faire une condition de clôture EF-01/EF-02 :** annoter plusieurs réunions réelles, créer des questions avec des identifiants d'unités pertinents et mesurer la recherche sur des réunions tenues à l'écart. La prochaine exigence fonctionnelle à implémenter est EF-04 (relations et temporalité), puis EF-05 (mémoire).
