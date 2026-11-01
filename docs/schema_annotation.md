@@ -1,6 +1,6 @@
 # Schéma d'annotation des conversations
 
-Version 1, 28 octobre 2026. Ce document définit les **annotations à produire** pour le moteur de mémoire. Les exports actuels `Data/Processed/*.jsonl` sont des transcriptions normalisées ; ils ne contiennent pas encore ces unités sémantiques ou relations validées. Les contrats machine sont [`semantic_unit.schema.json`](schemas/semantic_unit.schema.json) et [`relation.schema.json`](schemas/relation.schema.json).
+Version 1, 28 octobre 2026, complétée pour EF-04 le 1er novembre 2026. Ce document définit les **annotations à produire** pour le moteur de mémoire. Les exports de corpus dans `Data/Processed/` sont des transcriptions normalisées ; la démo Atlas possède maintenant des unités et relations annotées dans `Data/Curated/`, avec un index d'unités généré dans `Data/Processed/semantic_units.jsonl`. Les contrats machine sont [`semantic_unit.schema.json`](schemas/semantic_unit.schema.json) et [`relation.schema.json`](schemas/relation.schema.json).
 
 ## Unité et preuve
 
@@ -23,7 +23,7 @@ Pour une négation, conserver la polarité dans `statement`. Pour une date ou un
 
 ## Relations
 
-Un lien possède `from_id`, `to_id`, `relation` et `evidence_source_id`. Les deux identifiants d'unité doivent exister. `evidence_source_id` indique la réunion où la relation est établie ; il peut différer des sources des deux unités.
+Un lien possède `from_id`, `to_id`, `relation`, `evidence_source_id` et `evidence`. Les deux identifiants d'unité doivent exister. `evidence_source_id` indique la réunion où la relation est établie ; il peut différer des sources des deux unités. `evidence` cite exactement le passage qui établit le lien ; il vaut `null` pour `unrelated`, qui constate seulement l'absence de lien démontré entre la paire examinée.
 
 | Relation | Test d'annotation |
 |---|---|
@@ -35,6 +35,8 @@ Un lien possède `from_id`, `to_id`, `relation` et `evidence_source_id`. Les deu
 | `unrelated` | Paire comparée sans relation démontrée ; ne pas confondre absence de preuve et contradiction. |
 
 Une similarité d'embedding sert à proposer une paire candidate ; elle ne valide pas sa relation. Le lien doit citer une source. Les cas ambigus restent sans relation automatique et sont dirigés vers une vérification ou une clarification.
+
+La commande EF-04 `predict` peut maintenant proposer un lien par règles sur une paire nouvelle. Sa sortie `reviewed: false` est distincte du contrat JSON des relations annotées et ne doit pas être écrite dans `atlas_relations.jsonl` sans revue. Un résultat `relation: null` signifie abstention ; il n'est jamais assimilé à `unrelated`.
 
 ## Questions, pertinence et intentions
 

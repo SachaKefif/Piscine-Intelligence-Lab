@@ -61,7 +61,7 @@ def load_conversations(path):
 
 
 def check_schema(row, schema):
-    identifier = row.get("unit_id", "<sans identifiant>")
+    identifier = row.get("unit_id") or row.get("from_id") or "<sans identifiant>"
     required = set(schema["required"])
     properties = schema["properties"]
     missing = required - row.keys()

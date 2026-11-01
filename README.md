@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01 et EF-02 sont implémentées et vérifiées sur deux conversations de démonstration synthétiques**, conformément à leurs critères fonctionnels. Une évaluation complémentaire sur des unités de réunions réelles renforcerait ce résultat. Les relations et l'agent restent à réaliser.
+Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02 et EF-04 sont implémentées et vérifiées sur des démonstrations synthétiques** : EF-04 couvre les six relations, propose un lien pour une nouvelle paire avec abstention, et contrôle la décision courante. Son évaluation sur deux projets synthétiques tenus à l'écart ne prouve pas une généralisation aux réunions réelles. La mémoire EF-05 et l'agent restent à réaliser.
 
 ## Cahier des charges
 
@@ -17,6 +17,7 @@ Le dépôt contient les quatre corpus normalisés, les baselines de recherche QM
 - [Schéma d'annotation](docs/schema_annotation.md) : unités, statuts, preuves, relations et contrats JSON.
 - [Protocole d'évaluation](docs/protocole_evaluation.md) : splits, paramètres, métriques et règles contre la fuite de données.
 - [Rapport final de recherche](docs/rapport_retrieval_final.md) : validation, test, résultats par domaine, erreurs et coûts.
+- [Rapport EF-04](docs/rapport_relations_ef04.md) : règles de classification, métriques par classe, confusion et limites.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés
@@ -99,7 +100,7 @@ Pour utiliser directement les 25 exemples déjà revus par l'assistant, sans pro
 
 ## EF-01 — Implémentée et vérifiée sur la démo
 
-Le jeu de démonstration contient [deux conversations Atlas datées](Data/Synthetic/atlas_conversations.jsonl) et [dix unités annotées](Data/Curated/atlas_semantic_units.jsonl). Il est **synthétique**, distinct de QMSum. Chaque unité exprime une seule information et conserve un identifiant stable, son type, son statut, sa source, sa date, ses tours et une citation exacte ; locuteur, responsable et échéance restent `null` quand la source ne les établit pas. Le format suit le [contrat existant](docs/schemas/semantic_unit.schema.json). Par exemple, la proposition de 40 000 € du 20 octobre et son approbation du 3 novembre sont deux unités distinctes. Les dates absolues des échéances de la démo sont résolues avec la date explicite de leur réunion.
+Le jeu de démonstration contient [deux conversations Atlas datées](Data/Synthetic/atlas_conversations.jsonl) et [treize unités annotées](Data/Curated/atlas_semantic_units.jsonl). Il est **synthétique**, distinct de QMSum. Chaque unité exprime une seule information et conserve un identifiant stable, son type, son statut, sa source, sa date, ses tours et une citation exacte ; locuteur, responsable et échéance restent `null` quand la source ne les établit pas. Le format suit le [contrat existant](docs/schemas/semantic_unit.schema.json). Par exemple, la proposition de 40 000 € du 20 octobre et son approbation du 3 novembre sont deux unités distinctes. Les dates absolues des échéances de la démo sont résolues avec la date explicite de leur réunion.
 
 Depuis la racine du dépôt :
 
@@ -126,12 +127,31 @@ Le [moteur de recherche](Data%20Analysis/search_semantic_units.py) classe **tout
 .venv-gpu\Scripts\python.exe "Data Analysis\search_semantic_units.py" --query "Quelles propositions et décisions concernent le budget Atlas ?" --method bm25
 ```
 
-Pour comparer les trois méthodes sur les **mêmes dix unités** et les [neuf questions annotées avec `relevant_unit_ids`](Data/Curated/atlas_unit_queries.jsonl) :
+Pour comparer les trois méthodes sur les **mêmes treize unités** et les [neuf questions annotées avec `relevant_unit_ids`](Data/Curated/atlas_unit_queries.jsonl) :
 
 ```powershell
 .venv-gpu\Scripts\python.exe "Data Analysis\search_semantic_units.py" --questions Data\Curated\atlas_unit_queries.jsonl --output Data\Curated\atlas_unit_retrieval_metrics.json --device cpu
 ```
 
-Le [diagnostic enregistré](Data/Curated/atlas_unit_retrieval_metrics.json) donne à `k=5` un MRR de `0,9444` pour BM25 et `0,8333` pour E5 et l'hybride. Les trois trouvent au moins une unité pertinente pour les neuf questions ; la requête « propositions et décisions » renvoie des sources issues des deux conversations. Pour la question sur le budget **approuvé**, l'hybride place pourtant la proposition avant l'approbation : le statut doit donc rester visible et la recherche seule ne décide pas de l'état courant. **Ces neuf questions synthétiques sont une démonstration fonctionnelle, pas un test indépendant sur corpus réel.** Elles ne remplacent pas le benchmark QMSum et ne justifient pas un nouveau choix de modèle.
+Le [diagnostic enregistré](Data/Curated/atlas_unit_retrieval_metrics.json) donne à `k=5` un MRR de `0,9444` pour BM25, `0,7500` pour E5 et `0,8056` pour l'hybride. Les trois trouvent au moins une unité pertinente pour les neuf questions ; la requête « propositions et décisions » peut renvoyer des sources issues des deux conversations. Pour la question sur le budget **approuvé**, l'hybride place pourtant la proposition avant l'approbation : le statut doit donc rester visible et la recherche seule ne décide pas de l'état courant. **Ces neuf questions synthétiques sont une démonstration fonctionnelle, pas un test indépendant sur corpus réel.** Elles ne remplacent pas le benchmark QMSum et ne justifient pas un nouveau choix de modèle.
 
-Les critères fonctionnels EF-01/EF-02 sont couverts par cette démonstration : ingestion de deux conversations avec provenance, puis recherche classée avec score, source et preuve et comparaison des trois méthodes sur les mêmes questions. L'extraction des unités reste une étape d'annotation ; le cahier des charges n'impose pas qu'elle soit automatique. **Approfondissement possible, sans en faire une condition de clôture EF-01/EF-02 :** annoter plusieurs réunions réelles, créer des questions avec des identifiants d'unités pertinents et mesurer la recherche sur des réunions tenues à l'écart. La prochaine exigence fonctionnelle à implémenter est EF-04 (relations et temporalité), puis EF-05 (mémoire).
+Les critères fonctionnels EF-01/EF-02 sont couverts par cette démonstration : ingestion de deux conversations avec provenance, puis recherche classée avec score, source et preuve et comparaison des trois méthodes sur les mêmes questions. L'extraction des unités reste une étape d'annotation ; le cahier des charges n'impose pas qu'elle soit automatique. **Approfondissement possible, sans en faire une condition de clôture EF-01/EF-02 :** annoter plusieurs réunions réelles, créer des questions avec des identifiants d'unités pertinents et mesurer la recherche sur des réunions tenues à l'écart.
+
+## EF-04 — Relations et temporalité sur la démo Atlas
+
+Les [six relations annotées](Data/Curated/atlas_relations.jsonl) couvrent `supports`, `contradicts`, `supersedes`, `creates_action`, `answers` et `unrelated`. Chaque lien positif porte une citation exacte et sa réunion source, conformément au [schéma des relations](docs/schemas/relation.schema.json). La date du 19 novembre **remplace** explicitement la date du 12 novembre seulement envisagée ; deux affirmations opposées sur la confirmation du prix de Nova sont marquées comme **contradictoires**, sans inventer de résolution. `unrelated` est une annotation explicite d'une paire examinée, jamais la valeur automatique d'une paire absente.
+
+Après l'ingestion EF-01 ci-dessus, le [module relations et temporalité](Data%20Analysis/relations_temporality.py) valide les liens, permet de consulter une relation et renvoie une décision courante par sujet :
+
+```powershell
+.venv-gpu\Scripts\python.exe "Data Analysis\relations_temporality.py" validate
+.venv-gpu\Scripts\python.exe "Data Analysis\relations_temporality.py" classify --from-id Synthetic:Atlas-02:1-1:0 --to-id Synthetic:Atlas-01:1-1:0
+.venv-gpu\Scripts\python.exe "Data Analysis\relations_temporality.py" predict --from-id Synthetic:Atlas-02:7-7:0 --to-id Synthetic:Atlas-01:3-3:0
+.venv-gpu\Scripts\python.exe "Data Analysis\relations_temporality.py" current atlas_budget
+.venv-gpu\Scripts\python.exe "Data Analysis\relations_temporality.py" current atlas_delivery
+.venv-gpu\Scripts\python.exe "Data Analysis\evaluate_relations.py"
+```
+
+Le module vérifie les unités citées, la présence de la citation dans la réunion indiquée, les types des liens `answers` et `creates_action`, ainsi que l'ordre chronologique d'un `supersedes`. `classify` consulte uniquement les annotations validées : une paire non annotée renvoie `relation: null`. `predict` propose une relation sans la valider. Les [sujets de décision](Data/Curated/atlas_decision_topics.jsonl) regroupent explicitement les unités pertinentes. Une décision est courante si elle est `confirmed`, appuyée par sa preuve, non remplacée et sans contradiction annotée. Plusieurs décisions confirmées sans remplacement prouvé donnent `ambiguous`, même si l'une est plus récente. Une simple proposition n'est jamais présentée comme décision courante.
+
+Pour un autre corpus, fournir `--conversations`, `--units`, `--relations` et `--topics` **avant** la sous-commande. `predict` applique un classifieur **à règles**, sans entraînement, à une paire non annotée ; il cite la preuve et s'abstient si elle est insuffisante. Ses sorties restent des propositions `reviewed: false` et ne modifient pas les relations validées. Sur 12 paires synthétiques tenues à l'écart (deux par classe), le macro-F1 est `0,9444`, avec 11/12 paires qualifiées ; une relation `supersedes` a été laissée en abstention. La [matrice de confusion et les limites](docs/rapport_relations_ef04.md) sont documentées. EF-05 pourra utiliser les mêmes unités et liens pour construire la mémoire entre conversations.

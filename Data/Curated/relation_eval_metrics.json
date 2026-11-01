@@ -1,0 +1,192 @@
+{
+  "fixture": "Data\\Curated\\relation_eval_holdout.json",
+  "fixture_sha256": "18ce97a22742b1bd4bf44866c94e54080e95efd34b2849821c4d75cf9fdf02d4",
+  "method": "conservative_rules_v1",
+  "split": "held_out_synthetic_project",
+  "metrics": {
+    "count": 12,
+    "coverage": 0.9166666666666666,
+    "accuracy_with_abstention": 0.9166666666666666,
+    "macro_f1": 0.9444444444444445,
+    "by_class": {
+      "supports": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "contradicts": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "supersedes": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      "creates_action": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "answers": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "unrelated": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "confusion_matrix": {
+      "supports": {
+        "supports": 2,
+        "contradicts": 0,
+        "supersedes": 0,
+        "creates_action": 0,
+        "answers": 0,
+        "unrelated": 0,
+        "abstain": 0
+      },
+      "contradicts": {
+        "supports": 0,
+        "contradicts": 2,
+        "supersedes": 0,
+        "creates_action": 0,
+        "answers": 0,
+        "unrelated": 0,
+        "abstain": 0
+      },
+      "supersedes": {
+        "supports": 0,
+        "contradicts": 0,
+        "supersedes": 1,
+        "creates_action": 0,
+        "answers": 0,
+        "unrelated": 0,
+        "abstain": 1
+      },
+      "creates_action": {
+        "supports": 0,
+        "contradicts": 0,
+        "supersedes": 0,
+        "creates_action": 2,
+        "answers": 0,
+        "unrelated": 0,
+        "abstain": 0
+      },
+      "answers": {
+        "supports": 0,
+        "contradicts": 0,
+        "supersedes": 0,
+        "creates_action": 0,
+        "answers": 2,
+        "unrelated": 0,
+        "abstain": 0
+      },
+      "unrelated": {
+        "supports": 0,
+        "contradicts": 0,
+        "supersedes": 0,
+        "creates_action": 0,
+        "answers": 0,
+        "unrelated": 2,
+        "abstain": 0
+      }
+    }
+  },
+  "details": [
+    {
+      "from_id": "Synthetic:Boreal-02:2",
+      "to_id": "Synthetic:Boreal-02:0",
+      "gold": "supports",
+      "predicted": "supports",
+      "reason": "Énoncés concordants sur le même sujet."
+    },
+    {
+      "from_id": "Synthetic:Boreal-02:3",
+      "to_id": "Synthetic:Boreal-01:2",
+      "gold": "contradicts",
+      "predicted": "contradicts",
+      "reason": "Même sujet avec polarité opposée."
+    },
+    {
+      "from_id": "Synthetic:Boreal-02:1",
+      "to_id": "Synthetic:Boreal-01:0",
+      "gold": "supersedes",
+      "predicted": "supersedes",
+      "reason": "Remplacement explicite, statut confirmé et ordre daté."
+    },
+    {
+      "from_id": "Synthetic:Boreal-02:0",
+      "to_id": "Synthetic:Boreal-02:4",
+      "gold": "creates_action",
+      "predicted": "creates_action",
+      "reason": "L'action cite explicitement sa cause."
+    },
+    {
+      "from_id": "Synthetic:Boreal-02:2",
+      "to_id": "Synthetic:Boreal-01:1",
+      "gold": "answers",
+      "predicted": "answers",
+      "reason": "Réponse et question portent sur le même sujet."
+    },
+    {
+      "from_id": "Synthetic:Boreal-02:0",
+      "to_id": "Synthetic:Boreal-01:3",
+      "gold": "unrelated",
+      "predicted": "unrelated",
+      "reason": "Aucun terme de sujet ni nombre commun après retrait du projet."
+    },
+    {
+      "from_id": "Synthetic:Cedre-02:2",
+      "to_id": "Synthetic:Cedre-02:0",
+      "gold": "supports",
+      "predicted": "supports",
+      "reason": "Énoncés concordants sur le même sujet."
+    },
+    {
+      "from_id": "Synthetic:Cedre-02:3",
+      "to_id": "Synthetic:Cedre-01:2",
+      "gold": "contradicts",
+      "predicted": "contradicts",
+      "reason": "Même sujet avec polarité opposée."
+    },
+    {
+      "from_id": "Synthetic:Cedre-02:1",
+      "to_id": "Synthetic:Cedre-01:0",
+      "gold": "supersedes",
+      "predicted": null,
+      "reason": "Preuve de relation insuffisante : revue nécessaire."
+    },
+    {
+      "from_id": "Synthetic:Cedre-02:0",
+      "to_id": "Synthetic:Cedre-02:4",
+      "gold": "creates_action",
+      "predicted": "creates_action",
+      "reason": "L'action cite explicitement sa cause."
+    },
+    {
+      "from_id": "Synthetic:Cedre-02:2",
+      "to_id": "Synthetic:Cedre-01:1",
+      "gold": "answers",
+      "predicted": "answers",
+      "reason": "Réponse et question portent sur le même sujet."
+    },
+    {
+      "from_id": "Synthetic:Cedre-02:0",
+      "to_id": "Synthetic:Cedre-01:3",
+      "gold": "unrelated",
+      "predicted": "unrelated",
+      "reason": "Aucun terme de sujet ni nombre commun après retrait du projet."
+    }
+  ]
+}

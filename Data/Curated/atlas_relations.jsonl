@@ -1,0 +1,6 @@
+{"from_id":"Synthetic:Atlas-02:5-5:0","to_id":"Synthetic:Atlas-02:0-0:0","relation":"supports","evidence_source_id":"Synthetic:Atlas-02","evidence":"Oui, Camille a bien validé le budget de 40 000 € pour Atlas."}
+{"from_id":"Synthetic:Atlas-02:7-7:0","to_id":"Synthetic:Atlas-02:4-4:0","relation":"contradicts","evidence_source_id":"Synthetic:Atlas-02","evidence":"Nova n'a pas confirmé le prix de 8 000 € pour les capteurs ; ce montant reste à négocier."}
+{"from_id":"Synthetic:Atlas-02:1-1:0","to_id":"Synthetic:Atlas-01:1-1:0","relation":"supersedes","evidence_source_id":"Synthetic:Atlas-02","evidence":"La livraison du prototype Atlas est fixée au 19 novembre, et non au 12 novembre proposé auparavant."}
+{"from_id":"Synthetic:Atlas-02:0-0:0","to_id":"Synthetic:Atlas-02:6-6:0","relation":"creates_action","evidence_source_id":"Synthetic:Atlas-02","evidence":"Puisque le budget Atlas est approuvé, j'ouvre l'action : envoyer la commande des capteurs le 6 novembre."}
+{"from_id":"Synthetic:Atlas-02:5-5:0","to_id":"Synthetic:Atlas-01:4-4:0","relation":"answers","evidence_source_id":"Synthetic:Atlas-02","evidence":"Oui, Camille a bien validé le budget de 40 000 € pour Atlas."}
+{"from_id":"Synthetic:Atlas-02:0-0:0","to_id":"Synthetic:Atlas-02:4-4:0","relation":"unrelated","evidence_source_id":"Synthetic:Atlas-02","evidence":null}

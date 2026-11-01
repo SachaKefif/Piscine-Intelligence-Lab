@@ -1,0 +1,65 @@
+{
+  "description": "Deux projets synthétiques distincts de la démo Atlas pour contrôler les six classes EF-04. Deux paires par classe ; aucune optimisation sur ce jeu.",
+  "conversations": [
+    {"source_id": "Synthetic:Boreal-01", "project_id": "Boréal", "source_date": "2026-10-21", "segments": [
+      "Pour Boréal, la livraison le 12 décembre est seulement une option.",
+      "Qui a approuvé le financement du projet Boréal ?",
+      "L'entreprise Solis confirme le tarif de 5 000 € pour les batteries.",
+      "La salle de conférence sera repeinte vendredi."
+    ]},
+    {"source_id": "Synthetic:Boreal-02", "project_id": "Boréal", "source_date": "2026-11-04", "segments": [
+      "Le financement de 30 000 € pour Boréal est approuvé.",
+      "La livraison Boréal est fixée au 18 décembre, et non au 12 décembre envisagé.",
+      "Oui, Nadia a bien approuvé le financement de 30 000 € de Boréal.",
+      "Solis n'a pas confirmé le tarif de 5 000 € pour les batteries.",
+      "Puisque le financement Boréal est approuvé, j'ouvre l'action : commander les batteries."
+    ]},
+    {"source_id": "Synthetic:Cedre-01", "project_id": "Cèdre", "source_date": "2026-10-22", "segments": [
+      "Pour Cèdre, une livraison le 4 janvier reste une option, sans confirmation.",
+      "Qui a validé le contrat de Cèdre ?",
+      "Le prestataire Vela confirme le tarif de 9 000 € pour les écrans.",
+      "La cuisine du bureau sera rénovée au printemps."
+    ]},
+    {"source_id": "Synthetic:Cedre-02", "project_id": "Cèdre", "source_date": "2026-11-05", "segments": [
+      "Le contrat de 55 000 € pour Cèdre est validé.",
+      "La livraison Cèdre est fixée au 9 janvier au lieu du 4 janvier envisagé.",
+      "Oui, Mira a bien validé le contrat de 55 000 € de Cèdre.",
+      "Vela n'a pas confirmé le tarif de 9 000 € pour les écrans.",
+      "Suite à la validation du contrat Cèdre, j'ouvre l'action : commander les écrans."
+    ]}
+  ],
+  "units": [
+    {"source_id": "Synthetic:Boreal-01", "turn": 0, "type": "idea", "status": "proposed"},
+    {"source_id": "Synthetic:Boreal-01", "turn": 1, "type": "question", "status": "unknown"},
+    {"source_id": "Synthetic:Boreal-01", "turn": 2, "type": "fact", "status": "asserted"},
+    {"source_id": "Synthetic:Boreal-01", "turn": 3, "type": "fact", "status": "asserted"},
+    {"source_id": "Synthetic:Boreal-02", "turn": 0, "type": "decision", "status": "confirmed"},
+    {"source_id": "Synthetic:Boreal-02", "turn": 1, "type": "decision", "status": "confirmed"},
+    {"source_id": "Synthetic:Boreal-02", "turn": 2, "type": "answer", "status": "asserted"},
+    {"source_id": "Synthetic:Boreal-02", "turn": 3, "type": "fact", "status": "asserted"},
+    {"source_id": "Synthetic:Boreal-02", "turn": 4, "type": "action", "status": "confirmed"},
+    {"source_id": "Synthetic:Cedre-01", "turn": 0, "type": "idea", "status": "proposed"},
+    {"source_id": "Synthetic:Cedre-01", "turn": 1, "type": "question", "status": "unknown"},
+    {"source_id": "Synthetic:Cedre-01", "turn": 2, "type": "fact", "status": "asserted"},
+    {"source_id": "Synthetic:Cedre-01", "turn": 3, "type": "fact", "status": "asserted"},
+    {"source_id": "Synthetic:Cedre-02", "turn": 0, "type": "decision", "status": "confirmed"},
+    {"source_id": "Synthetic:Cedre-02", "turn": 1, "type": "decision", "status": "confirmed"},
+    {"source_id": "Synthetic:Cedre-02", "turn": 2, "type": "answer", "status": "asserted"},
+    {"source_id": "Synthetic:Cedre-02", "turn": 3, "type": "fact", "status": "asserted"},
+    {"source_id": "Synthetic:Cedre-02", "turn": 4, "type": "action", "status": "confirmed"}
+  ],
+  "pairs": [
+    {"from": "Synthetic:Boreal-02:2", "to": "Synthetic:Boreal-02:0", "gold": "supports"},
+    {"from": "Synthetic:Boreal-02:3", "to": "Synthetic:Boreal-01:2", "gold": "contradicts"},
+    {"from": "Synthetic:Boreal-02:1", "to": "Synthetic:Boreal-01:0", "gold": "supersedes"},
+    {"from": "Synthetic:Boreal-02:0", "to": "Synthetic:Boreal-02:4", "gold": "creates_action"},
+    {"from": "Synthetic:Boreal-02:2", "to": "Synthetic:Boreal-01:1", "gold": "answers"},
+    {"from": "Synthetic:Boreal-02:0", "to": "Synthetic:Boreal-01:3", "gold": "unrelated"},
+    {"from": "Synthetic:Cedre-02:2", "to": "Synthetic:Cedre-02:0", "gold": "supports"},
+    {"from": "Synthetic:Cedre-02:3", "to": "Synthetic:Cedre-01:2", "gold": "contradicts"},
+    {"from": "Synthetic:Cedre-02:1", "to": "Synthetic:Cedre-01:0", "gold": "supersedes"},
+    {"from": "Synthetic:Cedre-02:0", "to": "Synthetic:Cedre-02:4", "gold": "creates_action"},
+    {"from": "Synthetic:Cedre-02:2", "to": "Synthetic:Cedre-01:1", "gold": "answers"},
+    {"from": "Synthetic:Cedre-02:0", "to": "Synthetic:Cedre-01:3", "gold": "unrelated"}
+  ]
+}
