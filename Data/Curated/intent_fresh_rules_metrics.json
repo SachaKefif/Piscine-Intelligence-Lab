@@ -1,0 +1,651 @@
+{
+  "method": "conservative_rules_v1",
+  "split": "project_disjoint_synthetic_requests",
+  "independence_note": "New manually drafted synthetic requests, evaluated after the model and guard policy were fixed; not independent human data.",
+  "training": {
+    "path": "Data\\Curated\\intent_train.jsonl",
+    "sha256": "0c2cd4429c45af067cfb15d030bd61929c3e565506d5fb428bf7ccfb8d77e9dd",
+    "count": 424,
+    "projects": [
+      "Atlas",
+      "Calypso",
+      "Cosmos",
+      "Delta",
+      "Kappa",
+      "Mistral",
+      "Nova",
+      "Titan"
+    ]
+  },
+  "validation": {
+    "path": "Data\\Curated\\intent_validation.jsonl",
+    "sha256": "7c71154a79565ae0b65c0066970461344f29db14dc09c53e5105ab0834c70025",
+    "count": 125,
+    "projects": [
+      "Boreal",
+      "Cobalt",
+      "Galaxie",
+      "Meridian",
+      "Orion",
+      "Vega",
+      "Zenith"
+    ]
+  },
+  "evaluation": {
+    "path": "Data\\Curated\\intent_fresh_holdout.jsonl",
+    "sha256": "0aeeff9736dc284994ed4ccd49d049bef4366cb0f8c5ac13b37cfc8cd69388ef",
+    "count": 56,
+    "projects": [
+      "Bastion",
+      "Krypton",
+      "Mirage",
+      "Rivoli",
+      "Saphir",
+      "Tundra"
+    ]
+  },
+  "metrics": {
+    "intent_macro_f1": 0.5908197066091804,
+    "intent_accuracy": 0.5714285714285714,
+    "joint_intent_and_slots_exact_accuracy": 0.5535714285714286,
+    "by_class": {
+      "answer": {
+        "support": 8,
+        "precision": 0.7142857142857143,
+        "recall": 0.625,
+        "f1": 0.6666666666666666
+      },
+      "compare": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4
+      },
+      "build_dossier": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4
+      },
+      "draft_email": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.875,
+        "f1": 0.9333333333333333
+      },
+      "create_task": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.625,
+        "f1": 0.7692307692307693
+      },
+      "schedule_event": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.375,
+        "f1": 0.5454545454545454
+      },
+      "clarify": {
+        "support": 8,
+        "precision": 0.26666666666666666,
+        "recall": 1.0,
+        "f1": 0.4210526315789474
+      }
+    },
+    "confusion_matrix": {
+      "answer": {
+        "answer": 5,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 3
+      },
+      "compare": {
+        "answer": 2,
+        "compare": 2,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 4
+      },
+      "build_dossier": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 2,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 6
+      },
+      "draft_email": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 7,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 1
+      },
+      "create_task": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 5,
+        "schedule_event": 0,
+        "clarify": 3
+      },
+      "schedule_event": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 3,
+        "clarify": 5
+      },
+      "clarify": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 8
+      }
+    },
+    "slots": {
+      "subject": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 54,
+        "gold_present_exact_accuracy": 1.0,
+        "correct_intent_exact_accuracy": 1.0,
+        "gold_present_and_correct_intent_count": 30,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      },
+      "person": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 14,
+        "gold_present_exact_accuracy": 1.0,
+        "correct_intent_exact_accuracy": 1.0,
+        "gold_present_and_correct_intent_count": 11,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      },
+      "due_date": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 9,
+        "gold_present_exact_accuracy": 1.0,
+        "correct_intent_exact_accuracy": 1.0,
+        "gold_present_and_correct_intent_count": 4,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      },
+      "action": {
+        "exact_accuracy": 0.9642857142857143,
+        "gold_present_count": 9,
+        "gold_present_exact_accuracy": 0.8888888888888888,
+        "correct_intent_exact_accuracy": 0.96875,
+        "gold_present_and_correct_intent_count": 6,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      }
+    },
+    "clarification_precision": 0.26666666666666666,
+    "clarification_recall": 1.0,
+    "appropriate_clarification_rate": 1.0,
+    "false_clarification_rate": 0.4583333333333333
+  },
+  "errors": [
+    {
+      "id": "fresh02",
+      "gold": {
+        "intent": "answer",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh04",
+      "gold": {
+        "intent": "answer",
+        "subject": "capteurs Rivoli",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivoli",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh07",
+      "gold": {
+        "intent": "answer",
+        "subject": "livraison Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh09",
+      "gold": {
+        "intent": "compare",
+        "subject": "budget Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "budget Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "fresh10",
+      "gold": {
+        "intent": "compare",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh11",
+      "gold": {
+        "intent": "compare",
+        "subject": "planning Tundra",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Tundra",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh13",
+      "gold": {
+        "intent": "compare",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh14",
+      "gold": {
+        "intent": "compare",
+        "subject": "budget Mirage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "budget Mirage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "fresh15",
+      "gold": {
+        "intent": "compare",
+        "subject": "livraison Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh18",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh19",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "planning Tundra",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Tundra",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh20",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "capteurs Rivoli",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivoli",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh22",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "budget Mirage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Mirage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh23",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "livraison Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Saphir",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh24",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "planning Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh26",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "livraison Bastion",
+        "person": "Malik",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "draft_email",
+        "subject": "livraison Bastion",
+        "person": "Malik",
+        "due_date": null,
+        "action": "preparer un courriel pour malik concernant la livraison bastion",
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "fresh29",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "approvisionnement Krypton",
+        "person": "Yara",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Krypton",
+        "person": "Yara",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh36",
+      "gold": {
+        "intent": "create_task",
+        "subject": "capteurs Rivoli",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivoli",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres",
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh37",
+      "gold": {
+        "intent": "create_task",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": null,
+        "action": "appeler le fournisseur"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh40",
+      "gold": {
+        "intent": "create_task",
+        "subject": "planning Bastion",
+        "person": null,
+        "due_date": null,
+        "action": "valider la date"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Bastion",
+        "person": null,
+        "due_date": null,
+        "action": "valider la date",
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh42",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "livraison Bastion",
+        "person": "Nora",
+        "due_date": "2026-12-21",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Bastion",
+        "person": "Nora",
+        "due_date": "2026-12-21",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh44",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "capteurs Rivoli",
+        "person": "Malik",
+        "due_date": "2026-12-23",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivoli",
+        "person": "Malik",
+        "due_date": "2026-12-23",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh45",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": "2026-12-24",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": "2026-12-24",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh46",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "budget Mirage",
+        "person": null,
+        "due_date": "2026-12-26",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Mirage",
+        "person": null,
+        "due_date": "2026-12-26",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh48",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "planning Bastion",
+        "person": null,
+        "due_date": "2026-12-28",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Bastion",
+        "person": null,
+        "due_date": "2026-12-28",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    }
+  ]
+}

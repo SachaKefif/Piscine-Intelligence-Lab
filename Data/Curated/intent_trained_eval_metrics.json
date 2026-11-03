@@ -1,0 +1,385 @@
+{
+  "method": "trained_classifier_with_slot_guards_v1",
+  "split": "project_disjoint_synthetic_requests",
+  "independence_note": "The 23 evaluation seed examples were previously inspected, so this is a descriptive synthetic-data check.",
+  "training": {
+    "path": "Data\\Curated\\intent_train.jsonl",
+    "sha256": "0c2cd4429c45af067cfb15d030bd61929c3e565506d5fb428bf7ccfb8d77e9dd",
+    "count": 424,
+    "projects": [
+      "Atlas",
+      "Calypso",
+      "Cosmos",
+      "Delta",
+      "Kappa",
+      "Mistral",
+      "Nova",
+      "Titan"
+    ]
+  },
+  "validation": {
+    "path": "Data\\Curated\\intent_validation.jsonl",
+    "sha256": "7c71154a79565ae0b65c0066970461344f29db14dc09c53e5105ab0834c70025",
+    "count": 125,
+    "projects": [
+      "Boreal",
+      "Cobalt",
+      "Galaxie",
+      "Meridian",
+      "Orion",
+      "Vega",
+      "Zenith"
+    ]
+  },
+  "evaluation": {
+    "path": "Data\\Curated\\intent_eval_holdout.jsonl",
+    "sha256": "cfb97261b0cc49b262811c72d54952a05c5a82fbb77064a6f253f2ae48be76a3",
+    "count": 124,
+    "projects": [
+      "Lyra",
+      "Marina",
+      "Pulsar",
+      "Quasar",
+      "Rivage",
+      "Sirius",
+      "Solstice"
+    ]
+  },
+  "metrics": {
+    "intent_macro_f1": 0.9480367585630745,
+    "intent_accuracy": 0.9516129032258065,
+    "by_class": {
+      "answer": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "f1": 0.8
+      },
+      "compare": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "build_dossier": {
+        "support": 18,
+        "precision": 0.9,
+        "recall": 1.0,
+        "f1": 0.9473684210526316
+      },
+      "draft_email": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "create_task": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "schedule_event": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "clarify": {
+        "support": 16,
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.888888888888889
+      }
+    },
+    "confusion_matrix": {
+      "answer": {
+        "answer": 12,
+        "compare": 0,
+        "build_dossier": 2,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 4
+      },
+      "compare": {
+        "answer": 0,
+        "compare": 18,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 0
+      },
+      "build_dossier": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 18,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 0
+      },
+      "draft_email": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 18,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 0
+      },
+      "create_task": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 18,
+        "schedule_event": 0,
+        "clarify": 0
+      },
+      "schedule_event": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 18,
+        "clarify": 0
+      },
+      "clarify": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 16
+      }
+    },
+    "slots": {
+      "subject": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 122,
+        "gold_present_exact_accuracy": 1.0
+      },
+      "person": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 42,
+        "gold_present_exact_accuracy": 1.0
+      },
+      "due_date": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 23,
+        "gold_present_exact_accuracy": 1.0
+      },
+      "action": {
+        "exact_accuracy": 0.9596774193548387,
+        "gold_present_count": 23,
+        "gold_present_exact_accuracy": 0.782608695652174
+      }
+    },
+    "appropriate_clarification_rate": 1.0,
+    "false_clarification_rate": 0.037037037037037035
+  },
+  "errors": [
+    {
+      "id": "final02",
+      "gold": {
+        "intent": "answer",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "missing_named_recipient"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-01-05",
+      "gold": {
+        "intent": "answer",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-01",
+      "gold": {
+        "intent": "answer",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "missing_named_recipient"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-02",
+      "gold": {
+        "intent": "answer",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "build_dossier",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-04",
+      "gold": {
+        "intent": "answer",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "build_dossier",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-05",
+      "gold": {
+        "intent": "answer",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "missing_named_recipient"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-01",
+      "gold": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres pour le planning de solstice",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-02",
+      "gold": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": "verifier le calendrier"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": "verifier le calendrier pour les capteurs de pulsar",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-03",
+      "gold": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": "transmettre la note"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": "transmettre la note pour l'approvisionnement de quasar",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-04",
+      "gold": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": "preparer le compte rendu"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": "preparer le compte rendu pour le budget de rivage",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-05",
+      "gold": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": "relancer le fournisseur"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": "relancer le fournisseur pour la livraison de marina",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    }
+  ]
+}

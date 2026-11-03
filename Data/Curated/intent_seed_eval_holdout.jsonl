@@ -1,0 +1,23 @@
+{"id":"final01","request":"Quelle est la décision sur le budget Lyra ?","intent":"answer","subject":"budget Lyra","person":null,"due_date":null,"action":null}
+{"id":"final02","request":"Décris le planning Sirius.","intent":"answer","subject":"planning Sirius","person":null,"due_date":null,"action":null}
+{"id":"final03","request":"Qui suit la livraison Lyra ?","intent":"answer","subject":"livraison Lyra","person":null,"due_date":null,"action":null}
+{"id":"final04","request":"Compare le budget Lyra entre les deux réunions.","intent":"compare","subject":"budget Lyra","person":null,"due_date":null,"action":null}
+{"id":"final05","request":"En quoi le planning Sirius diffère entre les versions ?","intent":"compare","subject":"planning Sirius","person":null,"due_date":null,"action":null}
+{"id":"final06","request":"Quelles différences pour la livraison Lyra ?","intent":"compare","subject":"livraison Lyra","person":null,"due_date":null,"action":null}
+{"id":"final07","request":"Prépare un dossier sur le budget Lyra.","intent":"build_dossier","subject":"budget Lyra","person":null,"due_date":null,"action":null}
+{"id":"final08","request":"Établis une synthèse du planning Sirius.","intent":"build_dossier","subject":"planning Sirius","person":null,"due_date":null,"action":null}
+{"id":"final09","request":"Construis un dossier sur la livraison Lyra.","intent":"build_dossier","subject":"livraison Lyra","person":null,"due_date":null,"action":null}
+{"id":"final10","request":"Rédige un mail à Amina sur le budget Lyra.","intent":"draft_email","subject":"budget Lyra","person":"Amina","due_date":null,"action":null}
+{"id":"final11","request":"Rédige à Joël un mail sur le planning Sirius.","intent":"draft_email","subject":"planning Sirius","person":"Joël","due_date":null,"action":null}
+{"id":"final12","request":"Écris un courriel pour Nora concernant la livraison Lyra.","intent":"draft_email","subject":"livraison Lyra","person":"Nora","due_date":null,"action":null}
+{"id":"final13","request":"Crée une tâche pour relancer Amina sur le budget Lyra.","intent":"create_task","subject":"budget Lyra","person":"Amina","due_date":null,"action":"relancer amina sur le budget lyra"}
+{"id":"final14","request":"Ajoute un rappel : envoyer le dossier sur le planning Sirius.","intent":"create_task","subject":"planning Sirius","person":null,"due_date":null,"action":"envoyer le dossier sur le planning sirius"}
+{"id":"final15","request":"Mets une tâche pour vérifier la livraison Lyra.","intent":"create_task","subject":"livraison Lyra","person":null,"due_date":null,"action":"verifier la livraison lyra"}
+{"id":"final16","request":"Planifie une réunion avec Amina sur le budget Lyra le 17 décembre 2026.","intent":"schedule_event","subject":"budget Lyra","person":"Amina","due_date":"2026-12-17","action":null}
+{"id":"final17","request":"Bloque un créneau avec Joël sur le planning Sirius le 2026-12-18.","intent":"schedule_event","subject":"planning Sirius","person":"Joël","due_date":"2026-12-18","action":null}
+{"id":"final18","request":"Organise un rendez-vous pour la livraison Lyra le 19 décembre 2026.","intent":"schedule_event","subject":"livraison Lyra","person":null,"due_date":"2026-12-19","action":null}
+{"id":"final19","request":"Rédige un mail à la responsable du budget Lyra.","intent":"clarify","subject":"budget Lyra","person":null,"due_date":null,"action":null}
+{"id":"final20","request":"Compare les décisions récentes.","intent":"clarify","subject":null,"person":null,"due_date":null,"action":null}
+{"id":"final21","request":"On pourrait peut-être revoir le planning Sirius.","intent":"clarify","subject":"planning Sirius","person":null,"due_date":null,"action":null}
+{"id":"final22","request":"Planifie une réunion avec Nora sur la livraison Lyra.","intent":"clarify","subject":"livraison Lyra","person":"Nora","due_date":null,"action":null}
+{"id":"final23","request":"Crée une tâche sur le budget Lyra.","intent":"clarify","subject":"budget Lyra","person":null,"due_date":null,"action":null}

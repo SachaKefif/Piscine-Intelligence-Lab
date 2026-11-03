@@ -1,0 +1,15 @@
+{"id":"dev01","request":"Quelle est la décision actuelle sur le budget Atlas ?","intent":"answer","subject":"budget Atlas","person":null,"due_date":null,"action":null}
+{"id":"dev02","request":"Qui pilote la livraison Nova ?","intent":"answer","subject":"livraison Nova","person":null,"due_date":null,"action":null}
+{"id":"dev03","request":"Compare le budget Atlas entre les deux réunions.","intent":"compare","subject":"budget Atlas","person":null,"due_date":null,"action":null}
+{"id":"dev04","request":"Quelles différences pour la livraison Nova entre lundi et mardi ?","intent":"compare","subject":"livraison Nova","person":null,"due_date":null,"action":null}
+{"id":"dev05","request":"Prépare un dossier sur le budget Atlas.","intent":"build_dossier","subject":"budget Atlas","person":null,"due_date":null,"action":null}
+{"id":"dev06","request":"Fais une synthèse de la livraison Nova.","intent":"build_dossier","subject":"livraison Nova","person":null,"due_date":null,"action":null}
+{"id":"dev07","request":"Rédige un mail à Camille sur le budget Atlas.","intent":"draft_email","subject":"budget Atlas","person":"Camille","due_date":null,"action":null}
+{"id":"dev08","request":"Prépare un courriel pour Omar concernant la livraison Nova.","intent":"draft_email","subject":"livraison Nova","person":"Omar","due_date":null,"action":null}
+{"id":"dev09","request":"Crée une tâche pour relancer Camille sur le budget Atlas.","intent":"create_task","subject":"budget Atlas","person":"Camille","due_date":null,"action":"relancer camille sur le budget atlas"}
+{"id":"dev10","request":"Ajoute un rappel : envoyer le dossier sur la livraison Nova.","intent":"create_task","subject":"livraison Nova","person":null,"due_date":null,"action":"envoyer le dossier sur la livraison nova"}
+{"id":"dev11","request":"Planifie une réunion avec Camille sur le budget Atlas le 12 novembre 2026.","intent":"schedule_event","subject":"budget Atlas","person":"Camille","due_date":"2026-11-12","action":null}
+{"id":"dev12","request":"Organise un rendez-vous avec Omar pour la livraison Nova le 2026-11-15.","intent":"schedule_event","subject":"livraison Nova","person":"Omar","due_date":"2026-11-15","action":null}
+{"id":"dev13","request":"Prépare un mail à la responsable sur le budget Atlas.","intent":"clarify","subject":"budget Atlas","person":null,"due_date":null,"action":null}
+{"id":"dev14","request":"Compare les deux décisions.","intent":"clarify","subject":null,"person":null,"due_date":null,"action":null}
+{"id":"dev15","request":"On pourrait peut-être revoir le budget Atlas.","intent":"clarify","subject":"budget Atlas","person":null,"due_date":null,"action":null}

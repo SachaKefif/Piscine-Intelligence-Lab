@@ -1,0 +1,24 @@
+{"id":"test01","request":"Quel est le statut du planning Orion ?","intent":"answer","subject":"planning Orion","person":null,"due_date":null,"action":null}
+{"id":"test02","request":"Explique la décision sur le budget Vega.","intent":"answer","subject":"budget Vega","person":null,"due_date":null,"action":null}
+{"id":"test03","request":"Quand la livraison Orion a-t-elle été confirmée ?","intent":"answer","subject":"livraison Orion","person":null,"due_date":null,"action":null}
+{"id":"test04","request":"Compare le planning Orion dans les deux comptes rendus.","intent":"compare","subject":"planning Orion","person":null,"due_date":null,"action":null}
+{"id":"test05","request":"Quelles différences entre les versions du budget Vega ?","intent":"compare","subject":"budget Vega","person":null,"due_date":null,"action":null}
+{"id":"test06","request":"Fais une comparaison de la livraison Orion entre les réunions.","intent":"compare","subject":"livraison Orion","person":null,"due_date":null,"action":null}
+{"id":"test07","request":"Construis le dossier du planning Orion.","intent":"build_dossier","subject":"planning Orion","person":null,"due_date":null,"action":null}
+{"id":"test08","request":"Fais un récapitulatif du budget Vega.","intent":"build_dossier","subject":"budget Vega","person":null,"due_date":null,"action":null}
+{"id":"test09","request":"Produis une synthèse sur la livraison Orion.","intent":"build_dossier","subject":"livraison Orion","person":null,"due_date":null,"action":null}
+{"id":"test10","request":"Écris un e-mail à Léa sur le planning Orion.","intent":"draft_email","subject":"planning Orion","person":"Léa","due_date":null,"action":null}
+{"id":"test11","request":"Rédige un courriel pour Inès au sujet du budget Vega.","intent":"draft_email","subject":"budget Vega","person":"Inès","due_date":null,"action":null}
+{"id":"test12","request":"Prépare un mail à Malik concernant la livraison Orion.","intent":"draft_email","subject":"livraison Orion","person":"Malik","due_date":null,"action":null}
+{"id":"test13","request":"Note une tâche : vérifier le planning Orion.","intent":"create_task","subject":"planning Orion","person":null,"due_date":null,"action":"verifier le planning orion"}
+{"id":"test14","request":"Crée une tâche pour confirmer le budget Vega avant le 8 décembre 2026.","intent":"create_task","subject":"budget Vega","person":null,"due_date":"2026-12-08","action":"confirmer le budget vega"}
+{"id":"test15","request":"Ajoute un rappel : transmettre la livraison Orion à Malik.","intent":"create_task","subject":"livraison Orion","person":"Malik","due_date":null,"action":"transmettre la livraison orion a malik"}
+{"id":"test16","request":"Programme un événement avec Léa pour le planning Orion le 5 décembre 2026.","intent":"schedule_event","subject":"planning Orion","person":"Léa","due_date":"2026-12-05","action":null}
+{"id":"test17","request":"Fixe une réunion avec Inès sur le budget Vega le 2026-12-09.","intent":"schedule_event","subject":"budget Vega","person":"Inès","due_date":"2026-12-09","action":null}
+{"id":"test18","request":"Organise un rendez-vous pour la livraison Orion le 11 décembre 2026.","intent":"schedule_event","subject":"livraison Orion","person":null,"due_date":"2026-12-11","action":null}
+{"id":"test19","request":"Prépare un courriel à la responsable du budget Vega.","intent":"clarify","subject":"budget Vega","person":null,"due_date":null,"action":null}
+{"id":"test20","request":"Peux-tu comparer les deux décisions ?","intent":"clarify","subject":null,"person":null,"due_date":null,"action":null}
+{"id":"test21","request":"On devrait peut-être valider le budget Vega.","intent":"clarify","subject":"budget Vega","person":null,"due_date":null,"action":"valider le budget vega"}
+{"id":"test22","request":"Planifie une réunion avec Léa sur le planning Orion.","intent":"clarify","subject":"planning Orion","person":"Léa","due_date":null,"action":null}
+{"id":"test23","request":"Crée une tâche sur le budget Vega.","intent":"clarify","subject":"budget Vega","person":null,"due_date":null,"action":null}
+{"id":"test24","request":"Rédige un mail à la responsable du budget Vega. Malik connaît le dossier.","intent":"clarify","subject":"budget Vega","person":"Malik","due_date":null,"action":null}

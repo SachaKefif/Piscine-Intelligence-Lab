@@ -1,0 +1,47 @@
+{
+  "selected": "char_tfidf_linear_svc",
+  "selection_metric": "validation_macro_f1",
+  "validation_scores": {
+    "word_tfidf_linear_svc": {
+      "macro_f1": 0.902987402987403,
+      "accuracy": 0.904
+    },
+    "char_tfidf_linear_svc": {
+      "macro_f1": 0.9754299754299754,
+      "accuracy": 0.976
+    },
+    "word_char_tfidf_linear_svc": {
+      "macro_f1": 0.9186974789915966,
+      "accuracy": 0.92
+    }
+  },
+  "train": {
+    "count": 424,
+    "sha256": "0c2cd4429c45af067cfb15d030bd61929c3e565506d5fb428bf7ccfb8d77e9dd",
+    "projects": [
+      "Atlas",
+      "Calypso",
+      "Cosmos",
+      "Delta",
+      "Kappa",
+      "Mistral",
+      "Nova",
+      "Titan"
+    ]
+  },
+  "validation": {
+    "count": 125,
+    "sha256": "7c71154a79565ae0b65c0066970461344f29db14dc09c53e5105ab0834c70025",
+    "projects": [
+      "Boreal",
+      "Cobalt",
+      "Galaxie",
+      "Meridian",
+      "Orion",
+      "Vega",
+      "Zenith"
+    ]
+  },
+  "sklearn_version": "1.9.1",
+  "note": "Training uses synthetic annotations; no evaluation-set rows are used for fitting or selection."
+}

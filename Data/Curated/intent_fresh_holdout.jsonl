@@ -1,0 +1,56 @@
+{"id":"fresh01","request":"Qui a validé le budget Saphir ?","intent":"answer","subject":"budget Saphir","person":null,"due_date":null,"action":null}
+{"id":"fresh02","request":"Peux-tu me retrouver la dernière décision sur la livraison de Bastion ?","intent":"answer","subject":"livraison Bastion","person":null,"due_date":null,"action":null}
+{"id":"fresh03","request":"Où en est le planning Tundra ?","intent":"answer","subject":"planning Tundra","person":null,"due_date":null,"action":null}
+{"id":"fresh04","request":"Le prix des capteurs de Rivoli est-il confirmé ?","intent":"answer","subject":"capteurs Rivoli","person":null,"due_date":null,"action":null}
+{"id":"fresh05","request":"Explique-moi ce qui bloque l'approvisionnement de Krypton.","intent":"answer","subject":"approvisionnement Krypton","person":null,"due_date":null,"action":null}
+{"id":"fresh06","request":"Que sait-on du budget de Mirage ?","intent":"answer","subject":"budget Mirage","person":null,"due_date":null,"action":null}
+{"id":"fresh07","request":"Donne le statut de la livraison Saphir.","intent":"answer","subject":"livraison Saphir","person":null,"due_date":null,"action":null}
+{"id":"fresh08","request":"Selon Nora, quel est le risque sur le planning de Bastion ?","intent":"answer","subject":"planning Bastion","person":"Nora","due_date":null,"action":null}
+{"id":"fresh09","request":"Qu'est-ce qui a changé pour le budget de Saphir depuis la première réunion ?","intent":"compare","subject":"budget Saphir","person":null,"due_date":null,"action":null}
+{"id":"fresh10","request":"Mets côte à côte les décisions sur la livraison Bastion.","intent":"compare","subject":"livraison Bastion","person":null,"due_date":null,"action":null}
+{"id":"fresh11","request":"La version de mardi contredit-elle celle de jeudi sur le planning Tundra ?","intent":"compare","subject":"planning Tundra","person":null,"due_date":null,"action":null}
+{"id":"fresh12","request":"Compare le prix des capteurs Rivoli dans les deux comptes rendus.","intent":"compare","subject":"capteurs Rivoli","person":null,"due_date":null,"action":null}
+{"id":"fresh13","request":"Y a-t-il un écart entre les dates d'approvisionnement de Krypton ?","intent":"compare","subject":"approvisionnement Krypton","person":null,"due_date":null,"action":null}
+{"id":"fresh14","request":"Comment le budget de Mirage a-t-il évolué d'une réunion à l'autre ?","intent":"compare","subject":"budget Mirage","person":null,"due_date":null,"action":null}
+{"id":"fresh15","request":"Oppose les propositions sur la livraison Saphir.","intent":"compare","subject":"livraison Saphir","person":null,"due_date":null,"action":null}
+{"id":"fresh16","request":"Quelles différences entre les deux annonces de Nora sur le planning Bastion ?","intent":"compare","subject":"planning Bastion","person":"Nora","due_date":null,"action":null}
+{"id":"fresh17","request":"Fais-moi un dossier complet sur le budget de Saphir.","intent":"build_dossier","subject":"budget Saphir","person":null,"due_date":null,"action":null}
+{"id":"fresh18","request":"Rassemble les faits et décisions concernant la livraison Bastion dans une fiche.","intent":"build_dossier","subject":"livraison Bastion","person":null,"due_date":null,"action":null}
+{"id":"fresh19","request":"J'ai besoin d'un récapitulatif sourcé du planning Tundra.","intent":"build_dossier","subject":"planning Tundra","person":null,"due_date":null,"action":null}
+{"id":"fresh20","request":"Prépare un briefing sur les capteurs de Rivoli.","intent":"build_dossier","subject":"capteurs Rivoli","person":null,"due_date":null,"action":null}
+{"id":"fresh21","request":"Construis une synthèse de l'approvisionnement Krypton.","intent":"build_dossier","subject":"approvisionnement Krypton","person":null,"due_date":null,"action":null}
+{"id":"fresh22","request":"Peux-tu réunir tout le contexte du budget Mirage dans un dossier ?","intent":"build_dossier","subject":"budget Mirage","person":null,"due_date":null,"action":null}
+{"id":"fresh23","request":"Produis une fiche projet sur la livraison Saphir.","intent":"build_dossier","subject":"livraison Saphir","person":null,"due_date":null,"action":null}
+{"id":"fresh24","request":"Dresse un bilan du planning Bastion.","intent":"build_dossier","subject":"planning Bastion","person":null,"due_date":null,"action":null}
+{"id":"fresh25","request":"Écris à Nora un mail au sujet du budget Saphir.","intent":"draft_email","subject":"budget Saphir","person":"Nora","due_date":null,"action":null}
+{"id":"fresh26","request":"Peux-tu préparer un courriel pour Malik concernant la livraison Bastion ?","intent":"draft_email","subject":"livraison Bastion","person":"Malik","due_date":null,"action":null}
+{"id":"fresh27","request":"Rédige un e-mail à Amina sur le planning Tundra.","intent":"draft_email","subject":"planning Tundra","person":"Amina","due_date":null,"action":null}
+{"id":"fresh28","request":"Fais un brouillon de mail à Inès à propos des capteurs Rivoli.","intent":"draft_email","subject":"capteurs Rivoli","person":"Inès","due_date":null,"action":null}
+{"id":"fresh29","request":"Compose pour Yara un message électronique au sujet de l'approvisionnement Krypton.","intent":"draft_email","subject":"approvisionnement Krypton","person":"Yara","due_date":null,"action":null}
+{"id":"fresh30","request":"Prépare à Jules un courriel sur le budget Mirage.","intent":"draft_email","subject":"budget Mirage","person":"Jules","due_date":null,"action":null}
+{"id":"fresh31","request":"Je voudrais écrire un mail pour Nora sur la livraison Saphir.","intent":"draft_email","subject":"livraison Saphir","person":"Nora","due_date":null,"action":null}
+{"id":"fresh32","request":"Envoie un courriel destiné à Malik concernant le planning Bastion.","intent":"draft_email","subject":"planning Bastion","person":"Malik","due_date":null,"action":null}
+{"id":"fresh33","request":"Pour le budget Saphir, ajoute une tâche : relancer le fournisseur.","intent":"create_task","subject":"budget Saphir","person":null,"due_date":null,"action":"relancer le fournisseur"}
+{"id":"fresh34","request":"Note un rappel sur la livraison Bastion : vérifier les documents.","intent":"create_task","subject":"livraison Bastion","person":null,"due_date":null,"action":"verifier les documents"}
+{"id":"fresh35","request":"Crée une tâche liée au planning Tundra : envoyer le tableau.","intent":"create_task","subject":"planning Tundra","person":null,"due_date":null,"action":"envoyer le tableau"}
+{"id":"fresh36","request":"Mets dans ma liste une tâche sur les capteurs Rivoli : confirmer les chiffres.","intent":"create_task","subject":"capteurs Rivoli","person":null,"due_date":null,"action":"confirmer les chiffres"}
+{"id":"fresh37","request":"Il faut une tâche pour l'approvisionnement Krypton : appeler le fournisseur.","intent":"create_task","subject":"approvisionnement Krypton","person":null,"due_date":null,"action":"appeler le fournisseur"}
+{"id":"fresh38","request":"Ajoute un todo concernant le budget Mirage : préparer la note.","intent":"create_task","subject":"budget Mirage","person":null,"due_date":null,"action":"preparer la note"}
+{"id":"fresh39","request":"Crée un rappel pour la livraison Saphir : transmettre le dossier avant le 17 décembre 2026.","intent":"create_task","subject":"livraison Saphir","person":null,"due_date":"2026-12-17","action":"transmettre le dossier"}
+{"id":"fresh40","request":"Pour le planning Bastion, inscris une tâche : valider la date.","intent":"create_task","subject":"planning Bastion","person":null,"due_date":null,"action":"valider la date"}
+{"id":"fresh41","request":"Planifie une réunion sur le budget Saphir le 20 décembre 2026.","intent":"schedule_event","subject":"budget Saphir","person":null,"due_date":"2026-12-20","action":null}
+{"id":"fresh42","request":"Réserve un créneau avec Nora sur la livraison Bastion le 2026-12-21.","intent":"schedule_event","subject":"livraison Bastion","person":"Nora","due_date":"2026-12-21","action":null}
+{"id":"fresh43","request":"Ajoute un rendez-vous pour le planning Tundra le 22 décembre 2026.","intent":"schedule_event","subject":"planning Tundra","person":null,"due_date":"2026-12-22","action":null}
+{"id":"fresh44","request":"Bloque une réunion avec Malik sur les capteurs Rivoli le 2026-12-23.","intent":"schedule_event","subject":"capteurs Rivoli","person":"Malik","due_date":"2026-12-23","action":null}
+{"id":"fresh45","request":"Programme un échange sur l'approvisionnement Krypton le 24 décembre 2026.","intent":"schedule_event","subject":"approvisionnement Krypton","person":null,"due_date":"2026-12-24","action":null}
+{"id":"fresh46","request":"Fixe une visio sur le budget Mirage le 2026-12-26.","intent":"schedule_event","subject":"budget Mirage","person":null,"due_date":"2026-12-26","action":null}
+{"id":"fresh47","request":"Organise un événement avec Amina sur la livraison Saphir le 27 décembre 2026.","intent":"schedule_event","subject":"livraison Saphir","person":"Amina","due_date":"2026-12-27","action":null}
+{"id":"fresh48","request":"Peux-tu caler un rendez-vous sur le planning Bastion le 28 décembre 2026 ?","intent":"schedule_event","subject":"planning Bastion","person":null,"due_date":"2026-12-28","action":null}
+{"id":"fresh49","request":"Rédige un mail à la responsable du budget Saphir.","intent":"clarify","subject":"budget Saphir","person":null,"due_date":null,"action":null}
+{"id":"fresh50","request":"Compare les deux décisions, s'il te plaît.","intent":"clarify","subject":null,"person":null,"due_date":null,"action":null}
+{"id":"fresh51","request":"On pourrait peut-être revoir la livraison Bastion.","intent":"clarify","subject":"livraison Bastion","person":null,"due_date":null,"action":null}
+{"id":"fresh52","request":"Crée une tâche sur le planning Tundra.","intent":"clarify","subject":"planning Tundra","person":null,"due_date":null,"action":null}
+{"id":"fresh53","request":"Planifie une réunion sur les capteurs Rivoli demain.","intent":"clarify","subject":"capteurs Rivoli","person":null,"due_date":null,"action":null}
+{"id":"fresh54","request":"Écris à la cheffe un courriel concernant l'approvisionnement Krypton. Nora connaît le sujet.","intent":"clarify","subject":"approvisionnement Krypton","person":"Nora","due_date":null,"action":null}
+{"id":"fresh55","request":"Quelle est la décision actuelle ?","intent":"clarify","subject":null,"person":null,"due_date":null,"action":null}
+{"id":"fresh56","request":"Il faudrait peut-être confirmer le budget Mirage.","intent":"clarify","subject":"budget Mirage","person":null,"due_date":null,"action":"confirmer le budget mirage"}

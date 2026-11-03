@@ -83,7 +83,7 @@ Annoté six liens avec citation et source : supports, contradicts, supersedes, c
 
 Ajouté relations_temporality.py : validation des liens et de leur preuve, consultation d'une paire et décision courante par sujet. La livraison confirmée le 19 novembre remplace la proposition du 12 novembre avec preuve ; le budget approuvé est la décision courante. Une paire non revue reste inconnue, et une date plus récente seule ne résout pas deux décisions concurrentes.
 
-1er novembre 2026 — EF-04 finalisée, évaluée et documentée
+EF-04 finalisée, évaluée et documentée
 
 Ajouté predict_relations.py : classifieur prudent à règles pour proposer un lien sur une paire non annotée. Il examine types, statuts, dates, négation, nombres, indices de remplacement ou de causalité et termes communs ; il cite une preuve exacte pour les liens positifs. Les propositions restent non revues et une preuve insuffisante entraîne une abstention. La commande classify conserve uniquement les annotations validées ; current ne déduit une décision courante qu'à partir de ces liens et des statuts confirmés.
 
@@ -91,10 +91,21 @@ Ajouté evaluate_relations.py et un jeu de contrôle synthétique séparé de la
 
 Vérification : 20 tests automatiques passent ; la validation CLI couvre 13 unités, 6 relations et 2 sujets. Les données Atlas ont été étendues pour illustrer explicitement les six liens, et le diagnostic EF-02 a été recalculé sur les 13 unités.
 
-1er novembre 2026 — EF-05 : mémoire entre conversations
+EF-05 : mémoire entre conversations
 
 Ajouté semantic_memory.py et quatre sujets Atlas annotés (budget, livraison, prix des capteurs, approvisionnement), chacun suivi dans deux conversations. Le module valide les sources, unités et relations, puis expose une chronologie par sujet avec dates, citations, statuts et liens pertinents.
 
 La proposition de livraison du 12 novembre est signalée obsolète grâce au lien supersedes qui établit la décision du 19 novembre. Les affirmations opposées sur le prix Nova sont conservées avec leurs preuves et signalées comme contradiction non résolue. Une date plus récente ou une paire non revue ne produit pas de remplacement automatique.
 
 Documentation ajoutée dans docs/memoire_ef05.md et README.md. Vérification : 26 tests automatiques passent ; la validation CLI couvre 13 unités, 6 relations et 4 sujets traversant chacun deux conversations. La démonstration repose sur des annotations synthétiques ; la découverte automatique de sujets et l'évaluation sur réunions réelles restent hors de ce jalon.
+
+
+3 novembre 2026 — EF-06 : classification des intentions et extraction des paramètres
+
+Ajouté 424 demandes annotées pour l'entraînement, 125 pour la validation et 124 pour un premier contrôle synthétique. Les sept intentions et les paramètres sujet, personne, échéance et action sont représentés. Les jeux séparent les projets et les formulations générées ; les exemples initiaux restent conservés comme graines reproductibles.
+
+Une première baseline à règles classait mal les formulations nouvelles et demandait trop souvent une clarification. Ajouté train_intents.py : comparaison de trois classifieurs TF-IDF, sélection sur le macro-F1 de validation et export du modèle choisi (groupes de caractères + LinearSVC). Le routage applique ensuite des contrôles explicites : phrase hypothétique, sujet manquant, destinataire d'e-mail non nommé, action de tâche absente et date d'événement absente. Aucune action externe n'est exécutée.
+
+Un nouveau jeu de 56 demandes synthétiques rédigées individuellement, sur six autres projets, a été évalué après fixation du modèle et des contrôles. Macro-F1 : 0,930 pour le modèle avec contrôles contre 0,591 pour les règles seules. Les 8 clarifications attendues sont reconnues ; 3 des 48 demandes complètes sont clarifiées à tort, contre 22 pour la baseline. L'intention et les quatre paramètres sont tous exacts pour 51 des 56 demandes. Les cinq écarts restent consignés dans intent_fresh_eval_metrics.json.
+
+Vérification avant publication : 41 tests automatiques passent. Documentation, modèle et rapports ajoutés au dépôt. Les scores portent sur des demandes synthétiques ; une évaluation sur des formulations recueillies auprès d'utilisateurs indépendants reste à faire.

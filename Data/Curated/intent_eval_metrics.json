@@ -1,0 +1,1609 @@
+{
+  "method": "conservative_rules_v1",
+  "split": "project_disjoint_synthetic_requests",
+  "independence_note": "The 23 evaluation seed examples were previously inspected, so this is a descriptive synthetic-data check.",
+  "training": {
+    "path": "Data\\Curated\\intent_train.jsonl",
+    "sha256": "0c2cd4429c45af067cfb15d030bd61929c3e565506d5fb428bf7ccfb8d77e9dd",
+    "count": 424,
+    "projects": [
+      "Atlas",
+      "Calypso",
+      "Cosmos",
+      "Delta",
+      "Kappa",
+      "Mistral",
+      "Nova",
+      "Titan"
+    ]
+  },
+  "validation": {
+    "path": "Data\\Curated\\intent_validation.jsonl",
+    "sha256": "7c71154a79565ae0b65c0066970461344f29db14dc09c53e5105ab0834c70025",
+    "count": 125,
+    "projects": [
+      "Boreal",
+      "Cobalt",
+      "Galaxie",
+      "Meridian",
+      "Orion",
+      "Vega",
+      "Zenith"
+    ]
+  },
+  "evaluation": {
+    "path": "Data\\Curated\\intent_eval_holdout.jsonl",
+    "sha256": "cfb97261b0cc49b262811c72d54952a05c5a82fbb77064a6f253f2ae48be76a3",
+    "count": 124,
+    "projects": [
+      "Lyra",
+      "Marina",
+      "Pulsar",
+      "Quasar",
+      "Rivage",
+      "Sirius",
+      "Solstice"
+    ]
+  },
+  "metrics": {
+    "intent_macro_f1": 0.3930379298121233,
+    "intent_accuracy": 0.4032258064516129,
+    "by_class": {
+      "answer": {
+        "support": 18,
+        "precision": 0.25,
+        "recall": 0.1111111111111111,
+        "f1": 0.15384615384615383
+      },
+      "compare": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 0.1111111111111111,
+        "f1": 0.19999999999999998
+      },
+      "build_dossier": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 0.1111111111111111,
+        "f1": 0.19999999999999998
+      },
+      "draft_email": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 0.7222222222222222,
+        "f1": 0.8387096774193548
+      },
+      "create_task": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 0.7222222222222222,
+        "f1": 0.8387096774193548
+      },
+      "schedule_event": {
+        "support": 18,
+        "precision": 1.0,
+        "recall": 0.1111111111111111,
+        "f1": 0.19999999999999998
+      },
+      "clarify": {
+        "support": 16,
+        "precision": 0.19047619047619047,
+        "recall": 1.0,
+        "f1": 0.32
+      }
+    },
+    "confusion_matrix": {
+      "answer": {
+        "answer": 2,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 16
+      },
+      "compare": {
+        "answer": 6,
+        "compare": 2,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 10
+      },
+      "build_dossier": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 2,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 16
+      },
+      "draft_email": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 13,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 5
+      },
+      "create_task": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 13,
+        "schedule_event": 0,
+        "clarify": 5
+      },
+      "schedule_event": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 2,
+        "clarify": 16
+      },
+      "clarify": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 16
+      }
+    },
+    "slots": {
+      "subject": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 122,
+        "gold_present_exact_accuracy": 1.0
+      },
+      "person": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 42,
+        "gold_present_exact_accuracy": 1.0
+      },
+      "due_date": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 23,
+        "gold_present_exact_accuracy": 1.0
+      },
+      "action": {
+        "exact_accuracy": 0.9596774193548387,
+        "gold_present_count": 23,
+        "gold_present_exact_accuracy": 0.782608695652174
+      }
+    },
+    "appropriate_clarification_rate": 1.0,
+    "false_clarification_rate": 0.6296296296296297
+  },
+  "errors": [
+    {
+      "id": "final02",
+      "gold": {
+        "intent": "answer",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "final05",
+      "gold": {
+        "intent": "compare",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "final08",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Sirius",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "final15",
+      "gold": {
+        "intent": "create_task",
+        "subject": "livraison Lyra",
+        "person": null,
+        "due_date": null,
+        "action": "verifier la livraison lyra"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Lyra",
+        "person": null,
+        "due_date": null,
+        "action": "verifier la livraison lyra",
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "final17",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "planning Sirius",
+        "person": "Joël",
+        "due_date": "2026-12-18",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Sirius",
+        "person": "Joël",
+        "due_date": "2026-12-18",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-01-01",
+      "gold": {
+        "intent": "answer",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-01-02",
+      "gold": {
+        "intent": "answer",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-01-03",
+      "gold": {
+        "intent": "answer",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-01-04",
+      "gold": {
+        "intent": "answer",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-01-05",
+      "gold": {
+        "intent": "answer",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-02-01",
+      "gold": {
+        "intent": "answer",
+        "subject": "livraison Solstice",
+        "person": "Iris",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Solstice",
+        "person": "Iris",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-02-02",
+      "gold": {
+        "intent": "answer",
+        "subject": "planning Pulsar",
+        "person": "Karim",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Pulsar",
+        "person": "Karim",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-02-03",
+      "gold": {
+        "intent": "answer",
+        "subject": "capteurs Quasar",
+        "person": "Louise",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Quasar",
+        "person": "Louise",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-02-04",
+      "gold": {
+        "intent": "answer",
+        "subject": "approvisionnement Rivage",
+        "person": "Milan",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Rivage",
+        "person": "Milan",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-02-05",
+      "gold": {
+        "intent": "answer",
+        "subject": "budget Marina",
+        "person": "Zoé",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Marina",
+        "person": "Zoé",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-01",
+      "gold": {
+        "intent": "answer",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-02",
+      "gold": {
+        "intent": "answer",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-03",
+      "gold": {
+        "intent": "answer",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-04",
+      "gold": {
+        "intent": "answer",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-answer-03-05",
+      "gold": {
+        "intent": "answer",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-01-01",
+      "gold": {
+        "intent": "compare",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-01-02",
+      "gold": {
+        "intent": "compare",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-01-03",
+      "gold": {
+        "intent": "compare",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-01-04",
+      "gold": {
+        "intent": "compare",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-01-05",
+      "gold": {
+        "intent": "compare",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-02-01",
+      "gold": {
+        "intent": "compare",
+        "subject": "livraison Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "livraison Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "eval_holdout-compare-02-02",
+      "gold": {
+        "intent": "compare",
+        "subject": "planning Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "planning Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "eval_holdout-compare-02-03",
+      "gold": {
+        "intent": "compare",
+        "subject": "capteurs Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "capteurs Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "eval_holdout-compare-02-04",
+      "gold": {
+        "intent": "compare",
+        "subject": "approvisionnement Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "approvisionnement Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "eval_holdout-compare-02-05",
+      "gold": {
+        "intent": "compare",
+        "subject": "budget Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "budget Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "eval_holdout-compare-03-01",
+      "gold": {
+        "intent": "compare",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-03-02",
+      "gold": {
+        "intent": "compare",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-03-03",
+      "gold": {
+        "intent": "compare",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-03-04",
+      "gold": {
+        "intent": "compare",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-compare-03-05",
+      "gold": {
+        "intent": "compare",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-01-01",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-01-02",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-01-03",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-01-04",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-01-05",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-02-01",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "livraison Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-02-02",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "planning Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-02-03",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "capteurs Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-02-04",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "approvisionnement Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-02-05",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "budget Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-03-01",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-03-02",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-03-03",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-03-04",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-build_dossier-03-05",
+      "gold": {
+        "intent": "build_dossier",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-draft_email-01-01",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "budget Solstice",
+        "person": "Iris",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Solstice",
+        "person": "Iris",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-draft_email-01-02",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "livraison Pulsar",
+        "person": "Karim",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Pulsar",
+        "person": "Karim",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-draft_email-01-03",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "planning Quasar",
+        "person": "Louise",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Quasar",
+        "person": "Louise",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-draft_email-01-04",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "capteurs Rivage",
+        "person": "Milan",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivage",
+        "person": "Milan",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-draft_email-01-05",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "approvisionnement Marina",
+        "person": "Zoé",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Marina",
+        "person": "Zoé",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-create_task-01-01",
+      "gold": {
+        "intent": "create_task",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": "relancer le fournisseur"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Solstice",
+        "person": null,
+        "due_date": null,
+        "action": "relancer le fournisseur",
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-create_task-01-02",
+      "gold": {
+        "intent": "create_task",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": "envoyer le dossier"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": "envoyer le dossier",
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-create_task-01-03",
+      "gold": {
+        "intent": "create_task",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Quasar",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres",
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-create_task-01-04",
+      "gold": {
+        "intent": "create_task",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": "verifier le calendrier"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivage",
+        "person": null,
+        "due_date": null,
+        "action": "verifier le calendrier",
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-01-01",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "budget Solstice",
+        "person": "Iris",
+        "due_date": "2027-02-08",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Solstice",
+        "person": "Iris",
+        "due_date": "2027-02-08",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-01-02",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "livraison Pulsar",
+        "person": "Karim",
+        "due_date": "2027-02-09",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Pulsar",
+        "person": "Karim",
+        "due_date": "2027-02-09",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-01-03",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "planning Quasar",
+        "person": "Louise",
+        "due_date": "2027-02-10",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Quasar",
+        "person": "Louise",
+        "due_date": "2027-02-10",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-01-04",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "capteurs Rivage",
+        "person": "Milan",
+        "due_date": "2027-02-11",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Rivage",
+        "person": "Milan",
+        "due_date": "2027-02-11",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-01-05",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "approvisionnement Marina",
+        "person": "Zoé",
+        "due_date": "2027-02-12",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Marina",
+        "person": "Zoé",
+        "due_date": "2027-02-12",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-02-01",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "livraison Solstice",
+        "person": null,
+        "due_date": "2027-02-08",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Solstice",
+        "person": null,
+        "due_date": "2027-02-08",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-02-02",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "planning Pulsar",
+        "person": null,
+        "due_date": "2027-02-09",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Pulsar",
+        "person": null,
+        "due_date": "2027-02-09",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-02-03",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "capteurs Quasar",
+        "person": null,
+        "due_date": "2027-02-10",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Quasar",
+        "person": null,
+        "due_date": "2027-02-10",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-02-04",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "approvisionnement Rivage",
+        "person": null,
+        "due_date": "2027-02-11",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Rivage",
+        "person": null,
+        "due_date": "2027-02-11",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-02-05",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "budget Marina",
+        "person": null,
+        "due_date": "2027-02-12",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Marina",
+        "person": null,
+        "due_date": "2027-02-12",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-03-01",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "planning Solstice",
+        "person": "Iris",
+        "due_date": "2027-02-08",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": "Iris",
+        "due_date": "2027-02-08",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-03-02",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "capteurs Pulsar",
+        "person": "Karim",
+        "due_date": "2027-02-09",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": "Karim",
+        "due_date": "2027-02-09",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-03-03",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "approvisionnement Quasar",
+        "person": "Louise",
+        "due_date": "2027-02-10",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": "Louise",
+        "due_date": "2027-02-10",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-03-04",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "budget Rivage",
+        "person": "Milan",
+        "due_date": "2027-02-11",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": "Milan",
+        "due_date": "2027-02-11",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-schedule_event-03-05",
+      "gold": {
+        "intent": "schedule_event",
+        "subject": "livraison Marina",
+        "person": "Zoé",
+        "due_date": "2027-02-12",
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": "Zoé",
+        "due_date": "2027-02-12",
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-01",
+      "gold": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "planning Solstice",
+        "person": null,
+        "due_date": null,
+        "action": "confirmer les chiffres pour le planning de solstice",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-02",
+      "gold": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": "verifier le calendrier"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "capteurs Pulsar",
+        "person": null,
+        "due_date": null,
+        "action": "verifier le calendrier pour les capteurs de pulsar",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-03",
+      "gold": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": "transmettre la note"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Quasar",
+        "person": null,
+        "due_date": null,
+        "action": "transmettre la note pour l'approvisionnement de quasar",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-04",
+      "gold": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": "preparer le compte rendu"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "budget Rivage",
+        "person": null,
+        "due_date": null,
+        "action": "preparer le compte rendu pour le budget de rivage",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    },
+    {
+      "id": "eval_holdout-clarify-03-05",
+      "gold": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": "relancer le fournisseur"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Marina",
+        "person": null,
+        "due_date": null,
+        "action": "relancer le fournisseur pour la livraison de marina",
+        "clarification_reason": "hypothetical_not_request"
+      }
+    }
+  ]
+}

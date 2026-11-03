@@ -1,0 +1,291 @@
+{
+  "method": "trained_classifier_with_slot_guards_v1",
+  "split": "project_disjoint_synthetic_requests",
+  "independence_note": "New manually drafted synthetic requests, evaluated after the model and guard policy were fixed; not independent human data.",
+  "training": {
+    "path": "Data\\Curated\\intent_train.jsonl",
+    "sha256": "0c2cd4429c45af067cfb15d030bd61929c3e565506d5fb428bf7ccfb8d77e9dd",
+    "count": 424,
+    "projects": [
+      "Atlas",
+      "Calypso",
+      "Cosmos",
+      "Delta",
+      "Kappa",
+      "Mistral",
+      "Nova",
+      "Titan"
+    ]
+  },
+  "validation": {
+    "path": "Data\\Curated\\intent_validation.jsonl",
+    "sha256": "7c71154a79565ae0b65c0066970461344f29db14dc09c53e5105ab0834c70025",
+    "count": 125,
+    "projects": [
+      "Boreal",
+      "Cobalt",
+      "Galaxie",
+      "Meridian",
+      "Orion",
+      "Vega",
+      "Zenith"
+    ]
+  },
+  "evaluation": {
+    "path": "Data\\Curated\\intent_fresh_holdout.jsonl",
+    "sha256": "0aeeff9736dc284994ed4ccd49d049bef4366cb0f8c5ac13b37cfc8cd69388ef",
+    "count": 56,
+    "projects": [
+      "Bastion",
+      "Krypton",
+      "Mirage",
+      "Rivoli",
+      "Saphir",
+      "Tundra"
+    ]
+  },
+  "metrics": {
+    "intent_macro_f1": 0.9295844653650934,
+    "intent_accuracy": 0.9285714285714286,
+    "joint_intent_and_slots_exact_accuracy": 0.9107142857142857,
+    "by_class": {
+      "answer": {
+        "support": 8,
+        "precision": 0.8888888888888888,
+        "recall": 1.0,
+        "f1": 0.9411764705882353
+      },
+      "compare": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.8571428571428571
+      },
+      "build_dossier": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "draft_email": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.875,
+        "f1": 0.9333333333333333
+      },
+      "create_task": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 0.875,
+        "f1": 0.9333333333333333
+      },
+      "schedule_event": {
+        "support": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "clarify": {
+        "support": 8,
+        "precision": 0.7272727272727273,
+        "recall": 1.0,
+        "f1": 0.8421052631578948
+      }
+    },
+    "confusion_matrix": {
+      "answer": {
+        "answer": 8,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 0
+      },
+      "compare": {
+        "answer": 1,
+        "compare": 6,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 1
+      },
+      "build_dossier": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 8,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 0
+      },
+      "draft_email": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 7,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 1
+      },
+      "create_task": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 7,
+        "schedule_event": 0,
+        "clarify": 1
+      },
+      "schedule_event": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 8,
+        "clarify": 0
+      },
+      "clarify": {
+        "answer": 0,
+        "compare": 0,
+        "build_dossier": 0,
+        "draft_email": 0,
+        "create_task": 0,
+        "schedule_event": 0,
+        "clarify": 8
+      }
+    },
+    "slots": {
+      "subject": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 54,
+        "gold_present_exact_accuracy": 1.0,
+        "correct_intent_exact_accuracy": 1.0,
+        "gold_present_and_correct_intent_count": 50,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      },
+      "person": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 14,
+        "gold_present_exact_accuracy": 1.0,
+        "correct_intent_exact_accuracy": 1.0,
+        "gold_present_and_correct_intent_count": 13,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      },
+      "due_date": {
+        "exact_accuracy": 1.0,
+        "gold_present_count": 9,
+        "gold_present_exact_accuracy": 1.0,
+        "correct_intent_exact_accuracy": 1.0,
+        "gold_present_and_correct_intent_count": 9,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      },
+      "action": {
+        "exact_accuracy": 0.9642857142857143,
+        "gold_present_count": 9,
+        "gold_present_exact_accuracy": 0.8888888888888888,
+        "correct_intent_exact_accuracy": 0.9807692307692307,
+        "gold_present_and_correct_intent_count": 8,
+        "gold_present_and_correct_intent_exact_accuracy": 1.0
+      }
+    },
+    "clarification_precision": 0.7272727272727273,
+    "clarification_recall": 1.0,
+    "appropriate_clarification_rate": 1.0,
+    "false_clarification_rate": 0.0625
+  },
+  "errors": [
+    {
+      "id": "fresh10",
+      "gold": {
+        "intent": "compare",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "livraison Bastion",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "intent_uncertain_or_ambiguous"
+      }
+    },
+    {
+      "id": "fresh11",
+      "gold": {
+        "intent": "compare",
+        "subject": "planning Tundra",
+        "person": null,
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "answer",
+        "subject": "planning Tundra",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "fresh26",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "livraison Bastion",
+        "person": "Malik",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "draft_email",
+        "subject": "livraison Bastion",
+        "person": "Malik",
+        "due_date": null,
+        "action": "preparer un courriel pour malik concernant la livraison bastion",
+        "clarification_reason": null
+      }
+    },
+    {
+      "id": "fresh29",
+      "gold": {
+        "intent": "draft_email",
+        "subject": "approvisionnement Krypton",
+        "person": "Yara",
+        "due_date": null,
+        "action": null
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Krypton",
+        "person": "Yara",
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "missing_named_recipient"
+      }
+    },
+    {
+      "id": "fresh37",
+      "gold": {
+        "intent": "create_task",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": null,
+        "action": "appeler le fournisseur"
+      },
+      "predicted": {
+        "intent": "clarify",
+        "subject": "approvisionnement Krypton",
+        "person": null,
+        "due_date": null,
+        "action": null,
+        "clarification_reason": "missing_action"
+      }
+    }
+  ]
+}
