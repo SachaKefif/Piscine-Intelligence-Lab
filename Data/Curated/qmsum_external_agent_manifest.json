@@ -1,0 +1,22 @@
+{
+  "source": "Yale-LILY/QMSum data/Committee/test; original English specific queries, answers and relevant_text_span",
+  "meetings": [
+    "education_13",
+    "education_17"
+  ],
+  "cases": 15,
+  "input_sha256": {
+    "raw_education_13": "ee8b8b44e0d438c4280a15165148a9c52e3e278390af3a72aef1feb8e776dc60",
+    "raw_education_17": "a25f5bf677a5328f1f1628f45c0a4290b5735e434899d3e7a28aaa60b3cc2a90",
+    "units": "d4700a358a8c3018d45efa19b28b133be10f8334eb3339051829cd3ee043736d",
+    "cases": "c50a83387fb5e2e24d4940f4e0e1a8f91ced55db42016ab19cb721ec34ab0393",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "07e8d0271cdc19c932f9e787cd8718978feddea05d1436eaf287da0ed85a3bde"
+  },
+  "frozen_model_weights_sha256": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46",
+  "limitations": [
+    "Questions are English while EF-06 is trained for French.",
+    "QMSum provides no user-authored email/task/event requests or recipient labels.",
+    "Answer summaries and relevant spans are external annotations; unit conversion is automatic."
+  ]
+}

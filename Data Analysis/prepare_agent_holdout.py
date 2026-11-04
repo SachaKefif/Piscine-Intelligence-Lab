@@ -17,10 +17,11 @@ OUTPUT = ROOT / "Data/Processed/qmsum_agent_holdout_conversations.jsonl"
 UNITS = ROOT / "Data/Curated/qmsum_agent_holdout_units.jsonl"
 
 
-def prepare(output=OUTPUT, *, meetings=MEETINGS, units=UNITS):
+def prepare(output=OUTPUT, *, meetings=MEETINGS, units=UNITS, raw_dir=RAW):
+    raw_dir = raw_dir.resolve()
     rows = []
     for meeting_id in meetings:
-        raw_path = RAW / f"{meeting_id}.json"
+        raw_path = raw_dir / f"{meeting_id}.json"
         raw = json.loads(raw_path.read_text(encoding="utf-8"))
         rows.append({
             "dataset": "QMSum", "meeting_id": meeting_id, "split": "test",
@@ -48,8 +49,10 @@ def main():
     parser.add_argument("--output", type=Path, default=OUTPUT)
     parser.add_argument("--units", type=Path, default=UNITS)
     parser.add_argument("--meetings", nargs="+", default=MEETINGS)
+    parser.add_argument("--raw-dir", type=Path, default=RAW)
     args = parser.parse_args()
-    print(json.dumps(prepare(args.output, meetings=args.meetings, units=args.units),
+    print(json.dumps(prepare(args.output, meetings=args.meetings, units=args.units,
+                             raw_dir=args.raw_dir),
                      ensure_ascii=False, indent=2))
 
 

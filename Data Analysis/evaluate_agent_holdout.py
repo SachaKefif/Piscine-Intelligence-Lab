@@ -27,9 +27,9 @@ def digest(path):
 def evaluate(method="bm25", model=DEFAULT_MODEL, device="cpu", *, meetings=MEETINGS,
              conversations=CONVERSATIONS, units=UNITS, relations=RELATIONS,
              topics=TOPICS, cases_path=CASES, expected_cases=12, evaluation_note=None,
-             frozen_manifest=None):
+             frozen_manifest=None, raw_dir=RAW):
     input_sha256 = {
-        **{f"raw_{meeting}": digest(RAW / f"{meeting}.json") for meeting in meetings},
+        **{f"raw_{meeting}": digest(raw_dir / f"{meeting}.json") for meeting in meetings},
         "units": digest(units), "relations": digest(relations),
         "topics": digest(topics), "cases": digest(cases_path),
         "model_weights": digest(Path(model) / "model.safetensors") if method != "bm25" else None,
@@ -42,7 +42,7 @@ def evaluate(method="bm25", model=DEFAULT_MODEL, device="cpu", *, meetings=MEETI
         expected_model = frozen.get("frozen_model_weights_sha256")
         if method != "bm25" and expected_model and input_sha256["model_weights"] != expected_model:
             raise ValueError("Frozen model weights mismatch")
-    prepare(conversations, meetings=meetings, units=units)
+    prepare(conversations, meetings=meetings, units=units, raw_dir=raw_dir)
     engine = ResponseEngine(conversations, units, relations, topics)
     pipeline = SemanticPipeline(engine=engine, method=method, model_path=model, device=device)
     cases = list(read_jsonl(cases_path))
@@ -121,6 +121,7 @@ def main():
     parser.add_argument("--model", type=Path, default=DEFAULT_MODEL)
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--meetings", nargs="+", default=MEETINGS)
+    parser.add_argument("--raw-dir", type=Path, default=RAW)
     parser.add_argument("--conversations", type=Path, default=CONVERSATIONS)
     parser.add_argument("--units", type=Path, default=UNITS)
     parser.add_argument("--relations", type=Path, default=RELATIONS)
@@ -137,7 +138,7 @@ def main():
                                 units=args.units, relations=args.relations, topics=args.topics,
                                 cases_path=args.cases, expected_cases=args.expected_cases,
                                 evaluation_note=args.evaluation_note,
-                                frozen_manifest=args.frozen_manifest)
+                                frozen_manifest=args.frozen_manifest, raw_dir=args.raw_dir)
     args.metrics.write_text(json.dumps(metrics, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     args.outputs.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in outputs),
                             encoding="utf-8")
