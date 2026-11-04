@@ -109,3 +109,11 @@ Une première baseline à règles classait mal les formulations nouvelles et dem
 Un nouveau jeu de 56 demandes synthétiques rédigées individuellement, sur six autres projets, a été évalué après fixation du modèle et des contrôles. Macro-F1 : 0,930 pour le modèle avec contrôles contre 0,591 pour les règles seules. Les 8 clarifications attendues sont reconnues ; 3 des 48 demandes complètes sont clarifiées à tort, contre 22 pour la baseline. L'intention et les quatre paramètres sont tous exacts pour 51 des 56 demandes. Les cinq écarts restent consignés dans intent_fresh_eval_metrics.json.
 
 Vérification avant publication : 41 tests automatiques passent. Documentation, modèle et rapports ajoutés au dépôt. Les scores portent sur des demandes synthétiques ; une évaluation sur des formulations recueillies auprès d'utilisateurs indépendants reste à faire.
+
+EF-07 : réponses, comparaisons et dossiers sourcés
+
+Ajouté generate_response.py, qui relie EF-06 à la mémoire validée EF-05. Les alias annotés des quatre sujets Atlas permettent de choisir le périmètre sans inventer un sujet. Chaque affirmation reprend exactement une unité sémantique ou une relation revue et fournit les identifiants d'unités ainsi que les références vérifiables. Les décisions courantes restent distinctes des propositions remplacées ; les contradictions sont signalées sans arbitrage automatique.
+
+Le dossier expose faits établis, chronologie, décisions, points ouverts, responsables et changements prouvés. Une information absente reste explicitement introuvable, une question sur le projet entier sans sujet demande une précision et les intentions d'action ne déclenchent rien. Ajouté tests/test_generate_response.py et douze scénarios Atlas annotés pour mesurer couverture des faits, statut de réponse, relations attendues et intégrité des citations. Ce jeu a servi au développement ; il ne constitue pas un test indépendant sur d'autres projets.
+
+Vérification dans .venv-gpu : 55 tests passent. Sur les douze scénarios de développement, les 32 unités attendues sont couvertes, les douze statuts de réponse sont corrects et les citations passent toutes le contrôle de provenance. Une évaluation indépendante avec annotation humaine de la pertinence des réponses reste nécessaire.

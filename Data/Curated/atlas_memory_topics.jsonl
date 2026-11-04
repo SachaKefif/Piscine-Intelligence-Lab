@@ -1,4 +1,4 @@
-{"topic_id":"atlas_budget","project_id":"Atlas","unit_ids":["Synthetic:Atlas-01:0-0:0","Synthetic:Atlas-01:4-4:0","Synthetic:Atlas-02:0-0:0","Synthetic:Atlas-02:5-5:0"]}
-{"topic_id":"atlas_delivery","project_id":"Atlas","unit_ids":["Synthetic:Atlas-01:1-1:0","Synthetic:Atlas-02:1-1:0"]}
-{"topic_id":"atlas_sensor_price","project_id":"Atlas","unit_ids":["Synthetic:Atlas-01:3-3:0","Synthetic:Atlas-02:4-4:0","Synthetic:Atlas-02:7-7:0"]}
-{"topic_id":"atlas_procurement","project_id":"Atlas","unit_ids":["Synthetic:Atlas-01:2-2:0","Synthetic:Atlas-02:2-2:0","Synthetic:Atlas-02:3-3:0","Synthetic:Atlas-02:6-6:0"]}
+{"topic_id":"atlas_budget","project_id":"Atlas","aliases":["budget","validation du budget","budget du prototype"],"unit_ids":["Synthetic:Atlas-01:0-0:0","Synthetic:Atlas-01:4-4:0","Synthetic:Atlas-02:0-0:0","Synthetic:Atlas-02:5-5:0"]}
+{"topic_id":"atlas_delivery","project_id":"Atlas","aliases":["livraison","date de livraison","livraison du prototype"],"unit_ids":["Synthetic:Atlas-01:1-1:0","Synthetic:Atlas-02:1-1:0"]}
+{"topic_id":"atlas_sensor_price","project_id":"Atlas","aliases":["prix des capteurs","prix des capteurs Nova","prix Nova","tarif des capteurs","capteurs Nova"],"unit_ids":["Synthetic:Atlas-01:3-3:0","Synthetic:Atlas-02:4-4:0","Synthetic:Atlas-02:7-7:0"]}
+{"topic_id":"atlas_procurement","project_id":"Atlas","aliases":["approvisionnement","commande des capteurs","devis du prototype","achat des capteurs"],"unit_ids":["Synthetic:Atlas-01:2-2:0","Synthetic:Atlas-02:2-2:0","Synthetic:Atlas-02:3-3:0","Synthetic:Atlas-02:6-6:0"]}

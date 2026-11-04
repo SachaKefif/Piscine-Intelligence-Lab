@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02, EF-04 et EF-05 sont implémentées et vérifiées sur des démonstrations synthétiques** : EF-04 couvre les six relations, propose un lien pour une nouvelle paire avec abstention, et contrôle la décision courante. EF-05 expose une mémoire chronologique par sujet sur plusieurs conversations, avec remplacements et contradictions sourcés. EF-06 utilise désormais un classifieur entraîné suivi de contrôles des paramètres obligatoires ; sur 56 nouvelles demandes synthétiques, son macro-F1 est de 0,930 contre 0,591 pour les règles seules. L'agent complet reste à réaliser.
+Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02, EF-04, EF-05 et EF-07 sont implémentées et vérifiées sur des démonstrations synthétiques** : EF-04 couvre les six relations, propose un lien pour une nouvelle paire avec abstention, et contrôle la décision courante. EF-05 expose une mémoire chronologique par sujet sur plusieurs conversations, avec remplacements et contradictions sourcés. EF-06 utilise un classifieur entraîné suivi de contrôles des paramètres obligatoires ; sur 56 nouvelles demandes synthétiques, son macro-F1 est de 0,930 contre 0,591 pour les règles seules. EF-07 produit des réponses, comparaisons et dossiers à affirmations sourcées ; les douze scénarios Atlas de développement couvrent les 32 unités attendues. L'agent complet et les actions simulées restent à réaliser.
 
 ## Cahier des charges
 
@@ -20,6 +20,7 @@ Le dépôt contient les quatre corpus normalisés, les baselines de recherche QM
 - [Rapport EF-04](docs/rapport_relations_ef04.md) : règles de classification, métriques par classe, confusion et limites.
 - [Mémoire EF-05](docs/memoire_ef05.md) : sujets, chronologie, signalements et reproduction.
 - [Intentions EF-06](docs/intentions_ef06.md) : contrat, clarification, jeu annoté et évaluation.
+- [Réponses EF-07](docs/reponses_ef07.md) : affirmations sourcées, dossiers, comparaisons et évaluation.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés
