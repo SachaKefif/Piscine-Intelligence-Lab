@@ -23,7 +23,7 @@ def sha256(path):
     return digest.hexdigest()
 
 
-def install(archive_path=None, destination=DESTINATION):
+def install(archive_path=None, destination=DESTINATION, temp_dir=None):
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     if destination.exists():
         weights = destination / "model.safetensors"
@@ -32,7 +32,11 @@ def install(archive_path=None, destination=DESTINATION):
                     "weights_sha256": manifest["weights_sha256"]}
         raise FileExistsError(f"Existing checkpoint differs: {destination}")
     destination.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="e5-checkpoint-") as temporary:
+    if temp_dir is not None:
+        temp_dir.mkdir(parents=True, exist_ok=True)
+        if temp_dir.resolve().anchor != destination.resolve().anchor:
+            raise ValueError("Temporary directory and destination must share a drive")
+    with tempfile.TemporaryDirectory(prefix="e5-checkpoint-", dir=temp_dir) as temporary:
         temporary = Path(temporary)
         archive = temporary / manifest["asset_name"]
         if archive_path:
@@ -65,5 +69,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, help="Use a local release asset for offline verification")
     parser.add_argument("--destination", type=Path, default=DESTINATION)
+    parser.add_argument("--temp-dir", type=Path, help="Use a chosen drive for download and extraction")
     args = parser.parse_args()
-    print(json.dumps(install(args.archive, args.destination), indent=2))
+    print(json.dumps(install(args.archive, args.destination, args.temp_dir), indent=2))

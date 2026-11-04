@@ -1,0 +1,418 @@
+{
+  "dataset": "QMSum test, education_13, education_17; transcript dates unknown",
+  "requests": "15 original English questions from external QMSum annotators",
+  "evaluation_note": "First frozen transfer run; English questions are outside the French EF-06 training domain; no rule or model selected on these cases.",
+  "method": "bm25",
+  "cases": 15,
+  "passed": 0,
+  "case_accuracy": 0.0,
+  "intent_accuracy": 0.0,
+  "status_accuracy": 0.0,
+  "fact_coverage": 0.0,
+  "cases_with_citations": 0,
+  "citation_relevance_rate": null,
+  "clarification_recall": null,
+  "clarification_precision": 0.0,
+  "source_contract_rate": 1.0,
+  "input_sha256": {
+    "raw_education_13": "ee8b8b44e0d438c4280a15165148a9c52e3e278390af3a72aef1feb8e776dc60",
+    "raw_education_17": "a25f5bf677a5328f1f1628f45c0a4290b5735e434899d3e7a28aaa60b3cc2a90",
+    "units": "d4700a358a8c3018d45efa19b28b133be10f8334eb3339051829cd3ee043736d",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "07e8d0271cdc19c932f9e787cd8718978feddea05d1436eaf287da0ed85a3bde",
+    "cases": "c50a83387fb5e2e24d4940f4e0e1a8f91ced55db42016ab19cb721ec34ab0393",
+    "model_weights": null
+  },
+  "details": [
+    {
+      "id": "education_13_1",
+      "request": "What did Barry Hughes think about the legal framework when talking about the efficacy of the law?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:1-5:1"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:1-5:1"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_13_2",
+      "request": "What was the two-stage test during prosecutions when discussing the efficacy of the law?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:12-13:2"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:12-13:2"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_13_4",
+      "request": "What did Barry Hughes think about the implications for implementing the Bill in Wales when talking about the divergence between the law in England and Wales?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:17-23:4"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:17-23:4"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_13_5",
+      "request": "What did Barry Hughes think about draft changes to CPS guidance when talking about the divergence between the law in England and Wales?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:42-44:5"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:42-44:5"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_13_7",
+      "request": "How did the National Police Chiefs' Council help in out-of-court disposals?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:95-96:7"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:95-96:7"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_13_8",
+      "request": "What did Barry Hughes think about the infrastructure of out-of-court disposals?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:97-101:8"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:97-101:8"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_13_10",
+      "request": "What did Barry Hughes think about the targets regarding performance measure?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:111-114:10"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:111-114:10"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_13_11",
+      "request": "What did Karen Cornish think about a shortage of registered intermediaries?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_13:128-130:11"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_13:128-130:11"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_17_0",
+      "request": "What did the group discuss about how much employers understood the meaning of Welsh bac?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_17:2-12:0"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_17:2-12:0"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_17_1",
+      "request": "What did Ed Evans (director and secretary of the Civil Engineering Contractors Association) think about employers' understanding of Welsh bac?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_17:9-12:1"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_17:9-12:1"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_17_2",
+      "request": "What did they decide on how to improve employers' understanding of the Welsh bac?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_17:14-18:2"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_17:14-18:2"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_17_7",
+      "request": "What did Nick Brazil (deputy principal) think about to what extent that universities understood the value of the Welsh bac?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_17:52-52:7"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_17:52-52:7"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_17_8",
+      "request": "What was the situation in north Wales when discussing to what extent that universities understood the value of the Welsh bac?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_17:54-58:8"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_17:54-58:8"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_17_10",
+      "request": "What did Dafydd Evans (chair of ColegauCymru) think of introducing a specialist teacher training qualification?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_17:119-120:10"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_17:119-120:10"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "education_17_11",
+      "request": "What did Nick Brazil (deputy principal) think of introducing a specialist teacher training qualification?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:education_17:121-121:11"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:education_17:121-121:11"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    }
+  ]
+}

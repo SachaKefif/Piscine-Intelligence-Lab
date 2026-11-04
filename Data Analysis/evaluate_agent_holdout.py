@@ -27,7 +27,7 @@ def digest(path):
 def evaluate(method="bm25", model=DEFAULT_MODEL, device="cpu", *, meetings=MEETINGS,
              conversations=CONVERSATIONS, units=UNITS, relations=RELATIONS,
              topics=TOPICS, cases_path=CASES, expected_cases=12, evaluation_note=None,
-             frozen_manifest=None, raw_dir=RAW):
+             frozen_manifest=None, raw_dir=RAW, request_description=None):
     input_sha256 = {
         **{f"raw_{meeting}": digest(raw_dir / f"{meeting}.json") for meeting in meetings},
         "units": digest(units), "relations": digest(relations),
@@ -89,9 +89,10 @@ def evaluate(method="bm25", model=DEFAULT_MODEL, device="cpu", *, meetings=MEETI
                         for case, detail in zip(cases, details))
     expected_clarifications = [row for row in details if row["expected_status"] == "clarify"]
     actual_clarifications = [row for row in details if row["actual_status"] == "clarify"]
+    cases_with_citations = [row for row in details if row["cited_unit_ids"]]
     metrics = {
         "dataset": f"QMSum test, {', '.join(meetings)}; transcript dates unknown",
-        "requests": f"{len(cases)} manually written French requests; not a sample of user traffic",
+        "requests": request_description or f"{len(cases)} manually written French requests; not a sample of user traffic",
         "evaluation_note": evaluation_note or (
             "Frozen fixture: no agent rule or model was selected on these cases."
             if frozen_manifest else
@@ -103,9 +104,11 @@ def evaluate(method="bm25", model=DEFAULT_MODEL, device="cpu", *, meetings=MEETI
         "intent_accuracy": round(sum(row["checks"]["intent"] for row in details) / len(details), 4),
         "status_accuracy": round(sum(row["checks"]["status"] for row in details) / len(details), 4),
         "fact_coverage": round(covered_facts / expected_facts, 4),
-        "citation_relevance_rate": round(sum(row["checks"]["citation_relevance"] for row in details) / len(details), 4),
+        "cases_with_citations": len(cases_with_citations),
+        "citation_relevance_rate": round(sum(row["checks"]["citation_relevance"] for row in cases_with_citations)
+                                         / len(cases_with_citations), 4) if cases_with_citations else None,
         "clarification_recall": round(sum(row["actual_status"] == "clarify" for row in expected_clarifications)
-                                      / len(expected_clarifications), 4),
+                                      / len(expected_clarifications), 4) if expected_clarifications else None,
         "clarification_precision": round(sum(row["expected_status"] == "clarify" for row in actual_clarifications)
                                          / len(actual_clarifications), 4) if actual_clarifications else None,
         "source_contract_rate": round(sum(row["checks"]["source_contract"] for row in details) / len(details), 4),
@@ -129,6 +132,7 @@ def main():
     parser.add_argument("--cases", type=Path, default=CASES)
     parser.add_argument("--expected-cases", type=int, default=12)
     parser.add_argument("--evaluation-note")
+    parser.add_argument("--request-description")
     parser.add_argument("--frozen-manifest", type=Path)
     parser.add_argument("--metrics", type=Path, default=CURATED / "qmsum_agent_holdout_metrics.json")
     parser.add_argument("--outputs", type=Path, default=CURATED / "qmsum_agent_holdout_outputs.jsonl")
@@ -138,7 +142,8 @@ def main():
                                 units=args.units, relations=args.relations, topics=args.topics,
                                 cases_path=args.cases, expected_cases=args.expected_cases,
                                 evaluation_note=args.evaluation_note,
-                                frozen_manifest=args.frozen_manifest, raw_dir=args.raw_dir)
+                                frozen_manifest=args.frozen_manifest, raw_dir=args.raw_dir,
+                                request_description=args.request_description)
     args.metrics.write_text(json.dumps(metrics, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     args.outputs.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in outputs),
                             encoding="utf-8")
