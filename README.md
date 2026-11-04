@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt livre le prototype EF-01 à EF-09, les comparaisons de recherche QMSum, l'expérience EF-03 avec ablation, les huit scénarios de recette Atlas et les mesures de latence et mémoire du mini-agent. Le mode hybride utilise E5 adapté ; BM25 fonctionne sans checkpoint local. Un contrôle diagnostique sur deux réunions QMSum du test et douze demandes donne 11/12 cas conformes en BM25 et 10/12 en hybride après correction d'une fausse attribution. Un second contrôle, figé avant sa première exécution sur deux autres réunions, donne 9/9 dans les deux modes. Ces demandes ont été rédigées pour le projet. Sur quinze questions originales d'annotateurs QMSum en anglais, l'agent obtient 0/15 cas conformes dans les deux modes à cause du routage français EF-06, bien que la recherche place la réponse annotée dans les cinq premiers rangs pour les quinze cas. Le [rapport expérimental final](docs/rapport_experimental_final.md) distingue les résultats, erreurs et limites.
+Le dépôt livre le prototype EF-01 à EF-09, les comparaisons de recherche QMSum, l'expérience EF-03 avec ablation, les huit scénarios de recette Atlas et les mesures de latence et mémoire du mini-agent. Le mode hybride utilise E5 adapté ; BM25 fonctionne sans checkpoint local. Un contrôle diagnostique sur deux réunions QMSum du test et douze demandes donne 11/12 cas conformes en BM25 et 10/12 en hybride après correction d'une fausse attribution. Un second contrôle, figé avant sa première exécution sur deux autres réunions, donne 9/9 dans les deux modes. Ces demandes ont été rédigées pour le projet. Sur quinze questions originales d'annotateurs QMSum en anglais, l'agent obtient 0/15 cas conformes dans les deux modes à cause du routage français EF-06, bien que la recherche place la réponse annotée dans les cinq premiers rangs pour les quinze cas. Sur 66 demandes françaises MASSIVE, il s'abstient dans les 49 cas sans destinataire identifié mais manque les 17 noms directs écrits en minuscules. Le [rapport expérimental final](docs/rapport_experimental_final.md) distingue les résultats, erreurs et limites.
 
 ## Cahier des charges
 
@@ -25,6 +25,7 @@ Le dépôt livre le prototype EF-01 à EF-09, les comparaisons de recherche QMSu
 - [Recette de bout en bout](docs/recette_bout_en_bout.md) : huit scénarios, recherche hybride, sorties et preuves inspectables.
 - [Rapport expérimental final](docs/rapport_experimental_final.md) : synthèse des résultats EF-01 à EF-09, ablation, contrôle sur réunions QMSum, coûts et limites.
 - [Contrôle externe QMSum](docs/controle_externe_qmsum.md) : quinze questions humaines originales sur deux autres réunions, résultats et erreurs de transfert.
+- [Contrôle public des destinataires](docs/controle_public_destinataires.md) : 66 demandes françaises MASSIVE, noms directs, mentions sans destinataire et abstentions.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés
