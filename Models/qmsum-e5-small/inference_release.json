@@ -1,0 +1,20 @@
+{
+  "tag": "model-qmsum-e5-small-842",
+  "asset_name": "qmsum-e5-small-checkpoint-842-inference.zip",
+  "url": "https://github.com/SachaKefif/Piscine-Intelligence-Lab/releases/download/model-qmsum-e5-small-842/qmsum-e5-small-checkpoint-842-inference.zip",
+  "archive_sha256": "42d256e949320b7d05d7bf130605990c3a7c5a0f50329235ed89cd4ebbd6ed79",
+  "archive_bytes": 318587209,
+  "weights_sha256": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46",
+  "files": [
+    "config.json",
+    "config_sentence_transformers.json",
+    "model.safetensors",
+    "modules.json",
+    "README.md",
+    "sentence_bert_config.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "1_Pooling/config.json",
+    "2_Normalize/config.json"
+  ]
+}

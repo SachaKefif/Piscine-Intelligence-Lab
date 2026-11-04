@@ -51,7 +51,14 @@ py -3.13 -m venv .venv
 
 Ces commandes vérifient la recette et le contrôle QMSum sans checkpoint local. Les transcriptions sources QMSum nécessaires au contrôle sont suivies par Git ; [`prepare_agent_holdout.py`](Data%20Analysis/prepare_agent_holdout.py) les convertit et revalide les sept citations automatiquement. Les fichiers générés dans `Data/Processed/` ne modifient pas les sources suivies. Les versions de l'environnement de mesure sont épinglées dans [`requirements.txt`](requirements.txt). Pour le GPU, installer une variante PyTorch compatible avec la machine selon le sélecteur officiel avant les autres dépendances.
 
-Le checkpoint E5 utilisé pour les sorties hybrides (`Models/qmsum-e5-small/checkpoints/checkpoint-842`, SHA-256 `1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46`) est ignoré par Git. Pour reconstruire un checkpoint compatible depuis les corpus sources et le modèle public `intfloat/multilingual-e5-small` :
+Le checkpoint E5 utilisé pour les sorties hybrides (`Models/qmsum-e5-small/checkpoints/checkpoint-842`, SHA-256 `1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46`) est ignoré par Git. Le [paquet d'inférence publié](docs/checkpoint_release.md) s'installe dans une copie propre avec :
+
+```powershell
+.venv\Scripts\python.exe "Data Analysis\download_e5_checkpoint.py"
+.venv\Scripts\python.exe "Data Analysis\evaluate_acceptance.py" --method hybrid --device cpu --metrics Data\Processed\recette_hybrid.json --outputs Data\Processed\recette_hybrid.jsonl
+```
+
+Pour reconstruire un checkpoint compatible depuis les corpus sources et le modèle public `intfloat/multilingual-e5-small` :
 
 ```powershell
 .venv\Scripts\python.exe Data\Processing\data_processing_pipeline.py
