@@ -52,9 +52,9 @@ class RecipientTests(unittest.TestCase):
         self.assertEqual(result["name"], "Camille")
         self.assertEqual(result["source_unit_ids"], ["Synthetic:Atlas-01:2-2:0"])
 
-    def test_budget_approver_and_mentioned_person_are_not_owner(self):
+    def test_mentioned_person_is_not_price_owner(self):
         result = resolve_recipient(
-            "Rédige un mail à la responsable du budget Atlas. Camille connaît le dossier.",
+            "Rédige un mail à la responsable du prix des capteurs Nova pour Atlas. Camille connaît le dossier.",
             engine=self.engine)
         self.assertEqual(result["status"], "clarify")
         self.assertEqual(result["reason"], "no_explicit_owner")
@@ -120,12 +120,12 @@ class ActionDraftTests(unittest.TestCase):
         self.assertEqual(result["recipient"]["name"], "Julie")
         self.assertTrue(set(result["recipient"]["source_unit_ids"]) <= set(result["source_unit_ids"]))
 
-    def test_unowned_budget_role_clarifies_without_draft(self):
+    def test_budget_role_draft_uses_new_owner_evidence(self):
         result = self.simulator.prepare(
             "Prépare un mail à la responsable du budget Atlas.")
-        self.assertEqual(result["status"], "clarify")
-        self.assertEqual(result["clarification_reason"], "no_explicit_owner")
-        self.assertIsNone(result["tool_candidate"])
+        self.assertEqual(result["status"], "draft")
+        self.assertEqual(result["recipient"]["name"], "Camille")
+        self.assertIn("Synthetic:Atlas-02:9-9:0", result["source_unit_ids"])
         self.assertFalse(result["executed"])
 
     def test_task_draft_preserves_user_action_not_assignee_inference(self):
@@ -198,7 +198,7 @@ class ActionDraftTests(unittest.TestCase):
                        engine=self.simulator.engine)
         self.assertEqual(event["intent"], "schedule_event")
         self.assertEqual(event["status"], "draft")
-        ambiguous = handle("Prépare un mail à la responsable du budget Atlas.",
+        ambiguous = handle("Prépare un mail à la responsable du prix des capteurs Nova pour Atlas.",
                            engine=self.simulator.engine)
         self.assertEqual(ambiguous["status"], "clarify")
 

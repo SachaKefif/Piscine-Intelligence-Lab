@@ -64,7 +64,7 @@ class ResponseEngineTests(unittest.TestCase):
             parsed=self.parsed("clarify", None, "missing_subject"))
         fact_ids = {uid for row in dossier["sections"]["facts"]
                     for uid in row["source_unit_ids"]}
-        self.assertEqual(fact_ids, {"Synthetic:Atlas-02:5-5:0"})
+        self.assertEqual(fact_ids, {"Synthetic:Atlas-02:5-5:0", "Synthetic:Atlas-02:8-8:0"})
 
     def test_historical_question_can_use_obsolete_proposal(self):
         result = self.engine.generate(
@@ -89,9 +89,12 @@ class ResponseEngineTests(unittest.TestCase):
         self.assertEqual(result["intent"], "build_dossier")
         self.assertEqual(result["status"], "ok")
         self.assertEqual(len(result["topic_ids"]), 4)
-        self.assertEqual(len(result["sections"]["chronology"]), 13)
+        self.assertEqual(len(result["sections"]["chronology"]), 16)
+        self.assertEqual(result["sections"]["context"][0]["source_unit_ids"],
+                         ["Synthetic:Atlas-02:8-8:0"])
+        self.assertTrue(result["sections"]["risks"])
         self.assertEqual({row["owner"] for row in result["sections"]["responsibles"]},
-                         {"Camille", "Julie"})
+                         {"Camille", "Julie", "Marc"})
         self.assertTrue(all(row["source_unit_ids"] for section in result["sections"].values()
                             for row in section))
 

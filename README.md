@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02 et EF-04 à EF-09 ont une implémentation vérifiée sur des démonstrations synthétiques** : EF-04 contrôle les relations et la décision courante ; EF-05 expose une mémoire inter-conversations ; EF-06 classe les intentions ; EF-07 produit des réponses et dossiers sourcés. EF-08 prépare des brouillons d'e-mail, de tâche et d'événement sans effet externe ; EF-09 résout un destinataire nommé ou un responsable explicitement attribué, sinon demande une précision. Un mini-agent CLI assemble ces modules. Les évaluations des réponses et actions restent petites et synthétiques ; la recette de bout en bout et un test humain indépendant restent à réaliser.
+Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02 et EF-04 à EF-09 ont une implémentation vérifiée sur des démonstrations synthétiques** : EF-04 contrôle les relations et la décision courante ; EF-05 expose une mémoire inter-conversations ; EF-06 classe les intentions ; EF-07 produit des réponses et dossiers sourcés. EF-08 prépare des brouillons d'e-mail, de tâche et d'événement sans effet externe ; EF-09 résout un destinataire nommé ou un responsable explicitement attribué, sinon demande une précision. Le mini-agent CLI relie ces modules à la recherche EF-02, avec BM25 ou la fusion hybride utilisant E5 adapté. Les huit scénarios de recette passent sur Atlas synthétique ; une évaluation indépendante sur des conversations et demandes humaines reste à faire.
 
 ## Cahier des charges
 
@@ -22,6 +22,7 @@ Le dépôt contient les quatre corpus normalisés, les baselines de recherche QM
 - [Intentions EF-06](docs/intentions_ef06.md) : contrat, clarification, jeu annoté et évaluation.
 - [Réponses EF-07](docs/reponses_ef07.md) : affirmations sourcées, dossiers, comparaisons et évaluation.
 - [Actions EF-08 et destinataires EF-09](docs/actions_ef08_ef09.md) : brouillons, attribution, métriques et limites.
+- [Recette de bout en bout](docs/recette_bout_en_bout.md) : huit scénarios, recherche hybride, sorties et preuves inspectables.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés
@@ -104,7 +105,7 @@ Pour utiliser directement les 25 exemples déjà revus par l'assistant, sans pro
 
 ## EF-01 — Implémentée et vérifiée sur la démo
 
-Le jeu de démonstration contient [deux conversations Atlas datées](Data/Synthetic/atlas_conversations.jsonl) et [treize unités annotées](Data/Curated/atlas_semantic_units.jsonl). Il est **synthétique**, distinct de QMSum. Chaque unité exprime une seule information et conserve un identifiant stable, son type, son statut, sa source, sa date, ses tours et une citation exacte ; locuteur, responsable et échéance restent `null` quand la source ne les établit pas. Le format suit le [contrat existant](docs/schemas/semantic_unit.schema.json). Par exemple, la proposition de 40 000 € du 20 octobre et son approbation du 3 novembre sont deux unités distinctes. Les dates absolues des échéances de la démo sont résolues avec la date explicite de leur réunion.
+Le jeu de démonstration contient [deux conversations Atlas datées](Data/Synthetic/atlas_conversations.jsonl) et [seize unités annotées](Data/Curated/atlas_semantic_units.jsonl). Il est **synthétique**, distinct de QMSum. Chaque unité exprime une seule information et conserve un identifiant stable, son type, son statut, sa source, sa date, ses tours et une citation exacte ; locuteur, responsable et échéance restent `null` quand la source ne les établit pas. Le format suit le [contrat existant](docs/schemas/semantic_unit.schema.json). Par exemple, la proposition de 40 000 € du 20 octobre et son approbation du 3 novembre sont deux unités distinctes. Les dates absolues des échéances de la démo sont résolues avec la date explicite de leur réunion.
 
 Depuis la racine du dépôt :
 
@@ -131,13 +132,13 @@ Le [moteur de recherche](Data%20Analysis/search_semantic_units.py) classe **tout
 .venv-gpu\Scripts\python.exe "Data Analysis\search_semantic_units.py" --query "Quelles propositions et décisions concernent le budget Atlas ?" --method bm25
 ```
 
-Pour comparer les trois méthodes sur les **mêmes treize unités** et les [neuf questions annotées avec `relevant_unit_ids`](Data/Curated/atlas_unit_queries.jsonl) :
+Pour comparer les trois méthodes sur les **mêmes seize unités** et les [neuf questions annotées avec `relevant_unit_ids`](Data/Curated/atlas_unit_queries.jsonl) :
 
 ```powershell
 .venv-gpu\Scripts\python.exe "Data Analysis\search_semantic_units.py" --questions Data\Curated\atlas_unit_queries.jsonl --output Data\Curated\atlas_unit_retrieval_metrics.json --device cpu
 ```
 
-Le [diagnostic enregistré](Data/Curated/atlas_unit_retrieval_metrics.json) donne à `k=5` un MRR de `0,9444` pour BM25, `0,7500` pour E5 et `0,8056` pour l'hybride. Les trois trouvent au moins une unité pertinente pour les neuf questions ; la requête « propositions et décisions » peut renvoyer des sources issues des deux conversations. Pour la question sur le budget **approuvé**, l'hybride place pourtant la proposition avant l'approbation : le statut doit donc rester visible et la recherche seule ne décide pas de l'état courant. **Ces neuf questions synthétiques sont une démonstration fonctionnelle, pas un test indépendant sur corpus réel.** Elles ne remplacent pas le benchmark QMSum et ne justifient pas un nouveau choix de modèle.
+Le [diagnostic enregistré](Data/Curated/atlas_unit_retrieval_metrics.json) donne à `k=5` un MRR de `0,9259` pour BM25, `0,7315` pour E5 et `0,7963` pour l'hybride. Les trois trouvent au moins une unité pertinente pour les neuf questions ; la requête « propositions et décisions » peut renvoyer des sources issues des deux conversations. Pour la question sur le budget **approuvé**, l'hybride place pourtant la proposition avant l'approbation : le statut doit donc rester visible et la recherche seule ne décide pas de l'état courant. **Ces neuf questions synthétiques sont une démonstration fonctionnelle, pas un test indépendant sur corpus réel.** Elles ne remplacent pas le benchmark QMSum et ne justifient pas un nouveau choix de modèle.
 
 Les critères fonctionnels EF-01/EF-02 sont couverts par cette démonstration : ingestion de deux conversations avec provenance, puis recherche classée avec score, source et preuve et comparaison des trois méthodes sur les mêmes questions. L'extraction des unités reste une étape d'annotation ; le cahier des charges n'impose pas qu'elle soit automatique. **Approfondissement possible, sans en faire une condition de clôture EF-01/EF-02 :** annoter plusieurs réunions réelles, créer des questions avec des identifiants d'unités pertinents et mesurer la recherche sur des réunions tenues à l'écart.
 

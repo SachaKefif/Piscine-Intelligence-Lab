@@ -2,8 +2,8 @@
 {"id":"recipient02","request":"Prépare un mail à Marc sur la livraison Atlas.","expected_status":"explicit_user","expected_name":"Marc"}
 {"id":"recipient03","request":"Prépare un mail à la responsable de la commande des capteurs Atlas.","expected_status":"resolved","expected_name":"Julie"}
 {"id":"recipient04","request":"Prépare un mail à la responsable du devis du prototype Atlas.","expected_status":"resolved","expected_name":"Camille"}
-{"id":"recipient05","request":"Prépare un mail à la responsable du budget Atlas.","expected_status":"clarify","expected_name":null}
-{"id":"recipient06","request":"Rédige un mail à la responsable du budget Atlas. Camille connaît le dossier.","expected_status":"clarify","expected_name":null}
+{"id":"recipient05","request":"Prépare un mail à la responsable du budget Atlas.","expected_status":"resolved","expected_name":"Camille"}
+{"id":"recipient06","request":"Rédige un mail à la responsable du prix des capteurs Nova pour Atlas. Camille connaît le dossier.","expected_status":"clarify","expected_name":null}
 {"id":"recipient07","request":"Prépare un mail à la responsable sur le budget Atlas.","expected_status":"clarify","expected_name":null}
 {"id":"recipient08","request":"Prépare un mail à la responsable de la commande des capteurs Atlas.","as_of":"2027-04-01","expected_status":"clarify","expected_name":null}
 {"id":"recipient09","request":"Prépare un mail à la responsable de l'approvisionnement Atlas.","expected_status":"clarify","expected_name":null}

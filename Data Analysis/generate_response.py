@@ -18,7 +18,8 @@ from semantic_memory import DEFAULT_MEMORY_TOPICS, chronological_key, load_memor
 
 
 ANSWER_INTENTS = {"answer", "compare", "build_dossier"}
-SECTIONS = ("answer", "facts", "chronology", "decisions", "open_points", "responsibles", "changes")
+SECTIONS = ("answer", "context", "facts", "chronology", "decisions", "risks",
+            "open_points", "responsibles", "changes")
 RELATION_TEXT = {
     "supersedes": "Une information confirmée remplace l'information antérieure.",
     "contradicts": "Deux informations se contredisent ; la contradiction reste à résoudre.",
@@ -118,7 +119,7 @@ def unique_claims(claims):
     return result
 
 
-def answer_claims(request, selected, memories, units, relations):
+def answer_claims(request, selected, memories, units, relations, retrieved_ids=None):
     ids = {unit_id for topic in selected for unit_id in topic["unit_ids"]}
     conflicts = [row for row in relevant_relations(relations, ids)
                  if row["relation"] == "contradicts"]
@@ -158,7 +159,12 @@ def answer_claims(request, selected, memories, units, relations):
     if current and "date" in query and "propos" not in query and "envisag" not in query:
         return [unit_claim(row, role="current_decision") for row in current], [], "ok"
     scores = bm25_scores([row["statement"] for row in eligible], request)
-    ranked = sorted(range(len(eligible)), key=lambda index: (-scores[index], eligible[index]["unit_id"]))
+    retrieval_position = {uid: index for index, uid in enumerate(retrieved_ids or [])}
+    ranked = sorted(range(len(eligible)), key=lambda index: (
+        retrieval_position.get(eligible[index]["unit_id"], len(retrieval_position)),
+        -scores[index], eligible[index]["unit_id"]
+    )) if retrieved_ids else sorted(range(len(eligible)),
+                                    key=lambda index: (-scores[index], eligible[index]["unit_id"]))
     if not ranked or scores[ranked[0]] <= 0:
         return [], [], "not_found"
     best = eligible[ranked[0]]
@@ -171,7 +177,7 @@ def answer_claims(request, selected, memories, units, relations):
     return [unit_claim(best)], [], "ok"
 
 
-def build_sections(intent, request, selected, memories, units, relations):
+def build_sections(intent, request, selected, memories, units, relations, retrieved_ids=None):
     ids = {unit_id for topic in selected for unit_id in topic["unit_ids"]}
     ordered = sorted(ids, key=lambda uid: chronological_key(units[uid]))
     obsolete = {unit_id for memory in memories for unit_id in memory["obsolete_unit_ids"]}
@@ -186,9 +192,12 @@ def build_sections(intent, request, selected, memories, units, relations):
     sections = {name: [] for name in SECTIONS}
     if intent == "answer":
         sections["answer"], sections["open_points"], status = answer_claims(
-            request, selected, memories, units, relations)
+            request, selected, memories, units, relations, retrieved_ids)
         return sections, status
 
+    context_ids = {uid for topic in selected for uid in topic.get("context_unit_ids", [])}
+    sections["context"] = [unit_claim(units[uid], role="project_context")
+                           for uid in ordered if uid in context_ids]
     sections["chronology"] = [unit_claim(units[uid], role="obsolete" if uid in obsolete else "history")
                               for uid in ordered]
     sections["changes"] = [relation_claim(row) for row in links]
@@ -199,6 +208,8 @@ def build_sections(intent, request, selected, memories, units, relations):
                          and uid not in obsolete | conflicted]
     sections["responsibles"] = [unit_claim(units[uid]) for uid in ordered
                                 if units[uid]["owner"] and units[uid]["type"] in {"action", "commitment"}]
+    sections["risks"] = [unit_claim(units[uid]) for uid in ordered
+                         if units[uid]["type"] == "risk" and uid not in obsolete]
     sections["open_points"] = [unit_claim(units[uid]) for uid in ordered
                                if units[uid]["type"] == "risk"
                                or (units[uid]["type"] == "question" and not any(
@@ -271,8 +282,13 @@ class ResponseEngine:
                 not isinstance(alias, str) or not normalized(alias) for alias in aliases
             ):
                 raise ValueError(f"Alias de sujet absents ou invalides : {topic['topic_id']}")
+            context_ids = topic.get("context_unit_ids", [])
+            if (not isinstance(context_ids, list) or len(context_ids) != len(set(context_ids))
+                    or any(uid not in topic["unit_ids"] or self.units[uid]["type"] != "fact"
+                           or self.units[uid]["status"] != "confirmed" for uid in context_ids)):
+                raise ValueError(f"Contexte de sujet invalide : {topic['topic_id']}")
 
-    def generate(self, request, *, parsed=None):
+    def generate(self, request, *, parsed=None, retrieved_ids=None):
         parsed = parsed or parse_intent(request)
         intent = parsed["intent"]
         selected, scope_reason = select_scope(request, parsed["subject"], self.topics)
@@ -296,7 +312,12 @@ class ResponseEngine:
             if rules_intent == "answer":
                 intent = "answer"
         if intent == "clarify":
-            return empty_response(request, intent, "clarify", "La demande doit être précisée.",
+            message = "La demande doit être précisée."
+            if parsed["clarification_reason"] == "missing_subject" and rules_intent == "compare":
+                message = "Quelles décisions ou quel sujet souhaitez-vous comparer ?"
+            elif parsed["clarification_reason"] == "hypothetical_not_request":
+                message = "Souhaitez-vous formuler une demande explicite ?"
+            return empty_response(request, intent, "clarify", message,
                                   reason=parsed["clarification_reason"])
         if intent not in ANSWER_INTENTS:
             return empty_response(request, intent, "unsupported_intent",
@@ -316,7 +337,8 @@ class ResponseEngine:
             return empty_response(request, "clarify", "clarify",
                                   "Quel sujet du projet faut-il examiner ?", reason="ambiguous_subject")
         memories = [topic_memory(topic, self.units, self.relations) for topic in selected]
-        sections, status = build_sections(intent, request, selected, memories, self.units, self.relations)
+        sections, status = build_sections(intent, request, selected, memories,
+                                          self.units, self.relations, retrieved_ids)
         result = empty_response(request, intent, status, None)
         result["project_id"] = selected[0]["project_id"]
         result["topic_ids"] = [topic["topic_id"] for topic in selected]
@@ -330,7 +352,8 @@ class ResponseEngine:
         elif status == "uncertain":
             result["message"] = "Les preuves disponibles ne permettent pas de trancher."
         elif intent == "build_dossier":
-            result["missing"] = [name for name in ("facts", "decisions", "open_points", "responsibles")
+            result["missing"] = [name for name in ("context", "facts", "decisions", "risks",
+                                                    "open_points", "responsibles")
                                  if not sections[name]]
         validate_response(result, self.units, self.relations)
         return result
@@ -339,8 +362,9 @@ class ResponseEngine:
 def render_markdown(response):
     """Present the already validated JSON without adding factual statements."""
     headings = {
-        "answer": "Réponse", "facts": "Faits établis", "chronology": "Chronologie",
-        "decisions": "Décisions", "open_points": "Points ouverts",
+        "answer": "Réponse", "context": "Contexte", "facts": "Faits établis",
+        "chronology": "Chronologie", "decisions": "Décisions", "risks": "Risques",
+        "open_points": "Points ouverts",
         "responsibles": "Responsables", "changes": "Changements vérifiés",
     }
     lines = [f"# {response['intent']} — {response['status']}"]

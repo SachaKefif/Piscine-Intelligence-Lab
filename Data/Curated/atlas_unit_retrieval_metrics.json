@@ -1,22 +1,22 @@
 {
-  "candidate_units": 13,
+  "candidate_units": 16,
   "questions": 9,
   "top_k": 5,
   "metrics": {
     "bm25": {
       "hit_at_k": 1.0,
-      "recall_at_k": 1.0,
-      "mrr_at_k": 0.9444
+      "recall_at_k": 0.9444,
+      "mrr_at_k": 0.9259
     },
     "e5": {
       "hit_at_k": 1.0,
-      "recall_at_k": 0.9444,
-      "mrr_at_k": 0.75
+      "recall_at_k": 0.9074,
+      "mrr_at_k": 0.7315
     },
     "hybrid": {
       "hit_at_k": 1.0,
-      "recall_at_k": 0.9444,
-      "mrr_at_k": 0.8056
+      "recall_at_k": 0.9074,
+      "mrr_at_k": 0.7963
     }
   },
   "details": {
@@ -24,14 +24,14 @@
       {
         "query_id": "atlas:budget_confirmed",
         "hit_at_k": 1,
-        "recall_at_k": 1.0,
+        "recall_at_k": 0.5,
         "mrr_at_k": 1.0,
         "top_unit_ids": [
           "Synthetic:Atlas-02:0-0:0",
           "Synthetic:Atlas-01:0-0:0",
+          "Synthetic:Atlas-02:8-8:0",
           "Synthetic:Atlas-01:4-4:0",
-          "Synthetic:Atlas-02:4-4:0",
-          "Synthetic:Atlas-02:5-5:0"
+          "Synthetic:Atlas-02:4-4:0"
         ]
       },
       {
@@ -44,20 +44,20 @@
           "Synthetic:Atlas-02:3-3:0",
           "Synthetic:Atlas-02:6-6:0",
           "Synthetic:Atlas-02:2-2:0",
-          "Synthetic:Atlas-01:4-4:0"
+          "Synthetic:Atlas-02:8-8:0"
         ]
       },
       {
         "query_id": "atlas:budget_history",
         "hit_at_k": 1,
         "recall_at_k": 1.0,
-        "mrr_at_k": 0.5,
+        "mrr_at_k": 0.3333333333333333,
         "top_unit_ids": [
+          "Synthetic:Atlas-02:9-9:0",
           "Synthetic:Atlas-01:4-4:0",
           "Synthetic:Atlas-02:0-0:0",
           "Synthetic:Atlas-01:0-0:0",
-          "Synthetic:Atlas-02:5-5:0",
-          "Synthetic:Atlas-02:6-6:0"
+          "Synthetic:Atlas-02:5-5:0"
         ]
       },
       {
@@ -95,8 +95,8 @@
           "Synthetic:Atlas-01:2-2:0",
           "Synthetic:Atlas-01:4-4:0",
           "Synthetic:Atlas-02:3-3:0",
-          "Synthetic:Atlas-02:2-2:0",
-          "Synthetic:Atlas-02:0-0:0"
+          "Synthetic:Atlas-02:9-9:0",
+          "Synthetic:Atlas-02:2-2:0"
         ]
       },
       {
@@ -107,9 +107,9 @@
         "top_unit_ids": [
           "Synthetic:Atlas-02:2-2:0",
           "Synthetic:Atlas-02:6-6:0",
+          "Synthetic:Atlas-02:9-9:0",
           "Synthetic:Atlas-01:4-4:0",
-          "Synthetic:Atlas-02:3-3:0",
-          "Synthetic:Atlas-01:3-3:0"
+          "Synthetic:Atlas-02:3-3:0"
         ]
       },
       {
@@ -121,8 +121,8 @@
           "Synthetic:Atlas-02:4-4:0",
           "Synthetic:Atlas-01:3-3:0",
           "Synthetic:Atlas-02:7-7:0",
-          "Synthetic:Atlas-01:4-4:0",
-          "Synthetic:Atlas-01:0-0:0"
+          "Synthetic:Atlas-02:8-8:0",
+          "Synthetic:Atlas-02:10-10:0"
         ]
       },
       {
@@ -135,7 +135,7 @@
           "Synthetic:Atlas-02:5-5:0",
           "Synthetic:Atlas-02:2-2:0",
           "Synthetic:Atlas-02:6-6:0",
-          "Synthetic:Atlas-02:1-1:0"
+          "Synthetic:Atlas-02:8-8:0"
         ]
       }
     ],
@@ -169,14 +169,14 @@
       {
         "query_id": "atlas:budget_history",
         "hit_at_k": 1,
-        "recall_at_k": 1.0,
-        "mrr_at_k": 0.5,
+        "recall_at_k": 0.6666666666666666,
+        "mrr_at_k": 0.3333333333333333,
         "top_unit_ids": [
+          "Synthetic:Atlas-02:9-9:0",
           "Synthetic:Atlas-02:6-6:0",
           "Synthetic:Atlas-01:0-0:0",
           "Synthetic:Atlas-01:4-4:0",
-          "Synthetic:Atlas-02:0-0:0",
-          "Synthetic:Atlas-02:5-5:0"
+          "Synthetic:Atlas-02:0-0:0"
         ]
       },
       {
@@ -189,7 +189,7 @@
           "Synthetic:Atlas-02:1-1:0",
           "Synthetic:Atlas-01:2-2:0",
           "Synthetic:Atlas-02:3-3:0",
-          "Synthetic:Atlas-02:6-6:0"
+          "Synthetic:Atlas-02:10-10:0"
         ]
       },
       {
@@ -251,10 +251,10 @@
         "mrr_at_k": 1.0,
         "top_unit_ids": [
           "Synthetic:Atlas-02:3-3:0",
+          "Synthetic:Atlas-02:10-10:0",
           "Synthetic:Atlas-01:3-3:0",
           "Synthetic:Atlas-02:2-2:0",
-          "Synthetic:Atlas-01:1-1:0",
-          "Synthetic:Atlas-01:2-2:0"
+          "Synthetic:Atlas-01:1-1:0"
         ]
       }
     ],
@@ -288,14 +288,14 @@
       {
         "query_id": "atlas:budget_history",
         "hit_at_k": 1,
-        "recall_at_k": 1.0,
-        "mrr_at_k": 0.5,
+        "recall_at_k": 0.6666666666666666,
+        "mrr_at_k": 0.3333333333333333,
         "top_unit_ids": [
+          "Synthetic:Atlas-02:9-9:0",
           "Synthetic:Atlas-02:6-6:0",
           "Synthetic:Atlas-01:0-0:0",
           "Synthetic:Atlas-01:4-4:0",
-          "Synthetic:Atlas-02:0-0:0",
-          "Synthetic:Atlas-02:5-5:0"
+          "Synthetic:Atlas-02:0-0:0"
         ]
       },
       {
@@ -308,7 +308,7 @@
           "Synthetic:Atlas-02:1-1:0",
           "Synthetic:Atlas-01:2-2:0",
           "Synthetic:Atlas-02:3-3:0",
-          "Synthetic:Atlas-02:6-6:0"
+          "Synthetic:Atlas-02:10-10:0"
         ]
       },
       {
@@ -334,7 +334,7 @@
           "Synthetic:Atlas-01:4-4:0",
           "Synthetic:Atlas-01:0-0:0",
           "Synthetic:Atlas-02:1-1:0",
-          "Synthetic:Atlas-02:0-0:0"
+          "Synthetic:Atlas-02:3-3:0"
         ]
       },
       {
@@ -354,12 +354,12 @@
         "query_id": "atlas:sensors_price",
         "hit_at_k": 1,
         "recall_at_k": 1.0,
-        "mrr_at_k": 0.25,
+        "mrr_at_k": 0.3333333333333333,
         "top_unit_ids": [
           "Synthetic:Atlas-01:3-3:0",
-          "Synthetic:Atlas-02:5-5:0",
           "Synthetic:Atlas-02:7-7:0",
           "Synthetic:Atlas-02:4-4:0",
+          "Synthetic:Atlas-02:5-5:0",
           "Synthetic:Atlas-01:4-4:0"
         ]
       },
@@ -371,9 +371,9 @@
         "top_unit_ids": [
           "Synthetic:Atlas-02:3-3:0",
           "Synthetic:Atlas-02:2-2:0",
+          "Synthetic:Atlas-02:10-10:0",
           "Synthetic:Atlas-01:3-3:0",
-          "Synthetic:Atlas-01:1-1:0",
-          "Synthetic:Atlas-02:1-1:0"
+          "Synthetic:Atlas-01:1-1:0"
         ]
       }
     ]

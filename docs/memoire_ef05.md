@@ -27,7 +27,7 @@ Toutes les preuves sont revalidées contre les transcriptions à chaque chargeme
 .venv-gpu\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-Sur Atlas, `validate` trouve 13 unités, 6 relations et 4 sujets couvrant chacun deux conversations. Pour `atlas_delivery`, la date envisagée du 12 novembre apparaît avant la décision du 19 novembre et est signalée obsolète par le lien `supersedes`. Pour `atlas_sensor_price`, les deux affirmations incompatibles sur la confirmation des 8 000 € restent sourcées et non résolues. Le budget approuvé est la décision courante du sujet `atlas_budget`, mais la proposition antérieure n'est pas étiquetée obsolète sans lien de remplacement explicite.
+Sur Atlas, `validate` trouve 16 unités, 6 relations et 4 sujets couvrant chacun deux conversations. Pour `atlas_delivery`, la date envisagée du 12 novembre apparaît avant la décision du 19 novembre et est signalée obsolète par le lien `supersedes`. Pour `atlas_sensor_price`, les deux affirmations incompatibles sur la confirmation des 8 000 € restent sourcées et non résolues. Le budget approuvé est la décision courante du sujet `atlas_budget`, mais la proposition antérieure n'est pas étiquetée obsolète sans lien de remplacement explicite. Trois unités synthétiques supplémentaires rendent explicites le contexte du prototype, le suivi du budget par Camille et l'engagement de Marc à transmettre le dossier ; elles conservent leurs citations exactes dans la deuxième conversation.
 
 ## Limites
 

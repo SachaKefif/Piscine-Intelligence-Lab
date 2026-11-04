@@ -129,3 +129,11 @@ Ajouté des tests et un diagnostic sur Atlas puis sur Boréal, second projet syn
 Vérification dans .venv-gpu : 73 tests passent. Les 17 cas synthétiques de destinataire ont zéro faux choix et les 13 demandes d'action produisent toutes la sortie annotée attendue, toujours executed=false. Ces scores servent de diagnostic fonctionnel, sans prétendre mesurer la généralisation.
 
 EF-08 et EF-09 sont fonctionnelles dans le périmètre simulé. Pour clôturer le projet selon le cahier des charges, il reste à rejouer les huit scénarios de recette de bout en bout, à mesurer les coûts du système et à rédiger le rapport expérimental ; les réponses et dossiers doivent aussi être évalués sur des conversations tenues à l'écart.
+
+Recette de bout en bout : huit scénarios Atlas
+
+Étendu la deuxième conversation Atlas synthétique avec trois tours attribués et annotés : contexte du prototype, responsabilité explicite de Camille pour le suivi du budget et engagement de Marc à transmettre le dossier le 10 novembre. Les citations sont des extraits exacts de cette transcription fictive ; elles ne représentent pas des réunions réelles. La mémoire contient maintenant 16 unités sur deux conversations et conserve les six relations revues.
+
+Le mini-agent utilise maintenant EF-02 avant le routage vers EF-07 ou EF-08/09. Le mode hybride charge E5 adapté et BM25 ; un mode BM25 reste disponible sans checkpoint. Le classement oriente la sélection d'une unité dans le sujet annoté, tandis que les statuts et relations contrôlent la décision courante. Le dossier expose séparément contexte et risques.
+
+Ajouté un jeu JSONL d'attendus figés, un évaluateur et les sorties complètes pour les huit scénarios du cahier des charges. Les huit passent en hybride et en BM25 ; 76 tests automatiques passent. Ces résultats sont une recette fonctionnelle sur données synthétiques, pas une évaluation indépendante de la qualité des réponses sur des réunions réelles.

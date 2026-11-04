@@ -23,7 +23,7 @@ def clarification(request, reason, *, intent="clarify", recipient=None):
     }
 
 
-def supported_context(topic, engine, request):
+def supported_context(topic, engine, request, retrieved_ids=None):
     """Choose a current decision or a confirmed active action, never a disputed fact."""
     memory = topic_memory(topic, engine.units, engine.relations)
     if memory["contradictions"] or memory["current_decision"]["state"] == "ambiguous":
@@ -37,7 +37,12 @@ def supported_context(topic, engine, request):
                   and engine.units[uid]["type"] in {"action", "commitment"}]
     if candidates:
         scores = bm25_scores([row["statement"] for row in candidates], request)
-        index = max(range(len(candidates)), key=lambda i: (scores[i], chronological_key(candidates[i])))
+        positions = {uid: rank for rank, uid in enumerate(retrieved_ids or [])}
+        index = min(range(len(candidates)), key=lambda i: (
+            positions.get(candidates[i]["unit_id"], len(positions)),
+            -scores[i], chronological_key(candidates[i])
+        )) if retrieved_ids else max(range(len(candidates)),
+                                     key=lambda i: (scores[i], chronological_key(candidates[i])))
         return candidates[index], None
     return None, "no_confirmed_context"
 
@@ -92,7 +97,7 @@ class ActionSimulator:
     def __init__(self, engine=None):
         self.engine = engine or ResponseEngine()
 
-    def prepare(self, request, *, parsed=None, as_of=None):
+    def prepare(self, request, *, parsed=None, as_of=None, retrieved_ids=None):
         parsed = parsed or parse_intent(request)
         intent = parsed["intent"]
         if parsed["clarification_reason"] == "hypothetical_not_request":
@@ -120,7 +125,7 @@ class ActionSimulator:
             return clarification(request, "missing_due_date", intent=intent)
 
         topic = selected[0]
-        context, context_error = supported_context(topic, self.engine, request)
+        context, context_error = supported_context(topic, self.engine, request, retrieved_ids)
         if context is None:
             return clarification(request, context_error, intent=intent)
         recipient = None

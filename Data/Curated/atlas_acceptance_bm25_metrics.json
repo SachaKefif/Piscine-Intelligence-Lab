@@ -1,0 +1,184 @@
+{
+  "fixture": "Data\\Curated\\atlas_acceptance_cases.jsonl",
+  "fixture_sha256": "afb61650008e42cb47f0abdc6b6f43749e81d72946ed55bbe513ffe33d78c98b",
+  "method": "bm25",
+  "cases": 8,
+  "passed": 8,
+  "pass_rate": 1.0,
+  "inputs_sha256": {
+    "conversations": "cebc5d08268480adaa0c17f6e091878d71924216f65026980be5443cd4cf0986",
+    "units": "86aa46e68dca9096d1693878510f32b8242cb6c2412469028dc5832bc4ab13aa",
+    "relations": "6219578adf949487a76dad74cebbd7f9c4a292b4dc0eac397ee31d5733ac675c",
+    "topics": "4a080c458ce2f8e431d4f2a99436b4425c2fcf0c9e4b934a8b297955399c27c2",
+    "model_weights": null
+  },
+  "retrieval_config": {
+    "rrf_k": 60,
+    "e5_weight": 0.75,
+    "top_k_display": 5
+  },
+  "note": "Recette sur conversations Atlas synthétiques ; ne mesure pas la généralisation externe.",
+  "details": [
+    {
+      "id": "scenario01",
+      "description": "Décision courante du budget",
+      "passed": true,
+      "issues": [],
+      "intent": "answer",
+      "status": "ok",
+      "cited_unit_ids": [
+        "Synthetic:Atlas-02:0-0:0"
+      ],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-02:0-0:0",
+        "Synthetic:Atlas-01:0-0:0",
+        "Synthetic:Atlas-02:6-6:0",
+        "Synthetic:Atlas-02:9-9:0",
+        "Synthetic:Atlas-02:1-1:0"
+      ]
+    },
+    {
+      "id": "scenario02",
+      "description": "Date proposée puis confirmée",
+      "passed": true,
+      "issues": [],
+      "intent": "compare",
+      "status": "ok",
+      "cited_unit_ids": [
+        "Synthetic:Atlas-01:1-1:0",
+        "Synthetic:Atlas-02:1-1:0"
+      ],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-02:8-8:0",
+        "Synthetic:Atlas-02:1-1:0",
+        "Synthetic:Atlas-02:9-9:0",
+        "Synthetic:Atlas-01:1-1:0",
+        "Synthetic:Atlas-01:0-0:0"
+      ]
+    },
+    {
+      "id": "scenario03",
+      "description": "Contradiction contre remplacement entre réunions",
+      "passed": true,
+      "issues": [],
+      "intent": "compare",
+      "status": "ok",
+      "cited_unit_ids": [
+        "Synthetic:Atlas-01:1-1:0",
+        "Synthetic:Atlas-01:3-3:0",
+        "Synthetic:Atlas-02:1-1:0",
+        "Synthetic:Atlas-02:4-4:0",
+        "Synthetic:Atlas-02:7-7:0"
+      ],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-02:4-4:0",
+        "Synthetic:Atlas-01:3-3:0",
+        "Synthetic:Atlas-02:7-7:0",
+        "Synthetic:Atlas-02:2-2:0",
+        "Synthetic:Atlas-02:9-9:0"
+      ]
+    },
+    {
+      "id": "scenario04",
+      "description": "Engagement de transmettre un dossier",
+      "passed": true,
+      "issues": [],
+      "intent": "answer",
+      "status": "ok",
+      "cited_unit_ids": [
+        "Synthetic:Atlas-02:10-10:0"
+      ],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-02:9-9:0",
+        "Synthetic:Atlas-02:10-10:0",
+        "Synthetic:Atlas-01:4-4:0",
+        "Synthetic:Atlas-01:0-0:0",
+        "Synthetic:Atlas-02:8-8:0"
+      ]
+    },
+    {
+      "id": "scenario05",
+      "description": "Dossier Atlas complet",
+      "passed": true,
+      "issues": [],
+      "intent": "build_dossier",
+      "status": "ok",
+      "cited_unit_ids": [
+        "Synthetic:Atlas-01:0-0:0",
+        "Synthetic:Atlas-01:1-1:0",
+        "Synthetic:Atlas-01:2-2:0",
+        "Synthetic:Atlas-01:3-3:0",
+        "Synthetic:Atlas-01:4-4:0",
+        "Synthetic:Atlas-02:0-0:0",
+        "Synthetic:Atlas-02:1-1:0",
+        "Synthetic:Atlas-02:10-10:0",
+        "Synthetic:Atlas-02:2-2:0",
+        "Synthetic:Atlas-02:3-3:0",
+        "Synthetic:Atlas-02:4-4:0",
+        "Synthetic:Atlas-02:5-5:0",
+        "Synthetic:Atlas-02:6-6:0",
+        "Synthetic:Atlas-02:7-7:0",
+        "Synthetic:Atlas-02:8-8:0",
+        "Synthetic:Atlas-02:9-9:0"
+      ],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-02:10-10:0",
+        "Synthetic:Atlas-01:0-0:0",
+        "Synthetic:Atlas-02:8-8:0",
+        "Synthetic:Atlas-02:4-4:0",
+        "Synthetic:Atlas-01:2-2:0"
+      ]
+    },
+    {
+      "id": "scenario06",
+      "description": "Brouillon au responsable du budget",
+      "passed": true,
+      "issues": [],
+      "intent": "draft_email",
+      "status": "draft",
+      "cited_unit_ids": [
+        "Synthetic:Atlas-02:0-0:0",
+        "Synthetic:Atlas-02:9-9:0"
+      ],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-02:9-9:0",
+        "Synthetic:Atlas-02:8-8:0",
+        "Synthetic:Atlas-01:0-0:0",
+        "Synthetic:Atlas-02:6-6:0",
+        "Synthetic:Atlas-01:4-4:0"
+      ]
+    },
+    {
+      "id": "scenario07",
+      "description": "Décisions ambiguës à préciser",
+      "passed": true,
+      "issues": [],
+      "intent": "clarify",
+      "status": "clarify",
+      "cited_unit_ids": [],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-02:4-4:0",
+        "Synthetic:Atlas-01:0-0:0",
+        "Synthetic:Atlas-01:1-1:0",
+        "Synthetic:Atlas-01:2-2:0",
+        "Synthetic:Atlas-01:3-3:0"
+      ]
+    },
+    {
+      "id": "scenario08",
+      "description": "Phrase hypothétique sans action",
+      "passed": true,
+      "issues": [],
+      "intent": "clarify",
+      "status": "clarify",
+      "cited_unit_ids": [],
+      "retrieved_unit_ids": [
+        "Synthetic:Atlas-01:4-4:0",
+        "Synthetic:Atlas-02:0-0:0",
+        "Synthetic:Atlas-01:0-0:0",
+        "Synthetic:Atlas-02:5-5:0",
+        "Synthetic:Atlas-02:6-6:0"
+      ]
+    }
+  ]
+}
