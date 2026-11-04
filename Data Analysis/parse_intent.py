@@ -111,6 +111,15 @@ def classify(request):
     return "clarify", "unrecognized_request"
 
 
+def matches_source_hash(data, expected):
+    """Accept LF/CRLF checkout differences without accepting changed examples."""
+    canonical = data.replace(b"\r\n", b"\n")
+    return expected in {
+        hashlib.sha256(canonical).hexdigest(),
+        hashlib.sha256(canonical.replace(b"\n", b"\r\n")).hexdigest(),
+    }
+
+
 @lru_cache(maxsize=4)
 def load_classifier(path=DEFAULT_MODEL):
     """Load the locally trained model once per process."""
@@ -124,8 +133,8 @@ def load_classifier(path=DEFAULT_MODEL):
     if Path(path).resolve() == DEFAULT_MODEL.resolve():
         for split, name in (("train", "intent_train.jsonl"), ("validation", "intent_validation.jsonl")):
             expected = bundle.get("metadata", {}).get(split, {}).get("sha256")
-            actual = hashlib.sha256((DEFAULT_MODEL.parent / name).read_bytes()).hexdigest()
-            if expected != actual:
+            data = (DEFAULT_MODEL.parent / name).read_bytes()
+            if not matches_source_hash(data, expected):
                 raise ValueError(f"Modèle EF-06 périmé pour {name} : relancer train_intents.py")
     return bundle["estimator"]
 

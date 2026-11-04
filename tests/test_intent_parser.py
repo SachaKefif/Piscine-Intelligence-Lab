@@ -1,5 +1,6 @@
 """EF-06 routing, nullable slots and conservative clarification checks."""
 
+import hashlib
 import json
 import sys
 import unittest
@@ -9,10 +10,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "Data Analysis"))
 
-from parse_intent import INTENTS, folded, load_classifier, parse_intent, route_with_safety
+from parse_intent import INTENTS, folded, load_classifier, matches_source_hash, parse_intent, route_with_safety
 
 
 class IntentParserTests(unittest.TestCase):
+    def test_model_source_hash_accepts_only_line_ending_equivalence(self):
+        lf = b'{"request":"test"}\n'
+        crlf = lf.replace(b"\n", b"\r\n")
+        expected = hashlib.sha256(crlf).hexdigest()
+        self.assertTrue(matches_source_hash(lf, expected))
+        self.assertTrue(matches_source_hash(crlf, expected))
+        self.assertFalse(matches_source_hash(b'{"request":"changed"}\n', expected))
+
     def test_development_examples_cover_all_intents_and_slots(self):
         path = ROOT / "Data" / "Curated" / "intent_seed_dev.jsonl"
         rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
