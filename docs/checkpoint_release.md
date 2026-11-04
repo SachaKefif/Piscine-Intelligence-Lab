@@ -23,3 +23,22 @@ Le paquet peut être reconstruit à partir du checkpoint d'entraînement local a
 `py -3.13 "Data Analysis\package_e5_checkpoint.py"`. L'archive est déterministe
 pour ces fichiers : son SHA-256 doit être
 `42d256e949320b7d05d7bf130605990c3a7c5a0f50329235ed89cd4ebbd6ed79`.
+
+## Vérification depuis une copie propre
+
+Une nouvelle copie de `main` a été clonée depuis GitHub au commit `72027b4`.
+Le dossier du checkpoint y était absent. La commande de téléchargement a
+obtenu l'asset de la [release](https://github.com/SachaKefif/Piscine-Intelligence-Lab/releases/tag/model-qmsum-e5-small-842),
+vérifié l'archive et installé des poids de SHA-256
+`1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46`.
+L'espace libre sur C: étant insuffisant pour une deuxième copie des poids, ce
+contrôle a utilisé `--destination D:/Piscine-E5-clean-checkout/checkpoint-842`
+et `--temp-dir D:/Piscine-E5-clean-checkout`, puis `--model` avec ce chemin.
+Le même environnement Python 3.13 préinstallé a servi aux commandes de test.
+
+Après ingestion des unités Atlas, la [recette hybride](../Data/Curated/checkpoint_clean_acceptance_metrics.json)
+a obtenu **8/8** cas conformes. Le [contrôle QMSum figé](../Data/Curated/checkpoint_clean_holdout_metrics.json)
+sur `ES2011a/b` a obtenu **9/9**. Les deux rapports enregistrent l'empreinte
+des poids et des entrées contrôlées. Ces résultats vérifient le téléchargement
+et l'inférence depuis une copie propre ; ils ne constituent pas une nouvelle
+estimation indépendante de la qualité sur des demandes spontanées.
