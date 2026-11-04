@@ -1,0 +1,15 @@
+{
+  "source_url": "https://huggingface.co/datasets/AmazonScience/massive/resolve/2c02f1bc446b202987536ab9b2014579b1e7af3e/fr-FR/massive-test.parquet",
+  "source_sha256": "aacd57aa2bcf6e1d037a350a41b70cb756bbf51199d2023f40a3ebb9d38a1981",
+  "source_split": "fr-FR/test",
+  "source_license": "CC-BY-4.0",
+  "cases_sha256": "4fc8bae4978297b3c4e47b9e5d60dc1656109fa5572dd9a9697fb9aeeaab9c88",
+  "cases": 66,
+  "categories": {
+    "direct_named": 17,
+    "relation_without_identity": 16,
+    "person_mentioned_in_query": 33
+  },
+  "selection": "All rows with unanimous correct intent/slots and grammar >=3, then fixed slot/syntax categories",
+  "limitation": "MASSIVE annotates person and relation slots, not responsibility or email contact addresses."
+}
