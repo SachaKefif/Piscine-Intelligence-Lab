@@ -117,3 +117,15 @@ Ajouté generate_response.py, qui relie EF-06 à la mémoire validée EF-05. Les
 Le dossier expose faits établis, chronologie, décisions, points ouverts, responsables et changements prouvés. Une information absente reste explicitement introuvable, une question sur le projet entier sans sujet demande une précision et les intentions d'action ne déclenchent rien. Ajouté tests/test_generate_response.py et douze scénarios Atlas annotés pour mesurer couverture des faits, statut de réponse, relations attendues et intégrité des citations. Ce jeu a servi au développement ; il ne constitue pas un test indépendant sur d'autres projets.
 
 Vérification dans .venv-gpu : 55 tests passent. Sur les douze scénarios de développement, les 32 unités attendues sont couvertes, les douze statuts de réponse sont corrects et les citations passent toutes le contrôle de provenance. Une évaluation indépendante avec annotation humaine de la pertinence des réponses reste nécessaire.
+
+EF-08 et EF-09 : actions simulées et résolution du destinataire
+
+Ajouté resolve_recipient.py : un nom choisi explicitement dans la demande est distingué d'un rôle déduit d'unités dont le champ owner est explicite. Les attributions remplacées, non datées, trop anciennes ou concurrentes entraînent une abstention. La date de référence est celle de la dernière conversation chargée, avec une fenêtre de 90 jours ; une adresse inconnue reste vide. Le locuteur ou la personne mentionnée ne devient pas responsable par défaut.
+
+Ajouté simulate_actions.py pour les brouillons de mail, tâche et événement. Chaque sortie porte l'intention, l'opération candidate, les paramètres, un contenu fondé sur une unité confirmée, les références, needs_confirmation=true et executed=false. Une source contradictoire, une action ou date absente, un destinataire non résolu ou un sujet ambigu produisent une clarification. semantic_agent.py relie les réponses EF-07 et les brouillons EF-08 dans une CLI unique, sans connecteur externe.
+
+Ajouté des tests et un diagnostic sur Atlas puis sur Boréal, second projet synthétique à deux conversations avec transfert explicite de responsabilité. Les métriques EF-09 incluent Precision@1, faux destinataires, abstentions justifiées et intégrité de la preuve. Ces jeux sont petits et synthétiques ; une évaluation indépendante sur des demandes humaines reste nécessaire.
+
+Vérification dans .venv-gpu : 73 tests passent. Les 17 cas synthétiques de destinataire ont zéro faux choix et les 13 demandes d'action produisent toutes la sortie annotée attendue, toujours executed=false. Ces scores servent de diagnostic fonctionnel, sans prétendre mesurer la généralisation.
+
+EF-08 et EF-09 sont fonctionnelles dans le périmètre simulé. Pour clôturer le projet selon le cahier des charges, il reste à rejouer les huit scénarios de recette de bout en bout, à mesurer les coûts du système et à rédiger le rapport expérimental ; les réponses et dossiers doivent aussi être évalués sur des conversations tenues à l'écart.

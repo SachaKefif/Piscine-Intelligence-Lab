@@ -42,7 +42,9 @@ La commande EF-04 `predict` peut maintenant proposer un lien par règles sur une
 
 Pour QMSum, `query_id = meeting_id:index_specific_query`. Les `relevant_text_span` sont des intervalles de tours **inclusifs** fournis par le corpus. Le premier benchmark dérive `relevant_passage_ids` par tout chevauchement d'un passage avec un span. Stocker `label_origin = "derived_overlap"` : ce label est plus faible qu'une annotation humaine passage par passage. Les questions générales, sans spans, ne reçoivent pas ce label.
 
-Les intentions futures ont les valeurs `answer`, `compare`, `build_dossier`, `draft_email`, `create_task`, `schedule_event`, `clarify`. Pour chaque demande, annoter séparément `subject`, `person`, `due_date`, `action`, chacun nullable. Le routage vers une action simulée ne suppose jamais que la personne mentionnée est la destinataire.
+Les intentions ont les valeurs `answer`, `compare`, `build_dossier`, `draft_email`, `create_task`, `schedule_event`, `clarify`. Pour chaque demande, annoter séparément `subject`, `person`, `due_date`, `action`, chacun nullable. Le routage vers une action simulée ne suppose jamais que la personne mentionnée est la destinataire.
+
+Un brouillon EF-08 conserve `intent`, `tool_candidate`, `parameters`, `content`, `source_unit_ids`, `references`, `needs_confirmation: true` et `executed: false`. Une clarification garde `tool_candidate` et `content` à `null`. Pour l'e-mail, EF-09 retourne le nom, une adresse `null` si inconnue, le statut `explicit_user`, `resolved` ou `clarify`, et les unités qui justifient une résolution par rôle. La validation machine de ces sorties est dans `simulate_actions.py` et `resolve_recipient.py`.
 
 ## Procédure de contrôle
 

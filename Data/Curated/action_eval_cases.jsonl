@@ -1,0 +1,8 @@
+{"id":"action01","request":"Rédige un mail à Camille sur le budget Atlas.","expected_intent":"draft_email","expected_status":"draft","expected_context_id":"Synthetic:Atlas-02:0-0:0"}
+{"id":"action02","request":"Prépare un mail à la responsable de la commande des capteurs Atlas.","expected_intent":"draft_email","expected_status":"draft","expected_context_id":"Synthetic:Atlas-02:2-2:0"}
+{"id":"action03","request":"Prépare un mail à la responsable du budget Atlas.","expected_intent":"draft_email","expected_status":"clarify"}
+{"id":"action04","request":"Crée une tâche pour envoyer la commande des capteurs Atlas avant le 2026-11-06.","expected_intent":"create_task","expected_status":"draft","expected_context_id":"Synthetic:Atlas-02:6-6:0"}
+{"id":"action05","request":"Planifie une réunion sur la livraison Atlas le 2026-11-19.","expected_intent":"schedule_event","expected_status":"draft","expected_context_id":"Synthetic:Atlas-02:1-1:0"}
+{"id":"action06","request":"Planifie une réunion sur le budget Atlas demain.","expected_intent":"clarify","expected_status":"clarify"}
+{"id":"action07","request":"On pourrait peut-être revoir le budget Atlas.","expected_intent":"clarify","expected_status":"clarify"}
+{"id":"action08","request":"Rédige un mail à Camille sur le prix des capteurs Nova pour Atlas.","expected_intent":"draft_email","expected_status":"clarify"}

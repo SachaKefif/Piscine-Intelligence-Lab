@@ -1,0 +1,5 @@
+{"id":"boreal_action01","request":"Rédige un mail à la responsable du rapport Boréal.","expected_intent":"draft_email","expected_status":"draft","expected_context_id":"Synthetic:Boreal-02:0-0:0"}
+{"id":"boreal_action02","request":"Crée une tâche : envoyer le rapport Boréal avant le 2026-10-20.","expected_intent":"create_task","expected_status":"draft","expected_context_id":"Synthetic:Boreal-02:0-0:0"}
+{"id":"boreal_action03","request":"Planifie une réunion sur le budget Boréal le 2026-10-18.","expected_intent":"schedule_event","expected_status":"draft","expected_context_id":"Synthetic:Boreal-02:2-2:0"}
+{"id":"boreal_action04","request":"Rédige un mail à la responsable du budget Boréal.","expected_intent":"draft_email","expected_status":"clarify"}
+{"id":"boreal_action05","request":"Prépare un mail à la responsable de la réservation Boréal.","expected_intent":"draft_email","expected_status":"draft","expected_context_id":"Synthetic:Boreal-02:1-1:0"}

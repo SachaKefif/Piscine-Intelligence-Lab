@@ -1,0 +1,6 @@
+{"id":"boreal_recipient01","request":"Rédige un mail à la responsable du rapport Boréal.","expected_status":"resolved","expected_name":"Omar"}
+{"id":"boreal_recipient02","request":"Prépare un mail à la responsable de la réservation Boréal.","expected_status":"resolved","expected_name":"Nora"}
+{"id":"boreal_recipient03","request":"Rédige un mail à la responsable du budget Boréal.","expected_status":"clarify","expected_name":null}
+{"id":"boreal_recipient04","request":"Écris un mail à Léa sur le rapport Boréal.","expected_status":"explicit_user","expected_name":"Léa"}
+{"id":"boreal_recipient05","request":"Prépare un mail à la responsable du rapport Boréal.","as_of":"2027-05-01","expected_status":"clarify","expected_name":null}
+{"id":"boreal_recipient06","request":"Prépare un mail à la responsable de la logistique Boréal.","expected_status":"clarify","expected_name":null}

@@ -1,0 +1,337 @@
+{
+  "note": "Atlas : développement. Boréal : autre projet synthétique figé après le code initial ; pas de test humain indépendant.",
+  "recipient": {
+    "cases": 11,
+    "precision_at_1": 1.0,
+    "role_precision_at_1": 1.0,
+    "false_recipients": 0,
+    "justified_abstention_rate": 1.0,
+    "resolvable_recall": 1.0,
+    "status_accuracy": 1.0,
+    "evidence_integrity": 1.0,
+    "details": [
+      {
+        "id": "recipient01",
+        "expected_status": "explicit_user",
+        "actual_status": "explicit_user",
+        "expected_name": "Camille",
+        "actual_name": "Camille",
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient02",
+        "expected_status": "explicit_user",
+        "actual_status": "explicit_user",
+        "expected_name": "Marc",
+        "actual_name": "Marc",
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient03",
+        "expected_status": "resolved",
+        "actual_status": "resolved",
+        "expected_name": "Julie",
+        "actual_name": "Julie",
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient04",
+        "expected_status": "resolved",
+        "actual_status": "resolved",
+        "expected_name": "Camille",
+        "actual_name": "Camille",
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient05",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient06",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient07",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient08",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient09",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient10",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "recipient11",
+        "expected_status": "explicit_user",
+        "actual_status": "explicit_user",
+        "expected_name": "Julie",
+        "actual_name": "Julie",
+        "evidence_valid": true,
+        "correct": true
+      }
+    ]
+  },
+  "actions": {
+    "cases": 8,
+    "case_accuracy": 1.0,
+    "safe_output_rate": 1.0,
+    "details": [
+      {
+        "id": "action01",
+        "expected_intent": "draft_email",
+        "actual_intent": "draft_email",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Atlas-02:0-0:0",
+        "actual_context_id": "Synthetic:Atlas-02:0-0:0",
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "action02",
+        "expected_intent": "draft_email",
+        "actual_intent": "draft_email",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Atlas-02:2-2:0",
+        "actual_context_id": "Synthetic:Atlas-02:2-2:0",
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "action03",
+        "expected_intent": "draft_email",
+        "actual_intent": "draft_email",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_context_id": null,
+        "actual_context_id": null,
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "action04",
+        "expected_intent": "create_task",
+        "actual_intent": "create_task",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Atlas-02:6-6:0",
+        "actual_context_id": "Synthetic:Atlas-02:6-6:0",
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "action05",
+        "expected_intent": "schedule_event",
+        "actual_intent": "schedule_event",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Atlas-02:1-1:0",
+        "actual_context_id": "Synthetic:Atlas-02:1-1:0",
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "action06",
+        "expected_intent": "clarify",
+        "actual_intent": "clarify",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_context_id": null,
+        "actual_context_id": null,
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "action07",
+        "expected_intent": "clarify",
+        "actual_intent": "clarify",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_context_id": null,
+        "actual_context_id": null,
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "action08",
+        "expected_intent": "draft_email",
+        "actual_intent": "draft_email",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_context_id": null,
+        "actual_context_id": null,
+        "invariant_valid": true,
+        "correct": true
+      }
+    ]
+  },
+  "recipient_boreal": {
+    "cases": 6,
+    "precision_at_1": 1.0,
+    "role_precision_at_1": 1.0,
+    "false_recipients": 0,
+    "justified_abstention_rate": 1.0,
+    "resolvable_recall": 1.0,
+    "status_accuracy": 1.0,
+    "evidence_integrity": 1.0,
+    "details": [
+      {
+        "id": "boreal_recipient01",
+        "expected_status": "resolved",
+        "actual_status": "resolved",
+        "expected_name": "Omar",
+        "actual_name": "Omar",
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_recipient02",
+        "expected_status": "resolved",
+        "actual_status": "resolved",
+        "expected_name": "Nora",
+        "actual_name": "Nora",
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_recipient03",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_recipient04",
+        "expected_status": "explicit_user",
+        "actual_status": "explicit_user",
+        "expected_name": "Léa",
+        "actual_name": "Léa",
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_recipient05",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_recipient06",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_name": null,
+        "actual_name": null,
+        "evidence_valid": true,
+        "correct": true
+      }
+    ]
+  },
+  "actions_boreal": {
+    "cases": 5,
+    "case_accuracy": 1.0,
+    "safe_output_rate": 1.0,
+    "details": [
+      {
+        "id": "boreal_action01",
+        "expected_intent": "draft_email",
+        "actual_intent": "draft_email",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Boreal-02:0-0:0",
+        "actual_context_id": "Synthetic:Boreal-02:0-0:0",
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_action02",
+        "expected_intent": "create_task",
+        "actual_intent": "create_task",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Boreal-02:0-0:0",
+        "actual_context_id": "Synthetic:Boreal-02:0-0:0",
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_action03",
+        "expected_intent": "schedule_event",
+        "actual_intent": "schedule_event",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Boreal-02:2-2:0",
+        "actual_context_id": "Synthetic:Boreal-02:2-2:0",
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_action04",
+        "expected_intent": "draft_email",
+        "actual_intent": "draft_email",
+        "expected_status": "clarify",
+        "actual_status": "clarify",
+        "expected_context_id": null,
+        "actual_context_id": null,
+        "invariant_valid": true,
+        "correct": true
+      },
+      {
+        "id": "boreal_action05",
+        "expected_intent": "draft_email",
+        "actual_intent": "draft_email",
+        "expected_status": "draft",
+        "actual_status": "draft",
+        "expected_context_id": "Synthetic:Boreal-02:1-1:0",
+        "actual_context_id": "Synthetic:Boreal-02:1-1:0",
+        "invariant_valid": true,
+        "correct": true
+      }
+    ]
+  }
+}
