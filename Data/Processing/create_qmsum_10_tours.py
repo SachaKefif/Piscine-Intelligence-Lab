@@ -1,8 +1,8 @@
 """Create one JSONL record per 10 consecutive QMSum speaker turns.
 
-Run from any directory: python Data/Processing/create_qmsum_10_passages.py
+Run from any directory: python Data/Processing/create_qmsum_10_tours.py
 Reads Data/Processed/qmsum.jsonl and writes
-Data/Processed/qmsum_10_passages.jsonl without changing the source file.
+Data/Processed/qmsum_10_tours.jsonl without changing the source file.
 """
 
 import json
@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 INPUT = ROOT / "Data" / "Processed" / "qmsum.jsonl"
-OUTPUT = ROOT / "Data" / "Processed" / "qmsum_10_passages.jsonl"
+OUTPUT = ROOT / "Data" / "Processed" / "qmsum_10_tours.jsonl"
 TURNS_PER_PASSAGE = 10
 
 

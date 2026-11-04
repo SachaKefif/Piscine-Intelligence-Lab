@@ -221,6 +221,9 @@ def build_sections(intent, request, selected, memories, units, relations, retrie
         if decision["state"] == "current":
             sections["decisions"].append(unit_claim(units[decision["decision"]["unit_id"]],
                                                     role="current_decision"))
+        elif decision["state"] == "undated":
+            sections["decisions"].append(unit_claim(units[decision["decision"]["unit_id"]],
+                                                    role="confirmed_date_unknown"))
         elif decision["state"] == "ambiguous":
             sections["open_points"].extend(
                 unit_claim(units[row["unit_id"]], role="decision_candidate")
@@ -336,6 +339,13 @@ class ResponseEngine:
         if scope_reason == "project_only" and intent not in {"compare", "build_dossier"}:
             return empty_response(request, "clarify", "clarify",
                                   "Quel sujet du projet faut-il examiner ?", reason="ambiguous_subject")
+        if (intent == "answer" and re.search(
+                r"^qui\b.*\b(?:responsable|chargee?|referente?)\b", normalized(request))
+                and not any(self.units[uid]["owner"] for topic in selected
+                            for uid in topic["unit_ids"])):
+            return empty_response(request, "clarify", "clarify",
+                                  "Aucune attribution explicite ne permet d'identifier le responsable.",
+                                  reason="missing_owner")
         memories = [topic_memory(topic, self.units, self.relations) for topic in selected]
         sections, status = build_sections(intent, request, selected, memories,
                                           self.units, self.relations, retrieved_ids)

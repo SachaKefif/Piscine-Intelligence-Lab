@@ -1,0 +1,6 @@
+{"topic_id":"final_product","project_id":"Télécommande","aliases":["projet de télécommande","conception de la télécommande"],"context_unit_ids":["QMSum:ES2011a:10-10:0"],"unit_ids":["QMSum:ES2011a:10-10:0"]}
+{"topic_id":"final_selling_price","project_id":"Télécommande","aliases":["prix de vente","objectif de prix","prix de la télécommande"],"unit_ids":["QMSum:ES2011a:84-84:0"]}
+{"topic_id":"final_production_budget","project_id":"Télécommande","aliases":["budget de fabrication","budget de la télécommande","coût de fabrication"],"unit_ids":["QMSum:ES2011a:210-210:0"]}
+{"topic_id":"final_tv_scope","project_id":"Télécommande","aliases":["utilisation de la télécommande","usage de la télécommande","usage télévisuel"],"unit_ids":["QMSum:ES2011b:71-71:0"]}
+{"topic_id":"final_speech","project_id":"Télécommande","aliases":["reconnaissance vocale","commande vocale"],"unit_ids":["QMSum:ES2011b:113-113:0"]}
+{"topic_id":"final_vcr","project_id":"Télécommande","aliases":["magnétoscope","VCR"],"unit_ids":["QMSum:ES2011b:182-182:0"]}

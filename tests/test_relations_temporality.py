@@ -70,6 +70,13 @@ class RelationTests(unittest.TestCase):
         self.assertIn("19 novembre", delivery["decision"]["evidence"])
         self.assertTrue(any(row["relation"] == "supersedes" for row in delivery["relations"]))
 
+    def test_undated_decision_is_confirmed_but_not_current(self):
+        units = deepcopy(self.units)
+        units["Synthetic:Atlas-02:0-0:0"]["source_date"] = None
+        result = current_decision(self.topics["atlas_budget"], units, self.relations)
+        self.assertEqual(result["state"], "undated")
+        self.assertEqual(result["decision"]["unit_id"], "Synthetic:Atlas-02:0-0:0")
+
     def test_proposal_alone_is_not_a_current_decision(self):
         topic = {"topic_id": "proposal_only", "project_id": "Atlas",
                  "unit_ids": ["Synthetic:Atlas-01:1-1:0"]}

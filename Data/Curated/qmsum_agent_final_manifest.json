@@ -1,0 +1,18 @@
+{
+  "fixture": "QMSum agent final blind check",
+  "meetings": [
+    "ES2011a",
+    "ES2011b"
+  ],
+  "expected_cases": 9,
+  "input_sha256": {
+    "raw_ES2011a": "1e2ae7b9d3a7e9cf2e6c1dcd62de5c4f4050d7366c5e6a7605bfaf5d790ff35c",
+    "raw_ES2011b": "aa9c1ac75b1092e1bdb22576268831b0321147375de563be51cace51a67636f1",
+    "units": "3c356adb9dcef1377a03efb7fe860900f06a59c6405b3d566599aa6b67315104",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "a494dd64e7ab9086362b81062ce05e254f97d9fd435405961f25d3b79e36bb64",
+    "cases": "2c82efbc3d49a5be237e3f5d5e6d629ae577166d606517618fb07568a96fda11"
+  },
+  "frozen_model_weights_sha256": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46",
+  "note": "Frozen before the first agent run on these nine requests. Do not tune the pipeline on this fixture."
+}

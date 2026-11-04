@@ -115,6 +115,14 @@ class ResponseEngineTests(unittest.TestCase):
         self.assertEqual(result["status"], "not_found")
         self.assertEqual(result["references"], [])
 
+    def test_unknown_responsible_does_not_become_a_speaker(self):
+        result = self.engine.generate(
+            "Qui est responsable du prix des capteurs Nova pour Atlas ?",
+            parsed=self.parsed("answer", "capteurs Atlas"))
+        self.assertEqual(result["intent"], "clarify")
+        self.assertEqual(result["clarification_reason"], "missing_owner")
+        self.assertEqual(result["references"], [])
+
     def test_project_only_answer_requires_subject(self):
         result = self.engine.generate(
             "Que sait-on sur Atlas ?",

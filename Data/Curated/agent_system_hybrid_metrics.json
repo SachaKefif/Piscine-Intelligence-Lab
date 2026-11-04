@@ -1,0 +1,206 @@
+{
+  "method": "hybrid",
+  "device": "cpu",
+  "machine": "Windows-11-10.0.26300-SP0",
+  "python": "3.13.5",
+  "fixture_sha256": "afb61650008e42cb47f0abdc6b6f43749e81d72946ed55bbe513ffe33d78c98b",
+  "model_weights_sha256": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46",
+  "cases": 8,
+  "repetitions": 3,
+  "requests": 24,
+  "cold_load_wall_seconds": 20.2189,
+  "cold_load_cpu_seconds": 17.875,
+  "first_request_wall_seconds": 0.1483,
+  "first_request_cpu_seconds": 0.9688,
+  "first_request_status": "ok",
+  "warm_wall_seconds": {
+    "median": 0.0185,
+    "p95": 0.0226,
+    "max": 0.0229
+  },
+  "warm_cpu_seconds": {
+    "median": 0.125,
+    "p95": 0.25
+  },
+  "process_rss_bytes": {
+    "start": 23216128,
+    "peak": 1656729600,
+    "increase": 1633513472
+  },
+  "inference_cost": {
+    "external_api_calls": 0,
+    "external_api_charge": 0,
+    "total_warm_cpu_seconds": 3.5938
+  },
+  "method_note": "RSS échantillonné à 5 ms dans ce processus ; temps mur et CPU mesurés sur une petite fixture synthétique, sans concurrence contrôlée.",
+  "per_request": [
+    {
+      "id": "scenario01",
+      "wall_seconds": 0.01766089999000542,
+      "cpu_seconds": 0.125,
+      "intent": "answer",
+      "status": "ok"
+    },
+    {
+      "id": "scenario02",
+      "wall_seconds": 0.017623100022319704,
+      "cpu_seconds": 0.25,
+      "intent": "compare",
+      "status": "ok"
+    },
+    {
+      "id": "scenario03",
+      "wall_seconds": 0.020376100001158193,
+      "cpu_seconds": 0.125,
+      "intent": "compare",
+      "status": "ok"
+    },
+    {
+      "id": "scenario04",
+      "wall_seconds": 0.019322000007377937,
+      "cpu_seconds": 0.125,
+      "intent": "answer",
+      "status": "ok"
+    },
+    {
+      "id": "scenario05",
+      "wall_seconds": 0.01862360001541674,
+      "cpu_seconds": 0.125,
+      "intent": "build_dossier",
+      "status": "ok"
+    },
+    {
+      "id": "scenario06",
+      "wall_seconds": 0.02010369999334216,
+      "cpu_seconds": 0.25,
+      "intent": "draft_email",
+      "status": "draft"
+    },
+    {
+      "id": "scenario07",
+      "wall_seconds": 0.01805309997871518,
+      "cpu_seconds": 0.125,
+      "intent": "clarify",
+      "status": "clarify"
+    },
+    {
+      "id": "scenario08",
+      "wall_seconds": 0.01966099999845028,
+      "cpu_seconds": 0.125,
+      "intent": "clarify",
+      "status": "clarify"
+    },
+    {
+      "id": "scenario01",
+      "wall_seconds": 0.019962499995017424,
+      "cpu_seconds": 0.125,
+      "intent": "answer",
+      "status": "ok"
+    },
+    {
+      "id": "scenario02",
+      "wall_seconds": 0.019702999998116866,
+      "cpu_seconds": 0.25,
+      "intent": "compare",
+      "status": "ok"
+    },
+    {
+      "id": "scenario03",
+      "wall_seconds": 0.019345700013218448,
+      "cpu_seconds": 0.125,
+      "intent": "compare",
+      "status": "ok"
+    },
+    {
+      "id": "scenario04",
+      "wall_seconds": 0.019359099998837337,
+      "cpu_seconds": 0.125,
+      "intent": "answer",
+      "status": "ok"
+    },
+    {
+      "id": "scenario05",
+      "wall_seconds": 0.01842800001031719,
+      "cpu_seconds": 0.109375,
+      "intent": "build_dossier",
+      "status": "ok"
+    },
+    {
+      "id": "scenario06",
+      "wall_seconds": 0.020080899994354695,
+      "cpu_seconds": 0.25,
+      "intent": "draft_email",
+      "status": "draft"
+    },
+    {
+      "id": "scenario07",
+      "wall_seconds": 0.018397700012428686,
+      "cpu_seconds": 0.125,
+      "intent": "clarify",
+      "status": "clarify"
+    },
+    {
+      "id": "scenario08",
+      "wall_seconds": 0.018463400017935783,
+      "cpu_seconds": 0.125,
+      "intent": "clarify",
+      "status": "clarify"
+    },
+    {
+      "id": "scenario01",
+      "wall_seconds": 0.017462899995734915,
+      "cpu_seconds": 0.109375,
+      "intent": "answer",
+      "status": "ok"
+    },
+    {
+      "id": "scenario02",
+      "wall_seconds": 0.01769649999914691,
+      "cpu_seconds": 0.125,
+      "intent": "compare",
+      "status": "ok"
+    },
+    {
+      "id": "scenario03",
+      "wall_seconds": 0.022912599990377203,
+      "cpu_seconds": 0.25,
+      "intent": "compare",
+      "status": "ok"
+    },
+    {
+      "id": "scenario04",
+      "wall_seconds": 0.02259909998974763,
+      "cpu_seconds": 0.125,
+      "intent": "answer",
+      "status": "ok"
+    },
+    {
+      "id": "scenario05",
+      "wall_seconds": 0.017394299997249618,
+      "cpu_seconds": 0.125,
+      "intent": "build_dossier",
+      "status": "ok"
+    },
+    {
+      "id": "scenario06",
+      "wall_seconds": 0.016503200022270903,
+      "cpu_seconds": 0.125,
+      "intent": "draft_email",
+      "status": "draft"
+    },
+    {
+      "id": "scenario07",
+      "wall_seconds": 0.016772799979662523,
+      "cpu_seconds": 0.125,
+      "intent": "clarify",
+      "status": "clarify"
+    },
+    {
+      "id": "scenario08",
+      "wall_seconds": 0.017296799982432276,
+      "cpu_seconds": 0.125,
+      "intent": "clarify",
+      "status": "clarify"
+    }
+  ]
+}

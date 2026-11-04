@@ -21,14 +21,14 @@ def resolve_path(path):
     return path if path.is_absolute() else ROOT / path
 
 
-def load_reviewed_triplets(path):
+def load_reviewed_triplets(path, *, control_nonoverlap=False):
     rows = list(read_jsonl(path))
     if not rows:
         raise ValueError(f"No reviewed triplets in {path}")
     if len({row.get("id") for row in rows}) != len(rows):
         raise ValueError("Duplicate or missing triplet IDs")
     train_meetings = {
-        row["meeting_id"] for row in read_jsonl(PROCESSED / "qmsum.jsonl")
+        row["meeting_id"]: row for row in read_jsonl(PROCESSED / "qmsum.jsonl")
         if row["split"] == "train"
     }
     train_passages = {
@@ -40,7 +40,10 @@ def load_reviewed_triplets(path):
                     "positive_id", "negative_id", "review_status")
         if any(not row.get(field) for field in required):
             raise ValueError(f"Missing field in {row.get('id')}")
-        if row["review_status"] not in ("accepted_after_semantic_review", "accepted_assistant_review"):
+        if control_nonoverlap:
+            if row["review_status"] != "control_nonoverlap":
+                raise ValueError(f"Not a non-overlap control: {row['id']}")
+        elif row["review_status"] not in ("accepted_after_semantic_review", "accepted_assistant_review"):
             raise ValueError(f"Triplet not reviewed and accepted: {row['id']}")
         if row["meeting_id"] not in train_meetings:
             raise ValueError(f"Triplet outside QMSum train: {row['id']}")
@@ -50,6 +53,18 @@ def load_reviewed_triplets(path):
             if (passage is None or passage["meeting_id"] != row["meeting_id"]
                     or passage["text"] != row[field]):
                 raise ValueError(f"Passage provenance mismatch: {row['id']} / {passage_id}")
+        if control_nonoverlap:
+            query_id = row.get("query_id")
+            questions = train_meetings[row["meeting_id"]]["queries"]["specific"]
+            if not isinstance(query_id, str) or not query_id.startswith(row["meeting_id"] + ":"):
+                raise ValueError(f"Control query ID invalid: {row['id']}")
+            question_index = int(query_id.rsplit(":", 1)[1])
+            if question_index >= len(questions) or questions[question_index]["query"] != row["question"]:
+                raise ValueError(f"Control question mismatch: {row['id']}")
+            negative = train_passages[row["negative_id"]]
+            for start, end in questions[question_index]["relevant_text_span"]:
+                if negative["start_turn"] <= int(end) and int(start) <= negative["end_turn"]:
+                    raise ValueError(f"Control overlaps a relevant span: {row['id']}")
     return rows
 
 
@@ -68,6 +83,10 @@ def main():
     parser.add_argument("--device", choices=("cpu", "cuda", "auto"), default="cpu")
     parser.add_argument("--fp16", action="store_true")
     parser.add_argument("--prepare-only", action="store_true")
+    parser.add_argument("--control-nonoverlap", action="store_true",
+                        help="Allow only deterministic random negatives outside QMSum gold spans")
+    parser.add_argument("--skip-save-model", action="store_true",
+                        help="Record validation metrics without serializing the experimental weights")
     args = parser.parse_args()
     if (args.epochs < 1 or args.batch_size < 2
             or not 1 <= args.mini_batch_size <= args.batch_size
@@ -93,7 +112,7 @@ def main():
     if output.exists() and (not output.is_dir() or any(output.iterdir())):
         parser.error(f"Output directory is not empty: {output}")
     if args.prepare_only:
-        rows = load_reviewed_triplets(triplet_path)
+        rows = load_reviewed_triplets(triplet_path, control_nonoverlap=args.control_nonoverlap)
         print(f"Reviewed QMSum train triplets: {len(rows)}")
         return
     if not (checkpoint / "modules.json").is_file():
@@ -105,7 +124,7 @@ def main():
     snapshot_path = output / "train_triplets.jsonl"
     snapshot_bytes = triplet_path.read_bytes()
     snapshot_path.write_bytes(snapshot_bytes)
-    rows = load_reviewed_triplets(snapshot_path)
+    rows = load_reviewed_triplets(snapshot_path, control_nonoverlap=args.control_nonoverlap)
     print(f"Reviewed QMSum train triplets: {len(rows)}")
 
     import torch
@@ -166,14 +185,14 @@ def main():
     print(f"QMSum validation after: {after}")
 
     model_path = output / "model"
-    model.save(str(model_path))
     metrics = {
         "input_checkpoint": str(checkpoint),
-        "output_model": str(model_path),
+        "output_model": None,
         "triplet_file": str(triplet_path),
         "training_snapshot": str(snapshot_path),
         "triplet_sha256": hashlib.sha256(snapshot_bytes).hexdigest(),
         "triplet_count": len(rows),
+        "negative_policy": "random_nonoverlap_control" if args.control_nonoverlap else "reviewed_hard_negative",
         "validation_questions": len(validation),
         "device": device,
         "epochs": args.epochs,
@@ -186,8 +205,12 @@ def main():
         "delta": {key: round(after[key] - before[key], 4) for key in before},
     }
     (output / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
-    print(f"Model: {model_path}")
     print(f"Metrics: {output / 'metrics.json'}")
+    if not args.skip_save_model:
+        model.save(str(model_path))
+        metrics["output_model"] = str(model_path)
+        (output / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
+        print(f"Model: {model_path}")
 
 
 if __name__ == "__main__":

@@ -154,8 +154,12 @@ def current_decision(topic, units_by_id, relations):
                          "reason": "Décisions concurrentes ou contradiction non résolue par un remplacement prouvé."})
     else:
         selected_id = next(iter(active))
-        response.update({"state": "current", "decision": unit_summary(units_by_id[selected_id]),
-                         "reason": "Décision confirmée, sourcée et non remplacée par une autre décision prouvée."})
+        if units_by_id[selected_id]["source_date"] is None:
+            response.update({"state": "undated", "decision": unit_summary(units_by_id[selected_id]),
+                             "reason": "Décision confirmée et sourcée, mais date de source inconnue : état courant non établi."})
+        else:
+            response.update({"state": "current", "decision": unit_summary(units_by_id[selected_id]),
+                             "reason": "Décision confirmée, sourcée et non remplacée par une autre décision prouvée."})
     response["relations"] = [relation for relation in relations
                              if (relation["from_id"] in topic_ids and relation["to_id"] in topic_ids)
                              or (relation["relation"] == "contradicts" and

@@ -137,3 +137,13 @@ Recette de bout en bout : huit scénarios Atlas
 Le mini-agent utilise maintenant EF-02 avant le routage vers EF-07 ou EF-08/09. Le mode hybride charge E5 adapté et BM25 ; un mode BM25 reste disponible sans checkpoint. Le classement oriente la sélection d'une unité dans le sujet annoté, tandis que les statuts et relations contrôlent la décision courante. Le dossier expose séparément contexte et risques.
 
 Ajouté un jeu JSONL d'attendus figés, un évaluateur et les sorties complètes pour les huit scénarios du cahier des charges. Les huit passent en hybride et en BM25 ; 76 tests automatiques passent. Ces résultats sont une recette fonctionnelle sur données synthétiques, pas une évaluation indépendante de la qualité des réponses sur des réunions réelles.
+
+Clôture expérimentale du prototype
+
+Rejoué l'agent sur deux réunions publiques QMSum tenues hors de l'entraînement de l'encodeur, avec sept unités annotées à partir de citations exactes et douze demandes figées. Le premier contrôle a révélé une réponse sans attribution explicite à une question de responsabilité ; la règle de clarification a été corrigée. Le diagnostic après cette correction donne 11/12 cas conformes en BM25 et 10/12 en hybride. Il reste descriptif, car les demandes ont été rédigées dans le projet et l'une a servi à corriger le code.
+
+Conclu EF-03 avec 25 négatifs difficiles revus et un contrôle aléatoire apparié : sur validation QMSum, MRR@5 vaut respectivement 0,6667 et 0,6511, contre 0,6598 pour le checkpoint de référence. Le gain est faible et le Hit@5 baisse ; le modèle de référence reste celui du mini-agent. Mesuré la latence, le RSS et le coût local du pipeline complet en BM25 et en hybride, puis rédigé le rapport expérimental final avec erreurs et limites.
+
+Vérifié dans une copie séparée sans données préparées ni checkpoint, avec le même environnement Python : génération des passages QMSum avec empreintes identiques, recette BM25 8/8, contrôle QMSum 11/12 et 78 tests automatiques réussis. Les JSON et JSONL sont fixés en LF pour conserver leurs empreintes sur Windows ; les instructions expliquent le réentraînement des poids E5 ignorés par Git. Une décision issue d'une réunion sans date reste désormais confirmée mais n'est pas qualifiée de courante.
+
+Figé avant évaluation un second contrôle de neuf demandes sur deux autres réunions QMSum test, avec six unités sourcées. Le premier score obtenu est de 9/9 en BM25 et de 9/9 en hybride, sans adaptation du modèle ni des règles à ce jeu. Deux tentatives de chargement hybride ont d'abord échoué par manque de mémoire, avant qu'un run sur CPU ne produise les sorties inspectables. Ce petit contrôle ne remplace pas des demandes humaines indépendantes.

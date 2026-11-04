@@ -1,0 +1,6 @@
+{"topic_id":"remote_product","project_id":"Télécommande","aliases":["projet de télécommande","conception de la télécommande"],"context_unit_ids":["QMSum:ES2004a:14-14:0"],"unit_ids":["QMSum:ES2004a:14-14:0"]}
+{"topic_id":"remote_price","project_id":"Télécommande","aliases":["prix de vente","prix de la télécommande","coût de production","coût de la télécommande"],"unit_ids":["QMSum:ES2004a:131-131:0","QMSum:ES2004a:160-160:0"]}
+{"topic_id":"remote_design","project_id":"Télécommande","aliases":["télécommande universelle","commande universelle","appareils vidéo"],"unit_ids":["QMSum:ES2004b:13-13:0"]}
+{"topic_id":"remote_accessibility","project_id":"Télécommande","aliases":["accessibilité","large tranche d'âge"],"unit_ids":["QMSum:ES2004b:15-15:0"]}
+{"topic_id":"remote_circuit","project_id":"Télécommande","aliases":["circuit infrarouge","circuit de la télécommande"],"unit_ids":["QMSum:ES2004b:49-49:0"]}
+{"topic_id":"remote_budget","project_id":"Télécommande","aliases":["budget de la télécommande","contrainte budgétaire"],"unit_ids":["QMSum:ES2004b:177-177:0"]}

@@ -4,7 +4,7 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt contient les quatre corpus normalisés, les baselines de recherche QMSum et un encodeur E5 adapté sur le train QMSum. La recherche de passages QMSum a été évaluée sur la validation et sur le test final avec une fusion BM25 + E5 figée avant le test. **EF-01, EF-02 et EF-04 à EF-09 ont une implémentation vérifiée sur des démonstrations synthétiques** : EF-04 contrôle les relations et la décision courante ; EF-05 expose une mémoire inter-conversations ; EF-06 classe les intentions ; EF-07 produit des réponses et dossiers sourcés. EF-08 prépare des brouillons d'e-mail, de tâche et d'événement sans effet externe ; EF-09 résout un destinataire nommé ou un responsable explicitement attribué, sinon demande une précision. Le mini-agent CLI relie ces modules à la recherche EF-02, avec BM25 ou la fusion hybride utilisant E5 adapté. Les huit scénarios de recette passent sur Atlas synthétique ; une évaluation indépendante sur des conversations et demandes humaines reste à faire.
+Le dépôt livre le prototype EF-01 à EF-09, les comparaisons de recherche QMSum, l'expérience EF-03 avec ablation, les huit scénarios de recette Atlas et les mesures de latence et mémoire du mini-agent. Le mode hybride utilise E5 adapté ; BM25 fonctionne sans checkpoint local. Un contrôle diagnostique sur deux réunions QMSum du test et douze demandes donne 11/12 cas conformes en BM25 et 10/12 en hybride après correction d'une fausse attribution. Un second contrôle, figé avant sa première exécution sur deux autres réunions, donne 9/9 dans les deux modes. Ces demandes ont été rédigées pour le projet ; le [rapport expérimental final](docs/rapport_experimental_final.md) distingue les résultats, erreurs et limites.
 
 ## Cahier des charges
 
@@ -23,6 +23,7 @@ Le dépôt contient les quatre corpus normalisés, les baselines de recherche QM
 - [Réponses EF-07](docs/reponses_ef07.md) : affirmations sourcées, dossiers, comparaisons et évaluation.
 - [Actions EF-08 et destinataires EF-09](docs/actions_ef08_ef09.md) : brouillons, attribution, métriques et limites.
 - [Recette de bout en bout](docs/recette_bout_en_bout.md) : huit scénarios, recherche hybride, sorties et preuves inspectables.
+- [Rapport expérimental final](docs/rapport_experimental_final.md) : synthèse des résultats EF-01 à EF-09, ablation, contrôle sur réunions QMSum, coûts et limites.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
 
 ## Principes clés
@@ -34,6 +35,32 @@ Le dépôt contient les quatre corpus normalisés, les baselines de recherche QM
 - Évaluer séparément le retrieval, les relations, les intentions et le système complet.
 
 Le cahier des charges détaille le périmètre, les exigences, les critères de recette, les livrables et le calendrier.
+
+## Reproduction depuis une copie propre
+
+Avec Python 3.13 et PowerShell, depuis la racine d'une nouvelle copie du dépôt :
+
+```powershell
+py -3.13 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+.venv\Scripts\python.exe "Data Analysis\ingest_semantic_units.py"
+.venv\Scripts\python.exe "Data Analysis\evaluate_acceptance.py" --method bm25 --metrics Data\Processed\recette_bm25.json --outputs Data\Processed\recette_bm25.jsonl
+.venv\Scripts\python.exe "Data Analysis\evaluate_agent_holdout.py" --method bm25 --metrics Data\Processed\controle_agent_bm25.json --outputs Data\Processed\controle_agent_bm25.jsonl
+.venv\Scripts\python.exe -m unittest discover -s tests
+```
+
+Ces commandes vérifient la recette et le contrôle QMSum sans checkpoint local. Les transcriptions sources QMSum nécessaires au contrôle sont suivies par Git ; [`prepare_agent_holdout.py`](Data%20Analysis/prepare_agent_holdout.py) les convertit et revalide les sept citations automatiquement. Les fichiers générés dans `Data/Processed/` ne modifient pas les sources suivies. Les versions de l'environnement de mesure sont épinglées dans [`requirements.txt`](requirements.txt). Pour le GPU, installer une variante PyTorch compatible avec la machine selon le sélecteur officiel avant les autres dépendances.
+
+Le checkpoint E5 utilisé pour les sorties hybrides (`Models/qmsum-e5-small/checkpoints/checkpoint-842`, SHA-256 `1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46`) est ignoré par Git. Pour reconstruire un checkpoint compatible depuis les corpus sources et le modèle public `intfloat/multilingual-e5-small` :
+
+```powershell
+.venv\Scripts\python.exe Data\Processing\data_processing_pipeline.py
+.venv\Scripts\python.exe Data\Processing\create_qmsum_10_tours.py
+.venv\Scripts\python.exe "Data Analysis\finetune_qmsum_e5.py" --epochs 2 --batch-size 16
+.venv\Scripts\python.exe "Data Analysis\evaluate_acceptance.py" --method hybrid --model Models\qmsum-e5-small\checkpoints\checkpoint-842 --device cpu --metrics Data\Processed\recette_hybride.json --outputs Data\Processed\recette_hybride.jsonl
+```
+
+L'entraînement complet peut demander plusieurs heures sur CPU ; la connexion au registre du modèle initial est nécessaire si ce dernier n'est pas en cache. Le même protocole ne garantit pas des poids identiques au bit près sur GPU. Si l'empreinte diffère, les scores hybrides sont ceux d'un nouveau run ; les sorties et empreintes du run de référence restent archivées dans le dépôt. Pour reproduire l'ablation des négatifs difficiles, lancer [`make_ablation_control.py`](Data%20Analysis/make_ablation_control.py), puis [`train_qmsum_hard_negatives.py`](Data%20Analysis/train_qmsum_hard_negatives.py) séparément sur les fichiers revu et contrôle, dans deux dossiers de sortie vides, avec les mêmes réglages décrits dans le [rapport final](docs/rapport_experimental_final.md).
 
 ## Fine-tuning E5 sur QMSum
 
@@ -103,6 +130,8 @@ Pour utiliser directement les 25 exemples déjà revus par l'assistant, sans pro
 
 **Essai exploratoire déjà exécuté :** un run a chargé 26 triplets avant la dernière revue. Sur la validation QMSum, Hit@5 est passé de 0,8650 à 0,8565, Recall@5 de 0,4694 à 0,4725 et MRR@5 de 0,6598 à 0,6513. Il n'améliore pas le classement global ; conserver le checkpoint de référence. La revue a ensuite retiré un triplet ambigu et le fichier courant contient 25 lignes. Pendant ce run, l'empreinte du fichier a été calculée après l'entraînement, au moment où le fichier avait déjà changé : elle ne décrit pas exactement les 26 lignes chargées. Le script corrigé copie désormais les triplets dans le dossier de sortie **avant** l'entraînement et calcule l'empreinte de cette copie. Utiliser un nouveau dossier de sortie pour tout nouvel essai.
 
+**Essai final de 25 triplets et ablation :** à entraînement égal sur le GPU, le MRR@5 de validation vaut `0,6667` avec les négatifs revus, `0,6511` avec 25 négatifs aléatoires hors spans et `0,6598` pour la référence sans entraînement supplémentaire. Le gain face à la référence est faible et le Hit@5 baisse ; le checkpoint de référence reste utilisé par l'agent. Le [rapport final](docs/rapport_experimental_final.md) donne le protocole, les empreintes, une répétition CPU et les limites de cette comparaison.
+
 ## EF-01 — Implémentée et vérifiée sur la démo
 
 Le jeu de démonstration contient [deux conversations Atlas datées](Data/Synthetic/atlas_conversations.jsonl) et [seize unités annotées](Data/Curated/atlas_semantic_units.jsonl). Il est **synthétique**, distinct de QMSum. Chaque unité exprime une seule information et conserve un identifiant stable, son type, son statut, sa source, sa date, ses tours et une citation exacte ; locuteur, responsable et échéance restent `null` quand la source ne les établit pas. Le format suit le [contrat existant](docs/schemas/semantic_unit.schema.json). Par exemple, la proposition de 40 000 € du 20 octobre et son approbation du 3 novembre sont deux unités distinctes. Les dates absolues des échéances de la démo sont résolues avec la date explicite de leur réunion.
@@ -140,7 +169,7 @@ Pour comparer les trois méthodes sur les **mêmes seize unités** et les [neuf 
 
 Le [diagnostic enregistré](Data/Curated/atlas_unit_retrieval_metrics.json) donne à `k=5` un MRR de `0,9259` pour BM25, `0,7315` pour E5 et `0,7963` pour l'hybride. Les trois trouvent au moins une unité pertinente pour les neuf questions ; la requête « propositions et décisions » peut renvoyer des sources issues des deux conversations. Pour la question sur le budget **approuvé**, l'hybride place pourtant la proposition avant l'approbation : le statut doit donc rester visible et la recherche seule ne décide pas de l'état courant. **Ces neuf questions synthétiques sont une démonstration fonctionnelle, pas un test indépendant sur corpus réel.** Elles ne remplacent pas le benchmark QMSum et ne justifient pas un nouveau choix de modèle.
 
-Les critères fonctionnels EF-01/EF-02 sont couverts par cette démonstration : ingestion de deux conversations avec provenance, puis recherche classée avec score, source et preuve et comparaison des trois méthodes sur les mêmes questions. L'extraction des unités reste une étape d'annotation ; le cahier des charges n'impose pas qu'elle soit automatique. **Approfondissement possible, sans en faire une condition de clôture EF-01/EF-02 :** annoter plusieurs réunions réelles, créer des questions avec des identifiants d'unités pertinents et mesurer la recherche sur des réunions tenues à l'écart.
+Les critères fonctionnels EF-01/EF-02 sont couverts par cette démonstration : ingestion de deux conversations avec provenance, puis recherche classée avec score, source et preuve et comparaison des trois méthodes sur les mêmes questions. L'extraction des unités reste une étape d'annotation ; le cahier des charges n'impose pas qu'elle soit automatique. Le [contrôle final de l'agent](docs/rapport_experimental_final.md) ajoute quatre réunions publiques QMSum annotées à la main, mais seulement vingt et une demandes rédigées pour le projet ; une mesure plus large sur des formulations humaines indépendantes resterait nécessaire pour estimer la généralisation.
 
 ## EF-04 — Relations et temporalité sur la démo Atlas
 

@@ -1,0 +1,23 @@
+{
+  "evaluation_split": "QMSum validation",
+  "question_count": 237,
+  "base_checkpoint_sha256": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46",
+  "design": "Same 25 QMSum train questions and positive passages, one epoch, batch 2, cached-loss mini-batch 1, 256 training tokens, learning rate 1e-5, seed 42, CUDA. Only the negative changes.",
+  "reviewed_negative_sha256": "426771e90ec7dc4d6154975d0dc61922c6fd2aace44c33e83123a217f747f3f3",
+  "random_nonoverlap_sha256": "5816370405131b294cc1a2db1fe72655b76f686e686e07ff5476526dfa128e8f",
+  "random_control_training_snapshot_sha256": "ca573d45c238f927ab05a63da5faf78a4ab543b3db0b06894cd563d0b3aeee07",
+  "snapshot_line_endings": "The recorded GPU control run used CRLF on Windows. The checked-in LF file is byte-identical after replacing CRLF with LF; all 25 parsed JSON objects are unchanged.",
+  "metrics": {
+    "reference_without_extra_training": {"hit_at_5": 0.865, "recall_at_5": 0.4694, "mrr_at_5": 0.6598},
+    "reviewed_hard_negatives": {"hit_at_5": 0.8565, "recall_at_5": 0.4732, "mrr_at_5": 0.6667},
+    "random_nonoverlap_control": {"hit_at_5": 0.8354, "recall_at_5": 0.4664, "mrr_at_5": 0.6511}
+  },
+  "delta_hard_minus_reference": {"hit_at_5": -0.0085, "recall_at_5": 0.0038, "mrr_at_5": 0.0069},
+  "delta_hard_minus_random_control": {"hit_at_5": 0.0211, "recall_at_5": 0.0068, "mrr_at_5": 0.0156},
+  "cpu_replication": {
+    "device": "cpu",
+    "reviewed_hard_negatives": {"hit_at_5": 0.8565, "recall_at_5": 0.4662, "mrr_at_5": 0.6632},
+    "saved_model_sha256": "1be30f26ffd87237d5ccfcefec81de670843785ff49fafe4bd2fbd9ed5deefb2"
+  },
+  "interpretation": "The reviewed negatives beat the matched random control on validation, but the gain over the reference is small and Hit@5 falls. The reference checkpoint remains the final agent model. The random control is excluded from QMSum gold spans but was not semantically reviewed; these 25 examples do not establish statistical significance or generalization."
+}

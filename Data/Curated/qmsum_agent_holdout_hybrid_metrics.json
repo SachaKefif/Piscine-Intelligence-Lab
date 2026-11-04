@@ -1,0 +1,328 @@
+{
+  "dataset": "QMSum test, ES2004a and ES2004b; transcript dates unknown",
+  "requests": "Twelve manually written French requests, frozen before agent evaluation; not a sample of user traffic",
+  "evaluation_note": "The initial BM25 run scored 10/12; h11 prompted a missing-owner safety fix, and undated QMSum decisions prompted a temporal-label fix. Final scores are post-fix diagnostics, not an untouched blind test.",
+  "method": "hybrid",
+  "cases": 12,
+  "passed": 10,
+  "case_accuracy": 0.8333,
+  "intent_accuracy": 0.9167,
+  "status_accuracy": 0.9167,
+  "fact_coverage": 0.875,
+  "citation_relevance_rate": 0.9167,
+  "clarification_recall": 1.0,
+  "clarification_precision": 0.8333,
+  "source_contract_rate": 1.0,
+  "input_sha256": {
+    "raw_ES2004a": "911e56db0d8482f1e730bae0a8fcf0ab0095c94abb000ba0516e975fa6e48b31",
+    "raw_ES2004b": "5ed3c79e6784827652a2cdfaf2922c377aa386d8501b4a2039e51fb00a4d294d",
+    "units": "7f8c8ecda4670a5bcc3d88e2d00c3f2100f5ad4f3bb5cb1ed7201ee1e4e793aa",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "11651ae28d4d0472cff4f60c5c121889e1aa91aeed4f6e0950d516fc327a862b",
+    "cases": "0428eb0678580f84bffbbc626a06a5a6d77ddb1259ed5459d56d812abc1684ca",
+    "model_weights": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46"
+  },
+  "details": [
+    {
+      "id": "h01",
+      "request": "Quel prix de vente a été évoqué pour la télécommande ?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:ES2004a:131-131:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:ES2004a:131-131:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h02",
+      "request": "Quel coût de production a été mentionné pour la télécommande ?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:ES2004a:160-160:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:ES2004a:131-131:0"
+      ],
+      "missing_unit_ids": [
+        "QMSum:ES2004a:160-160:0"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:ES2004a:131-131:0"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "h03",
+      "request": "Quelle décision sur la télécommande universelle est rapportée ?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:ES2004b:13-13:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:ES2004b:13-13:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h04",
+      "request": "Quel risque concerne le circuit infrarouge de la télécommande ?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:ES2004b:49-49:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:ES2004b:49-49:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h05",
+      "request": "Quelle décision concerne l'accessibilité de la télécommande ?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:ES2004b:15-15:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:ES2004b:15-15:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h06",
+      "request": "Construis un dossier sur la télécommande.",
+      "expected_intent": "build_dossier",
+      "actual_intent": "build_dossier",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:ES2004a:14-14:0",
+        "QMSum:ES2004b:13-13:0",
+        "QMSum:ES2004b:49-49:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:ES2004a:131-131:0",
+        "QMSum:ES2004a:14-14:0",
+        "QMSum:ES2004a:160-160:0",
+        "QMSum:ES2004b:13-13:0",
+        "QMSum:ES2004b:15-15:0",
+        "QMSum:ES2004b:177-177:0",
+        "QMSum:ES2004b:49-49:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h07",
+      "request": "Prépare un mail à la responsable du budget de la télécommande.",
+      "expected_intent": "draft_email",
+      "actual_intent": "draft_email",
+      "expected_status": "clarify",
+      "actual_status": "clarify",
+      "expected_unit_ids": [],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true,
+        "recipient": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h08",
+      "request": "Compare les deux décisions.",
+      "expected_intent": "clarify",
+      "actual_intent": "clarify",
+      "expected_status": "clarify",
+      "actual_status": "clarify",
+      "expected_unit_ids": [],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h09",
+      "request": "On pourrait peut-être revoir le budget de la télécommande.",
+      "expected_intent": "clarify",
+      "actual_intent": "clarify",
+      "expected_status": "clarify",
+      "actual_status": "clarify",
+      "expected_unit_ids": [],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h10",
+      "request": "Quel est le prix des batteries de la télécommande ?",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "not_found",
+      "actual_status": "clarify",
+      "expected_unit_ids": [],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "h11",
+      "request": "Qui est responsable du circuit de la télécommande ?",
+      "expected_intent": "clarify",
+      "actual_intent": "clarify",
+      "expected_status": "clarify",
+      "actual_status": "clarify",
+      "expected_unit_ids": [],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "h12",
+      "request": "Crée une tâche pour vérifier le circuit de la télécommande.",
+      "expected_intent": "create_task",
+      "actual_intent": "create_task",
+      "expected_status": "clarify",
+      "actual_status": "clarify",
+      "expected_unit_ids": [],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    }
+  ]
+}
