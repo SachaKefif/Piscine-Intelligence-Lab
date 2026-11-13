@@ -2,6 +2,8 @@
 
 État vérifié le 13 novembre 2026 sur la copie de travail et un worktree propre du commit de livraison. Le périmètre est celui des sept [livrables du cahier des charges](../Consignes/cahier_des_charges.md), avec actions simulées et limites expérimentales déclarées.
 
+**Statut exact :** les sept livrables et la recette fonctionnelle sont réalisés. La validation scientifique de toutes les capacités sur des conversations nouvelles n'est **pas complète** : les relations `contradicts` et `supersedes` ne disposent que d'un petit contrôle synthétique, et l'attribution d'un responsable de réunion n'a pas de vérité de référence indépendante. « Livré » ne signifie donc pas « démontré fiable à 100 % ».
+
 | Livrable | Preuve livrée |
 |---|---|
 | 1. Dépôt exécutable et documenté | [README](../README.md), [dépendances](../requirements.txt), CLI [`semantic_agent.py`](../Data%20Analysis/semantic_agent.py), 84 tests automatisés réussis. |
@@ -25,4 +27,4 @@ Dans le worktree propre, les **84 tests**, la recette BM25 **8/8**, le jeu QMSum
 
 ## Limite à ne pas confondre avec une fonction manquante
 
-Le [protocole AMI](protocole_annotation_independante_ami.md) rend possible une mesure indépendante de contradiction, remplacement et attribution sur de nouvelles réunions. Les quatre formulaires restent vierges. Deux personnes doivent les remplir séparément avant le calcul d'une précision ou d'un rappel sur ces tâches. Le sujet demande de documenter la qualité et les limites de l'évaluation ; il ne fixe pas de seuil de réussite ni n'exige de recueillir des jugements humains externes pour déclarer la recette fonctionnelle achevée.
+Le [protocole AMI](protocole_annotation_independante_ami.md) rend possible une mesure indépendante de contradiction, remplacement et attribution sur de nouvelles réunions. Les quatre formulaires restent vierges. Deux personnes doivent les remplir séparément avant le calcul d'une précision ou d'un rappel sur ces tâches. Le sujet demande de documenter la qualité et les limites de l'évaluation ; il ne fixe pas de seuil de réussite ni n'exige de recueillir des jugements humains externes pour déclarer la recette fonctionnelle achevée. Pour affirmer une validation empirique complète, ce contrôle ou un autre jeu humain équivalent reste nécessaire.
