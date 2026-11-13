@@ -35,6 +35,8 @@ Chaque évaluateur ajoute une note lorsqu'il hésite. Un troisième arbitrage es
 
 L'évaluateur vérifie les empreintes, la complétude, la séparation des deux formulaires et les désaccords. Il renvoie actuellement `pending_human_review`, sans précision, rappel ni F1. Une fois les deux formulaires remplis, les désaccords peuvent être consignés dans des CSV d'arbitrage indiqués par `--adjudicated-pairs` et `--adjudicated-owners`. Ce n'est qu'après ces étapes qu'il calcule la précision et le rappel de `contradicts` et `supersedes`, ainsi que l'exactitude et les fausses attributions de responsables.
 
+Après réception des quatre formulaires, `--adjudication-dir CHEMIN` crée des CSV vierges contenant uniquement les items en désaccord, avec les deux jugements dans `notes`. Un troisième évaluateur renseigne les colonnes de jugement et leurs preuves ; relancer ensuite l'audit avec `--adjudicated-pairs CHEMIN/adjudicated_pairs.csv` et/ou `--adjudicated-owners CHEMIN/adjudicated_owners.csv`. La création refuse d'écraser un fichier d'arbitrage existant.
+
 Un résultat sans exemples positifs d'une classe doit garder sa précision ou son rappel à `null` ; il ne prouve pas que le détecteur maîtrise cette classe. Si les annotateurs ne trouvent pas de remplacement explicite dans le couple de bureaux, `supersedes` sera **non évaluable** sur ce lot. Il faudra alors recueillir d'autres réunions avec décisions successives et ordre vérifié.
 
 ## État actuel

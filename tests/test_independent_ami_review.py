@@ -12,7 +12,7 @@ from zipfile import ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "Data Analysis"))
 
-from evaluate_independent_ami_review import review_state
+from evaluate_independent_ami_review import review_state, write_adjudication_templates
 from predict_owner import predict_owner
 
 
@@ -72,6 +72,14 @@ class IndependentAmiReviewTests(unittest.TestCase):
                 writer.writerows(records)
             self.assertEqual(review_state(directory)["status"], "pending_human_review")
             self.assertEqual(len(review_state(directory)["pending_adjudication"]), 1)
+            templates = write_adjudication_templates(directory, review_state(directory),
+                                                     directory / "adjudication")
+            self.assertEqual(len(templates), 1)
+            with Path(templates[0]).open(encoding="utf-8", newline="") as stream:
+                template_rows = list(csv.DictReader(stream))
+            self.assertEqual(len(template_rows), 1)
+            self.assertEqual(template_rows[0]["item_id"], records[0]["item_id"])
+            self.assertEqual(template_rows[0]["semantic_relation"], "")
 
 
 if __name__ == "__main__":

@@ -158,14 +158,40 @@ def review_state(directory, adjudicated_pairs=None, adjudicated_owners=None):
     return state
 
 
+def write_adjudication_templates(directory, state, destination):
+    """Prepare only disputed items for a third reviewer, without model outputs."""
+    pairs, owners, _ = verify(directory)
+    destination.mkdir(parents=True, exist_ok=True)
+    paths = []
+    for task, items, fields in (("pairs", pairs, PAIR_FIELDS),
+                                ("owners", owners, OWNER_FIELDS)):
+        disputes = [row for row in state["disagreements"] if row["task"] == task]
+        if not disputes:
+            continue
+        path = destination / f"adjudicated_{task}.csv"
+        with path.open("x", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=fields)
+            writer.writeheader()
+            for dispute in disputes:
+                writer.writerow({**items[dispute["item_id"]],
+                                 "notes": f"A: {dispute['a']} | B: {dispute['b']}"})
+        paths.append(str(path))
+    return paths
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--directory", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--adjudicated-pairs", type=Path)
     parser.add_argument("--adjudicated-owners", type=Path)
+    parser.add_argument("--adjudication-dir", type=Path,
+                        help="Create blank third-reviewer CSVs for current disagreements")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     result = review_state(args.directory, args.adjudicated_pairs, args.adjudicated_owners)
+    if args.adjudication_dir:
+        result["adjudication_templates"] = write_adjudication_templates(
+            args.directory, result, args.adjudication_dir)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
