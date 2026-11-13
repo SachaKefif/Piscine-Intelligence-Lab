@@ -4,7 +4,9 @@ Projet individuel de la Piscine Makers Intelligence Lab. L'objectif est de conce
 
 ## État du dépôt
 
-Le dépôt livre le prototype EF-01 à EF-09, les comparaisons de recherche QMSum, l'expérience EF-03 avec ablation, les huit scénarios de recette Atlas et les mesures de latence et mémoire du mini-agent. Le mode hybride utilise E5 adapté ; BM25 fonctionne sans checkpoint local. Un contrôle diagnostique sur deux réunions QMSum du test et douze demandes donne 11/12 cas conformes en BM25 et 10/12 en hybride après correction d'une fausse attribution. Un second contrôle, figé avant sa première exécution sur deux autres réunions, donne 9/9 dans les deux modes. Ces demandes ont été rédigées pour le projet. Sur quinze questions originales d'annotateurs QMSum en anglais, l'agent obtient 0/15 cas conformes dans les deux modes à cause du routage français EF-06, bien que la recherche place la réponse annotée dans les cinq premiers rangs pour les quinze cas. Sur 66 demandes françaises MASSIVE, il s'abstient dans les 49 cas sans destinataire identifié mais manque les 17 noms directs écrits en minuscules. Le [rapport expérimental final](docs/rapport_experimental_final.md) distingue les résultats, erreurs et limites.
+Le dépôt livre le prototype EF-01 à EF-09, les comparaisons de recherche QMSum, l'expérience EF-03 avec ablation, les huit scénarios de recette Atlas et les mesures de latence et mémoire du mini-agent. Le mode hybride utilise E5 adapté ; BM25 fonctionne sans checkpoint local. La recette passe 8/8 dans les deux modes et 84 tests automatisés passent. Les premiers contrôles publics ont révélé des échecs de routage anglais et de reconnaissance des noms en minuscules ; après correction, le diagnostic donne 12/15 questions originales QMSum conformes et 17/17 destinataires directement nommés dans MASSIVE, avec 49/49 abstentions appropriées. Un dernier jeu QMSum figé avant sa première exécution donne 11/12 réponses conformes en BM25 et en hybride ; un autre jeu avait donné 4/10, ce qui interdit de présenter le 11/12 comme une performance générale stable. Le [rapport expérimental](docs/rapport_experimental_final.md) et son [extension](docs/extension_transfert.md) conservent l'historique des résultats et leurs limites.
+
+Une extension postérieure ajoute l'[ingestion prudente de nouvelles conversations](Data%20Analysis/bootstrap_memory.py), un classifieur candidat pour la relation `answers` et des contrôles externes supplémentaires. Les scores historiques ci-dessus sont conservés ; les [résultats de l'extension](docs/extension_transfert.md) distinguent les diagnostics après correction du nouveau test figé avant exécution.
 
 ## Cahier des charges
 
@@ -24,6 +26,7 @@ Le dépôt livre le prototype EF-01 à EF-09, les comparaisons de recherche QMSu
 - [Actions EF-08 et destinataires EF-09](docs/actions_ef08_ef09.md) : brouillons, attribution, métriques et limites.
 - [Recette de bout en bout](docs/recette_bout_en_bout.md) : huit scénarios, recherche hybride, sorties et preuves inspectables.
 - [Rapport expérimental final](docs/rapport_experimental_final.md) : synthèse des résultats EF-01 à EF-09, ablation, contrôle sur réunions QMSum, coûts et limites.
+- [Vérification finale des sept livrables](docs/validation_finale.md) : correspondance avec le cahier des charges et contrôles rejoués.
 - [Contrôle externe QMSum](docs/controle_externe_qmsum.md) : quinze questions humaines originales sur deux autres réunions, résultats et erreurs de transfert.
 - [Contrôle public des destinataires](docs/controle_public_destinataires.md) : 66 demandes françaises MASSIVE, noms directs, mentions sans destinataire et abstentions.
 - [Audit reproductible](docs/audit_week1_data.json) et [contrôle ponctuel des preuves](docs/controle_annotations.md).
@@ -82,6 +85,31 @@ python "Data Analysis/finetune_qmsum_e5.py" --epochs 2 --batch-size 16
 ```
 
 Le modèle final est le dernier checkpoint dans `Models/qmsum-e5-small/checkpoints/` ; les mesures sont dans `Models/qmsum-e5-small/metrics.json`. Le script ne crée pas une troisième copie du modèle après l'entraînement. La loss contrastive traite les 16 paires par blocs de 2 (`--mini-batch-size`) pour limiter l'utilisation de la mémoire ; sur CPU, l'entraînement complet peut prendre plusieurs heures. Utiliser `--fp16` seulement avec un GPU compatible. Les passages pertinents sont définis par chevauchement des tours annotés dans QMSum ; ces labels sont approximatifs, particulièrement pour les longues discussions.
+
+## Extension : nouvelles conversations et transfert
+
+Pour charger deux transcriptions UTF-8 ou plus, placer un tour par ligne dans des fichiers `.txt`. Le préfixe `Prénom: ` est facultatif. Une date absente reste inconnue. La commande crée une mémoire interrogeable dans un dossier de sortie neuf :
+
+```powershell
+.venv\Scripts\python.exe "Data Analysis\bootstrap_memory.py" --text-dir CHEMIN\transcriptions --project Atlas --output-dir Data\Processed\nouvelle_memoire
+.venv\Scripts\python.exe "Data Analysis\semantic_agent.py" "Quel est le budget Atlas ?" --method bm25 --conversations Data\Processed\nouvelle_memoire\conversations.jsonl --units Data\Processed\nouvelle_memoire\units.jsonl --relations Data\Processed\nouvelle_memoire\relations.jsonl --topics Data\Processed\nouvelle_memoire\topics.jsonl
+```
+
+Le générateur accepte aussi `--conversations CHEMIN\conversations.jsonl` au format normalisé. Il conserve les citations exactes et les tours, crée des unités candidates et des propositions de relations dans `relation_suggestions.jsonl`. Il ne transforme **jamais** ces propositions en relations validées : `relations.jsonl` reste vide. Une décision détectée automatiquement a le statut `unknown` ; aucun responsable ni destinataire n'est déduit du seul locuteur. L'agent peut citer cet énoncé avec le statut `uncertain`, mais une décision courante ou un brouillon fondé sur elle demande une annotation revue. Pour une mémoire validée, renseigner les quatre fichiers conformément aux [schémas](docs/schema_annotation.md) puis relancer l'agent.
+
+Le [classifieur de paires question–réponse](Data%20Analysis/answer_relation_model.py) est entraîné sur le train QMSum anglais, choisit son seuil sur validation et évalue le test par réunion. Son artefact local est `Data/Curated/answer_relation_model.joblib`. Il ne propose que la relation `answers` ; ses propositions sont toujours `reviewed: false`. Pour régénérer le modèle et le rapport :
+
+```powershell
+.venv\Scripts\python.exe "Data Analysis\answer_relation_model.py"
+.venv\Scripts\python.exe "Data Analysis\evaluate_public_answer_relations.py"
+.venv\Scripts\python.exe "Data Analysis\benchmark_answer_selection.py"
+```
+
+Le [rapport de transfert](docs/extension_transfert.md) donne les résultats, les commandes de reproduction et les limites. Les 12 questions QMSum du nouveau contrôle utilisent les réponses originales des annotateurs déjà placées dans des unités sourcées ; ce contrôle ne mesure donc pas l'extraction automatique de faits à partir des seuls tours de parole.
+
+### Étude indépendante AMI en attente de deux évaluateurs
+
+Le [protocole d'annotation](docs/protocole_annotation_independante_ami.md) prépare les 33 paires de décisions possibles dans deux couples de réunions et 14 actions tirées de quatre nouvelles réunions AMI, avec transcriptions, paquets aveugles séparés, prédictions isolées et audit des empreintes. `bootstrap_memory.py` exporte également des propositions de responsables dans `owner_suggestions.jsonl`, sans les valider. L'évaluateur [`evaluate_independent_ami_review.py`](Data%20Analysis/evaluate_independent_ami_review.py) refuse de calculer un score tant que deux personnes indépendantes n'ont pas rempli les formulaires et que les désaccords n'ont pas été arbitrés. Le corpus local ne fournit pas ces étiquettes de contradiction, remplacement et responsabilité ; aucun score humain n'est revendiqué avant leur collecte.
 
 ### GPU NVIDIA sous Windows
 

@@ -1,0 +1,312 @@
+{
+  "dataset": "QMSum test, Bmr006, Bmr014; transcript dates unknown",
+  "requests": "10 original English QMSum questions from two Academic test meetings",
+  "evaluation_note": "First run on second frozen QMSum Academic fixture; no tuning to these cases.",
+  "method": "bm25",
+  "cases": 10,
+  "passed": 4,
+  "case_accuracy": 0.4,
+  "intent_accuracy": 1.0,
+  "status_accuracy": 1.0,
+  "fact_coverage": 0.4,
+  "cases_with_citations": 10,
+  "citation_relevance_rate": 0.4,
+  "clarification_recall": null,
+  "clarification_precision": null,
+  "source_contract_rate": 1.0,
+  "input_sha256": {
+    "raw_Bmr006": "0b1fb051ad319a0ff006970b86336425fc2ed987a3616bd07cf9a48c53bbfa69",
+    "raw_Bmr014": "d0e8d99b8a2568beaaedae741c4ac5453a6bcb22f23386e50659690dcc916bd6",
+    "units": "57a66b804c4f3d0429a11cc9e8a265e10ce58cd8428e1bf7352e785ce0ee688f",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "ded1fb8367cc391d9e99543147ac856aacc6f7789dbbf4420c38b174deb21534",
+    "cases": "3ce402eb8abe7527d919285199f9b05befa48ba45456865350d2ced52f4f9e30",
+    "model_weights": null
+  },
+  "details": [
+    {
+      "id": "Bmr006_0",
+      "request": "What were some of the ideas proposed about future meeting recordings?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr006:38-64:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:157-162:2"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bmr006:38-64:0"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bmr006:157-162:2"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bmr006_1",
+      "request": "What was said on getting fluent English speakers?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr006:65-102:1"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:65-102:1"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bmr006_2",
+      "request": "What were the options that were discussed on the location of the recording equipment?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr006:157-162:2"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:162-233:3"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bmr006:157-162:2"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bmr006:162-233:3"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bmr006_3",
+      "request": "What did the group say on portable equipment?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr006:162-233:3"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:162-233:3"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bmr006_4",
+      "request": "What were Grad B’s updates on meeting disk storage?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr006:370-412:4"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:421-437:5"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bmr006:370-412:4"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bmr006:421-437:5"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bmr006_5",
+      "request": "What were other ways to get more space?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr006:421-437:5"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:421-437:5"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bmr014_0",
+      "request": "What was said about the equipment?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr014:74-104:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:162-233:3"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bmr014:74-104:0"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bmr006:162-233:3"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bmr014_1",
+      "request": "What did the team say about recording conventions?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr014:99-121:1"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr014:99-121:1"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bmr014_2",
+      "request": "What’s the current state of transcriptions?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr014:201-248:2"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr014:201-275:3"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bmr014:201-248:2"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bmr014:201-275:3"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bmr014_3",
+      "request": "What was needed for the transcripts?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bmr014:201-275:3"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bmr006:157-162:2"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bmr014:201-275:3"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bmr006:157-162:2"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    }
+  ]
+}

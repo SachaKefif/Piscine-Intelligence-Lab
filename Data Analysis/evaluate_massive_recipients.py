@@ -1,5 +1,6 @@
 """Evaluate EF-06/09 on frozen French MASSIVE recipient and non-recipient requests."""
 
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -16,7 +17,7 @@ METRICS = ROOT / "Data/Curated/massive_fr_recipient_metrics.json"
 OUTPUTS = ROOT / "Data/Curated/massive_fr_recipient_outputs.jsonl"
 
 
-def evaluate():
+def evaluate(*, metrics_path=METRICS, outputs_path=OUTPUTS):
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     if hashlib.sha256(CASES.read_bytes()).hexdigest() != manifest["cases_sha256"]:
         raise ValueError("Frozen MASSIVE cases changed")
@@ -69,11 +70,17 @@ def evaluate():
         ],
         "details": details,
     }
-    METRICS.write_text(json.dumps(metrics, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    OUTPUTS.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in details),
+    metrics_path.parent.mkdir(parents=True, exist_ok=True)
+    outputs_path.parent.mkdir(parents=True, exist_ok=True)
+    metrics_path.write_text(json.dumps(metrics, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    outputs_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in details),
                        encoding="utf-8")
     return {key: value for key, value in metrics.items() if key != "details"}
 
 
 if __name__ == "__main__":
-    print(json.dumps(evaluate(), ensure_ascii=False, indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--metrics", type=Path, default=METRICS)
+    parser.add_argument("--outputs", type=Path, default=OUTPUTS)
+    args = parser.parse_args()
+    print(json.dumps(evaluate(metrics_path=args.metrics, outputs_path=args.outputs), ensure_ascii=False, indent=2))

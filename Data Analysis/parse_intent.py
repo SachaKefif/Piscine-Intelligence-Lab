@@ -15,6 +15,7 @@ from pathlib import Path
 
 
 INTENTS = ("answer", "compare", "build_dossier", "draft_email", "create_task", "schedule_event", "clarify")
+ENGLISH_INFORMATION_START = r"^(?:what|who|when|where|why|how|which|did|does|is|are|was|were|had|summarize|please summarize)\b"
 MONTHS = {name: index for index, name in enumerate((
     "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
     "septembre", "octobre", "novembre", "décembre"), 1)}
@@ -52,16 +53,31 @@ def extract_person(request, subject):
 
 def extract_named_recipient(request):
     """Find an explicitly named mail addressee; other names do not qualify."""
-    name = r"([A-ZÉÈÀ][a-zéèàêëïîôöûüç-]{2,})"
-    mail = r"(?i:mail|e-mail|email|courriel)"
+    plain = folded(request)
+    mail = r"(?:e[ -]?mail|mail|courriel)"
+    command = r"\b(?:envoi\w*|envoy\w*|ecri\w*|redig\w*|prepar\w*|compos\w*|repond\w*|commenc\w*)\b"
+    if re.match(r"^(?:ai[\s-]*je|est[\s-]*ce|quelle?s?\b|quels\b|qui\b|combien\b)", plain):
+        return None
+    if not re.search(command, plain):
+        return None
     patterns = (
-        rf"\b{mail}\b(?:\s+(?:destiné|destinée))?\s+(?:à|pour)\s+{name}\b",
-        rf"\b(?i:rédige|écris|prépare|compose)\s+(?:à|pour)\s+{name}\s+(?:un|une)\s+{mail}\b",
+        rf"\b{mail}\b\s+(?:à|a|pour)\s+([\w'-]+(?:\s+[\w'-]+)?)",
+        rf"\b(?:écri\w*|ecri\w*|rédig\w*|redig\w*|prépar\w*|prepar\w*|compos\w*)\s+(?:à|a|pour)\s+([\w'-]+(?:\s+[\w'-]+)?)\s+(?:un|une)\s+{mail}\b",
     )
+    stop = {"mon", "ma", "mes", "notre", "nos", "leur", "leurs", "la", "le", "les",
+            "un", "une", "du", "des", "pour", "que", "qui", "et", "au", "aux", "dans"}
+    stop |= {"maman", "papa", "mamie", "papi", "frere", "soeur", "equipe", "famille", "ami", "amie"}
+    tail = {"pour", "que", "qui", "et", "au", "aux", "dans", "disant", "afin", "sur", "de",
+            "maintenant", "he", "lui", "elle", "il", "demande", "demandant", "en"}
     for pattern in patterns:
-        match = re.search(pattern, request)
+        match = re.search(pattern, request, re.I)
         if match:
-            return match.group(1)
+            parts = match.group(1).split()
+            if folded(parts[0]) in stop or len(parts[0]) < 2:
+                continue
+            if len(parts) > 1 and folded(parts[1]) in tail:
+                parts.pop()
+            return " ".join(parts)
     return None
 
 
@@ -92,11 +108,25 @@ def extract_action(request):
     return folded(phrase.strip()) or None
 
 
+def looks_like_information_request(plain):
+    if not re.search(r"\b(?:mail|e-mail|email|courriel|contact\w*|telephone|numero)\b", plain):
+        return False
+    if re.match(r"^(?:ai[\s-]*je|est[\s-]*ce|estce|quelle?s?\b|quels\b|qui\b|combien\b|a t on|ben\b|trouv\w*|cherch\w*|donn\w*|affich\w*|verifi\w*|consulte\w*|montre\w*|detail\w*|le numero|de nouveaux|merci de verifi)", plain):
+        return True
+    if re.search(r"\b(?:nouveaux? e-mails?|numero de telephone|adresse e-mail|recu)\b", plain):
+        return not re.search(r"\b(?:envoi\w*|envoy\w*|ecri\w*|redig\w*|prepar\w*|compos\w*|repond\w*)\b", plain)
+    return False
+
+
 def classify(request):
     plain = folded(request)
     if re.search(r"\b(on pourrait|il faudrait peut-etre|on devrait peut-etre)\b", plain):
         return "clarify", "hypothetical_not_request"
-    if re.search(r"\b(mail|e-mail|email|courriel)\b", plain) and re.search(r"\b(prepar\w*|redig\w*|ecri\w*|envoi\w*|faire|fais)\b", plain):
+    if re.match(ENGLISH_INFORMATION_START, plain):
+        return "answer", None
+    if looks_like_information_request(plain):
+        return "answer", None
+    if re.search(r"\b(?:mail|e-mail|email|courriel)\b", plain) and re.search(r"\b(?:prepar\w*|redig\w*|ecri\w*|envoi\w*|envoy\w*|compos\w*|repond\w*|cre\w*|faire|fais)\b", plain):
         return "draft_email", None
     if re.search(r"\b(rendez-vous|reunion|evenement|creneau)\b", plain) and re.search(r"\b(planifi\w*|programm\w*|organis\w*|fix\w*|cree\w*|ajout\w*)\b", plain):
         return "schedule_event", None
@@ -146,7 +176,15 @@ def route_with_safety(request, predicted_intent, subject, action, due_date):
     plain = folded(request)
     if re.search(r"\b(on pourrait|il faudrait peut-etre|on devrait peut-etre)\b", plain):
         return "clarify", "hypothetical_not_request"
-    candidate = classify(request)[0] if predicted_intent == "clarify" else predicted_intent
+    rule_intent = classify(request)[0]
+    candidate = rule_intent if predicted_intent == "clarify" else predicted_intent
+    if rule_intent == "answer" and (re.match(ENGLISH_INFORMATION_START, plain)
+                                    or looks_like_information_request(plain)):
+        return "answer", None
+    if rule_intent == "draft_email" and subject is None:
+        # Routing can identify a draft request without inventing its context.
+        # The action layer will require a grounded topic before proposing a draft.
+        return "draft_email", None
     if candidate == "draft_email" and extract_named_recipient(request) is None:
         return "clarify", "missing_named_recipient"
     if candidate in {"answer", "compare", "build_dossier", "draft_email"} and subject is None:

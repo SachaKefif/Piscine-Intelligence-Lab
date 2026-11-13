@@ -1,0 +1,12 @@
+{
+  "input_sha256": {
+    "raw_Bro004": "f8a8c92c0574f4d4ed4596b68d94ca236f2ae09bccb283ead925ef3512f64890",
+    "raw_Bro019": "b2f4aee0ced969ee2c3a9d4dc71d24dce227e9513aca8acc539ae3cfda5a2cec",
+    "units": "16496f55c4460c2b38cf413b00f2ce6215efdca2bb498ee1658644de15349569",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "7c8614eda961bfc9e20157567615ec8275c7838fb635b01e9d45bf409da9689d",
+    "cases": "50b93d407cc7c1361cc623343c6bc9ef1ee3d6e6df6a0f11eb3e31511b01a085"
+  },
+  "cases": 12,
+  "source": "QMSum Academic test original questions"
+}

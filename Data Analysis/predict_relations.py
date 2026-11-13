@@ -74,9 +74,22 @@ def predict_pair(from_unit, to_unit):
             and re.search(r"\b(?:remplac\w*|desormais|plutot\s+qu|au\s+lieu\s+de|et\s+non)\b", a_norm)
             and sim >= 0.15):
         relation, reason = "supersedes", "Remplacement explicite, statut confirmé et ordre daté."
-    elif (from_unit["type"] == "answer" and to_unit["type"] == "question"
-          and compatible_numbers(a, b) and sim >= 0.2):
-        relation, reason = "answers", "Réponse et question portent sur le même sujet."
+    elif from_unit["type"] == "answer" and to_unit["type"] == "question":
+        answer = from_unit.get("statement", a)
+        question = to_unit.get("statement", b)
+        if re.match(r"^(?:what|who|when|where|why|how|which|did|does|is|are|was|were)\b", question.casefold()):
+            from answer_relation_model import predicts_answer
+            verdict = predicts_answer(question, answer)
+            if verdict is not None:
+                result["method"] = "qmsum_answer_classifier_v1"
+                if verdict[0]:
+                    relation, reason = "answers", f"Association question-réponse prédite (score={verdict[1]:.3f}) ; revue nécessaire."
+            elif (compatible_numbers(answer, question)
+                  and overlap(answer, question, project) >= 0.2):
+                relation, reason = "answers", "Réponse et question partagent les éléments demandés."
+        elif (compatible_numbers(answer, question)
+              and overlap(answer, question, project) >= 0.2):
+            relation, reason = "answers", "Réponse et question partagent les éléments demandés."
     elif (from_unit["type"] in {"decision", "commitment"} and to_unit["type"] == "action"
           and re.search(r"\b(?:puisque|suite\s+a|apres|en\s+application\s+de|parce\s+que)\b", b_norm)
           and overlap(a, b.split(",", 1)[0], project) >= 0.2):

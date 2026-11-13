@@ -12,7 +12,7 @@ from pathlib import Path
 
 from bm25_score_qmsum import bm25_scores
 from ingest_semantic_units import DEFAULT_CONVERSATIONS, DEFAULT_UNITS
-from parse_intent import classify, folded, parse_intent
+from parse_intent import ENGLISH_INFORMATION_START, classify, folded, parse_intent
 from relations_temporality import DEFAULT_RELATIONS
 from semantic_memory import DEFAULT_MEMORY_TOPICS, chronological_key, load_memory, topic_memory
 
@@ -100,6 +100,11 @@ def select_scope(request, subject, topics):
         return selected, None
     if project:
         return [topic for topic in topics.values() if topic["project_id"] == project], "project_only"
+    if (len(topics) == 1 and not subject
+            and re.match(ENGLISH_INFORMATION_START, query)):
+        # A single loaded collection supplies the scope for an English question.
+        # Retrieval still has to locate evidence; no fact is inferred here.
+        return list(topics.values()), None
     return [], "unknown_subject"
 
 
@@ -137,7 +142,6 @@ def answer_claims(request, selected, memories, units, relations, retrieved_ids=N
 
     eligible = [units[unit_id] for unit_id in ids
                 if units[unit_id]["type"] != "question"
-                and units[unit_id]["status"] != "unknown"
                 and not any(unit_id in memory["obsolete_unit_ids"] for memory in memories)]
     eligible.sort(key=chronological_key)
     query = normalized(request)
@@ -158,6 +162,18 @@ def answer_claims(request, selected, memories, units, relations, retrieved_ids=N
         return [unit_claim(row, role="current_decision") for row in current], [], "ok"
     if current and "date" in query and "propos" not in query and "envisag" not in query:
         return [unit_claim(row, role="current_decision") for row in current], [], "ok"
+    if (len(eligible) > 1 and all(row["type"] == "answer" and row["source_id"].startswith("QMSum:")
+                                  for row in eligible)
+            and re.match(ENGLISH_INFORMATION_START, query)):
+        from answer_relation_model import load as load_answer_model, score as score_answers
+        bundle = load_answer_model()
+        if bundle is not None:
+            probabilities = score_answers([(request, row["statement"], 0, "") for row in eligible], bundle)
+            best_index = max(range(len(eligible)), key=lambda index: (probabilities[index], -index))
+            if probabilities[best_index] < bundle["threshold"]:
+                return [], [], "not_found"
+            best = eligible[best_index]
+            return [unit_claim(best, role="model_ranked_answer")], [], "ok"
     scores = bm25_scores([row["statement"] for row in eligible], request)
     retrieval_position = {uid: index for index, uid in enumerate(retrieved_ids or [])}
     ranked = sorted(range(len(eligible)), key=lambda index: (
@@ -174,6 +190,8 @@ def answer_claims(request, selected, memories, units, relations, retrieved_ids=N
         if confirmed:
             confirmed_scores = bm25_scores([row["statement"] for row in confirmed], request)
             best = confirmed[max(range(len(confirmed)), key=lambda index: confirmed_scores[index])]
+    if best["status"] == "unknown":
+        return [unit_claim(best, role="unreviewed_source_statement")], [], "uncertain"
     return [unit_claim(best)], [], "ok"
 
 

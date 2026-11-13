@@ -1,0 +1,29 @@
+{
+  "task": "QMSum English question / answer association",
+  "threshold_selected_on": "validation",
+  "threshold": 0.4250000000000001,
+  "train_meetings": 162,
+  "validation_meetings": 35,
+  "test_meetings": 35,
+  "validation": {
+    "pairs": 709,
+    "positive_pairs": 237,
+    "precision_proxy": 0.5732,
+    "recall": 0.7764,
+    "f1_proxy": 0.6595,
+    "false_positive_rate_proxy": 0.2903
+  },
+  "test": {
+    "pairs": 732,
+    "positive_pairs": 244,
+    "precision_proxy": 0.576,
+    "recall": 0.8074,
+    "f1_proxy": 0.6724,
+    "false_positive_rate_proxy": 0.2971
+  },
+  "limitations": [
+    "Other same-meeting answers are proxy negatives, not independently adjudicated non-answers.",
+    "The classifier is English QMSum-specific and proposes only answers links.",
+    "Proposals are never promoted to reviewed relations automatically."
+  ]
+}

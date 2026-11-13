@@ -1,0 +1,39 @@
+{
+  "source_sha256": {
+    "IB4003": "a6253f573fcc9a7816f1d4db2af6ea2daa7ba51a758f24804cde0f55b0858308",
+    "IB4005": "9626d5a2074137f8ae96ada6872443ecb2f28204ca359a254af9c57b96e79c86",
+    "IB4010": "4e85c138e583dc2651393738423ce12c60edfc63d702255fa3e2620c5e7afb2a",
+    "IB4011": "b12d774fe8d74b8f854b3b62f62c06765f869965afa65b9a157c7a053b360f19"
+  },
+  "source_hash_canonicalization": "CRLF to LF before SHA-256",
+  "meeting_dates": {
+    "IB4003": "2004-11-02",
+    "IB4005": "2004-11-02",
+    "IB4010": "2005-04-08",
+    "IB4011": "2005-04-08"
+  },
+  "meeting_date_source": "https://groups.inf.ed.ac.uk/ami/corpus/signals.shtml",
+  "meeting_sequence_source": "https://groups.inf.ed.ac.uk/ami/corpus/meetingids.shtml",
+  "transcript_sha256": {
+    "IB4003": "1231293def99657f3e05f7c15dc3d5061f07fee35038f87fb281977efc12fbf9",
+    "IB4005": "3f72a4efdb4eb02a0733acd8e750bb681d14b0a8f3846410b647dbc906b19d2e",
+    "IB4010": "b3647bcce5517b033ec1b205e7317c01266d4daf1ab1137877d8a8470b7bb299",
+    "IB4011": "fbfb89be94303c96639d2e4cf83a539726d47af9fdba531838e0dad9a2f81b54"
+  },
+  "pair_items_sha256": "d47e00cf29cfaa303975ea19a47a1f07e6b0f80c59def2ac41cba8303962bbf3",
+  "owner_items_sha256": "e6288e6d35e6a06b9452108c5badd3a5dfc1c57735072a5693fb18f35024b72d",
+  "predictions_sha256": "0e6adc85ace04cab20df8724e9d9f984e6fe4efba5093b41aedbc508cc1cbf0c",
+  "reviewer_packet_sha256": {
+    "a": "04664549f04ad448758f21106189ce4756555ae0f8d650464ab5304758120082",
+    "b": "8cd21b82beca78fb2d514e987aaad40dcc89ae55a2a52f0d8d6ab46017c1a5b6"
+  },
+  "pair_items": 33,
+  "owner_items": 14,
+  "meetings": [
+    "IB4003",
+    "IB4005",
+    "IB4010",
+    "IB4011"
+  ],
+  "gold_status": "awaiting_two_independent_humans"
+}

@@ -1,5 +1,11 @@
 # Rapport expérimental final — Semantic Agent Engine
 
+## État de livraison au 13 novembre 2026
+
+Le prototype et les sept livrables du [cahier des charges](../Consignes/cahier_des_charges.md) sont présents. La recette Atlas a été rejouée sur le code actuel : **8/8 cas conformes en BM25 et 8/8 en hybride**. La suite complète passe **84 tests**. Le contrôle externe MASSIVE donne **17/17** destinataires directement nommés et **49/49** abstentions appropriées. Le dernier jeu QMSum figé (`Bro004/Bro019`) a été rejoué sans changement de modèle : **11/12** cas conformes dans les deux modes ; le jeu figé précédent avait donné **4/10**. Les métriques de ces vérifications récentes sont conservées dans `Data/Processed/` et le détail du protocole et des erreurs dans l'[extension](extension_transfert.md).
+
+Les sections suivantes conservent les mesures et l'état de la version initiale pour rendre les corrections auditables. Le [protocole AMI](protocole_annotation_independante_ami.md) fournit en plus deux paquets aveugles pour juger contradictions, remplacements et responsables sur d'autres réunions. Ce contrôle **n'a aucun score** avant réception de deux annotations humaines indépendantes. La validation sur réunions ouvertes reste donc une limite scientifique explicite, sans empêcher la recette fonctionnelle exigée par le sujet.
+
 ## Périmètre et protocoles
 
 Le prototype couvre EF-01 à EF-09 du [cahier des charges](../Consignes/cahier_des_charges.md). Ses sorties sont des réponses structurées et des **brouillons simulés** : aucune connexion à un service externe, aucune action exécutée. Les conversations Atlas et Boréal sont fictives. Deux couples de réunions du test QMSum sont des transcriptions publiques authentiques, tenues hors de l'entraînement de l'encodeur. Le premier contrôle (`ES2004a/b`) possède sept unités et douze demandes ; le second (`ES2011a/b`) six unités et neuf demandes, avec [attendus et empreintes figés avant exécution](../Data/Curated/qmsum_agent_final_manifest.json). Les demandes ont été rédigées pour le projet et ne constituent pas un échantillon d'utilisateurs indépendants. Un [contrôle supplémentaire](controle_externe_qmsum.md) emploie quinze questions originales des annotateurs QMSum sur deux autres réunions ; il révèle l'échec du routage EF-06 hors du français. Les dates de ces réunions sont inconnues et restent `null`.

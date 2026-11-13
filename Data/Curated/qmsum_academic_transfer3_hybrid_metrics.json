@@ -1,0 +1,344 @@
+{
+  "dataset": "QMSum test, Bro004, Bro019; transcript dates unknown",
+  "requests": "12 original English QMSum questions from two Academic test meetings",
+  "evaluation_note": "First hybrid run on third frozen QMSum Academic fixture; no tuning to these cases.",
+  "method": "hybrid",
+  "cases": 12,
+  "passed": 11,
+  "case_accuracy": 0.9167,
+  "intent_accuracy": 1.0,
+  "status_accuracy": 1.0,
+  "fact_coverage": 0.9167,
+  "cases_with_citations": 12,
+  "citation_relevance_rate": 0.9167,
+  "clarification_recall": null,
+  "clarification_precision": null,
+  "source_contract_rate": 1.0,
+  "input_sha256": {
+    "raw_Bro004": "f8a8c92c0574f4d4ed4596b68d94ca236f2ae09bccb283ead925ef3512f64890",
+    "raw_Bro019": "b2f4aee0ced969ee2c3a9d4dc71d24dce227e9513aca8acc539ae3cfda5a2cec",
+    "units": "16496f55c4460c2b38cf413b00f2ce6215efdca2bb498ee1658644de15349569",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "7c8614eda961bfc9e20157567615ec8275c7838fb635b01e9d45bf409da9689d",
+    "cases": "50b93d407cc7c1361cc623343c6bc9ef1ee3d6e6df6a0f11eb3e31511b01a085",
+    "model_weights": "1882ffc39c626972770c4f4778a12e72db9d0a1f60e40943c52c9689e3f21a46"
+  },
+  "details": [
+    {
+      "id": "Bro004_0",
+      "request": "Summarize the discussion about the effect of training on different languages",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro004:206-323:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro004:206-323:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro004_1",
+      "request": "What did PhD D explain about the multilingual model?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro004:295-303:1"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro004:295-303:1"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro004_2",
+      "request": "What did the Professor think about the use of English?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro004:218-242:2"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro004:218-242:2"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro004_3",
+      "request": "Summarize the discussion on managing the complexity of the model",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro004:487-750:3"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro004:487-750:3"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro004_4",
+      "request": "What did the team discuss about IBM computers?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro004:685-714:4"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro019:46-90:1"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bro004:685-714:4"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bro019:46-90:1"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bro004_5",
+      "request": "What did the team think about delays?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro004:646-656:5"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro004:646-656:5"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro019_0",
+      "request": "Summarize the discussion about microphone issues",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro019:9-18:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro019:9-18:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro019_1",
+      "request": "What did PhD F think about computational resources?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro019:46-90:1"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro019:46-90:1"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro019_2",
+      "request": "What did the professor say about the workshop?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro019:53-75:2"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro019:53-75:2"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro019_3",
+      "request": "Summarize the discussion about spectral subtraction",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro019:358-448:3"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro019:358-448:3"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro019_4",
+      "request": "What did the team say about the person in Grenada?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro019:447-463:4"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro019:447-463:4"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bro019_5",
+      "request": "What did the professor think about the Wiener filter?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bro019:406-416:5"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bro019:406-416:5"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    }
+  ]
+}

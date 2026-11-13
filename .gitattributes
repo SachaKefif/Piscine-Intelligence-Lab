@@ -1,2 +1,6 @@
 *.json text eol=lf
 *.jsonl text eol=lf
+
+# Frozen evaluation fixtures carry byte-level hashes in their manifests.
+Data/Curated/qmsum_academic_transfer* -text -eol
+Data/Curated/independent_ami_review/* -text -eol

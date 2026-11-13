@@ -1,0 +1,352 @@
+{
+  "dataset": "QMSum test, Bed003, Bed008; transcript dates unknown",
+  "requests": "12 original English QMSum questions from two Academic test meetings",
+  "evaluation_note": "First run on frozen QMSum Academic questions; no tuning to these cases.",
+  "method": "bm25",
+  "cases": 12,
+  "passed": 5,
+  "case_accuracy": 0.4167,
+  "intent_accuracy": 0.6667,
+  "status_accuracy": 0.6667,
+  "fact_coverage": 0.4167,
+  "cases_with_citations": 8,
+  "citation_relevance_rate": 0.625,
+  "clarification_recall": null,
+  "clarification_precision": 0.0,
+  "source_contract_rate": 1.0,
+  "input_sha256": {
+    "raw_Bed003": "959b0a710628f786f64c35f1462717f234b03ba34f2e170d3bb13be72f3321f8",
+    "raw_Bed008": "d05c8b6dbc35244a277147f85778bb02b7ad7eae0f03700ac68d084d296fc84a",
+    "units": "c8ca8d8a5f6e4862d98595b36ecb68dfde1d06f95ebeddb98291f2c7ce8bcc57",
+    "relations": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "topics": "dece81837fbefa1bf13f10309124a43cffda1d6bfd6c72f52a442f7dce03e24b",
+    "cases": "c881e8bdf29730db1b28cc957d45e1bf6c772d0c4fed256aec2d418986d34fe2",
+    "model_weights": null
+  },
+  "details": [
+    {
+      "id": "Bed003_0",
+      "request": "What did Grad B say about the structure of the belief net?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed003:137-150:0"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed003:137-150:0"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bed003_1",
+      "request": "What was the next step on features?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed003:778-820:1"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed008:669-749:4"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bed003:778-820:1"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bed008:669-749:4"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bed003_2",
+      "request": "Summarize what was said on intentionality",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:Bed003:54-76:2"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:Bed003:54-76:2"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": false,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bed003_3",
+      "request": "How would the middle layer work?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed003:141-148:3"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed003:141-148:3"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bed003_4",
+      "request": "What was the importance of SmartKom?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed003:782-796:4"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed003:782-796:4"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bed003_5",
+      "request": "What was said about hiring?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed003:944-960:5"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed008:727-749:5"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bed003:944-960:5"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bed008:727-749:5"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bed008_0",
+      "request": "Summarize the discussion about value for user and situation models.",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:Bed008:45-81:0"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:Bed008:45-81:0"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": false,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bed008_1",
+      "request": "What did the group members think of the value of user budget when discussing value for user and situation models?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed008:47-81:1"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed008:45-81:0"
+      ],
+      "missing_unit_ids": [
+        "QMSum:Bed008:47-81:1"
+      ],
+      "irrelevant_unit_ids": [
+        "QMSum:Bed008:45-81:0"
+      ],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": false,
+        "citation_relevance": false,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bed008_2",
+      "request": "Summarize the discussion about Go-there decision.",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:Bed008:433-533:2"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:Bed008:433-533:2"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": false,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bed008_3",
+      "request": "What did Grad E say when discussing Go-there decision?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed008:433-533:3"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed008:433-533:3"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    },
+    {
+      "id": "Bed008_4",
+      "request": "Summarize the discussion about probability computation.",
+      "expected_intent": "answer",
+      "actual_intent": "clarify",
+      "expected_status": "ok",
+      "actual_status": "clarify",
+      "expected_unit_ids": [
+        "QMSum:Bed008:669-749:4"
+      ],
+      "cited_unit_ids": [],
+      "missing_unit_ids": [
+        "QMSum:Bed008:669-749:4"
+      ],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": false,
+        "status": false,
+        "required_facts": false,
+        "citation_relevance": true,
+        "required_sections": false,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": false
+    },
+    {
+      "id": "Bed008_5",
+      "request": "What did Grad D say about mixture of experts when discussing probability computation?",
+      "expected_intent": "answer",
+      "actual_intent": "answer",
+      "expected_status": "ok",
+      "actual_status": "ok",
+      "expected_unit_ids": [
+        "QMSum:Bed008:727-749:5"
+      ],
+      "cited_unit_ids": [
+        "QMSum:Bed008:727-749:5"
+      ],
+      "missing_unit_ids": [],
+      "irrelevant_unit_ids": [],
+      "checks": {
+        "intent": true,
+        "status": true,
+        "required_facts": true,
+        "citation_relevance": true,
+        "required_sections": true,
+        "source_contract": true,
+        "no_external_effect": true
+      },
+      "passed": true
+    }
+  ]
+}
