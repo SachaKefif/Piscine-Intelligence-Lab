@@ -108,7 +108,18 @@ def review_state(directory, adjudicated_pairs=None, adjudicated_owners=None):
         for task, path in (("pairs", adjudicated_pairs), ("owners", adjudicated_owners)):
             if path is None:
                 continue
-            adjudications = {row["item_id"]: row for row in rows(path)}
+            records = rows(path)
+            fields = PAIR_FIELDS if task == "pairs" else OWNER_FIELDS
+            if records and set(records[0]) != set(fields):
+                raise ValueError(f"Colonnes d'arbitrage modifiées : {path}")
+            adjudications = {row["item_id"]: row for row in records}
+            disputed_ids = {row["item_id"] for row in disagreements if row["task"] == task}
+            if len(adjudications) != len(records) or not set(adjudications) <= disputed_ids:
+                raise ValueError(f"Arbitrage hors désaccord ou identifiant dupliqué : {path}")
+            originals = pairs if task == "pairs" else owners
+            for uid, row in adjudications.items():
+                if any(row.get(key) != value for key, value in originals[uid].items()):
+                    raise ValueError(f"Texte ou source modifié dans l'arbitrage : {uid}")
             for dispute in disagreements:
                 if dispute["task"] != task or dispute["item_id"] not in adjudications:
                     continue

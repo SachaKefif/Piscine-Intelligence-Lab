@@ -80,6 +80,21 @@ class IndependentAmiReviewTests(unittest.TestCase):
             self.assertEqual(len(template_rows), 1)
             self.assertEqual(template_rows[0]["item_id"], records[0]["item_id"])
             self.assertEqual(template_rows[0]["semantic_relation"], "")
+            template_rows[0]["semantic_relation"] = "unrelated"
+            template_rows[0]["temporal_relation"] = "not_supersedes"
+            with Path(templates[0]).open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=list(template_rows[0]))
+                writer.writeheader()
+                writer.writerows(template_rows)
+            self.assertEqual(review_state(directory, adjudicated_pairs=Path(templates[0]))["status"],
+                             "scored")
+            template_rows[0]["text_a"] = "modified source"
+            with Path(templates[0]).open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=list(template_rows[0]))
+                writer.writeheader()
+                writer.writerows(template_rows)
+            with self.assertRaisesRegex(ValueError, "Texte ou source modifié"):
+                review_state(directory, adjudicated_pairs=Path(templates[0]))
 
 
 if __name__ == "__main__":
