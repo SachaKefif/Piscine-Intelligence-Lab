@@ -41,6 +41,19 @@ Une extension postérieure ajoute l'[ingestion prudente de nouvelles conversatio
 
 Le cahier des charges détaille le périmètre, les exigences, les critères de recette, les livrables et le calendrier.
 
+## Interface locale de démonstration
+
+Une interface Streamlit utilise directement le même `SemanticPipeline` que la CLI. Elle propose les huit scénarios Atlas, affiche les sections de réponse, les citations exactes et les résultats de recherche, et présente les brouillons comme des simulations. BM25 fonctionne sans checkpoint ; le mode hybride apparaît si le checkpoint E5 local est présent.
+
+Depuis la racine du dépôt :
+
+```powershell
+.venv\Scripts\python.exe -m pip install -r requirements-ui.txt
+.venv\Scripts\python.exe -m streamlit run app.py
+```
+
+Ouvrir ensuite l'adresse locale indiquée par Streamlit. Le panneau latéral permet de choisir la démo Atlas ou de charger quatre fichiers JSONL annotés (`conversations`, `units`, `relations`, `topics`) conformes aux [schémas du projet](docs/schema_annotation.md). L'interface n'annote pas automatiquement un nouveau corpus : les relations et les sujets doivent avoir été revus. Les commandes de recette restent disponibles ci-dessous pour vérifier le fonctionnement indépendamment de l'interface.
+
 ## Reproduction depuis une copie propre
 
 Avec Python 3.13 et PowerShell, depuis la racine d'une nouvelle copie du dépôt :

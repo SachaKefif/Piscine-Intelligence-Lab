@@ -5,18 +5,3 @@ Faire la recette des huit scénarios de bout en bout. Deux échouent actuellemen
 Terminer l’expérience EF-03. Le modèle E5 adapté a déjà été comparé sur QMSum, mais la variante finale avec les 25 négatifs difficiles revus et l’ablation prévue restent à conclure et à documenter. Un résultat négatif est acceptable s’il est mesuré clairement.
 
 Livrer le bilan final reproductible. Mesurer la latence et la mémoire du mini-agent complet, rédiger le rapport rassemblant résultats, erreurs, ablation, coûts et limites, puis vérifier les commandes depuis une copie propre du dépôt. Le checkpoint E5 est ignoré par Git : sa reproduction ou son obtention doit être claire.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
