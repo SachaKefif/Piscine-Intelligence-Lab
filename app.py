@@ -91,10 +91,18 @@ def _pipeline(mode, method, data):
     return SemanticPipeline(engine=engine, method=method, device="cpu")
 
 
-def _choose_example():
-    selected = st.session_state.get("example")
-    if selected is not None:
-        st.session_state["request"] = CASES[selected]["request"]
+def _set_request(request):
+    st.session_state["request"] = request
+    _clear_result()
+
+
+def _clear_result():
+    st.session_state.pop("result", None)
+    st.session_state.pop("result_signature", None)
+
+
+def _new_request():
+    _set_request("")
 
 
 def _render_claims(sections):
@@ -170,107 +178,177 @@ def _render_retrieval(retrieval):
 
 def main():
     st.set_page_config(page_title="Atlas · Mémoire sémantique", page_icon="🔎",
-                       layout="wide")
+                       layout="wide", initial_sidebar_state="collapsed")
+    st.markdown("<style>" + (ROOT / "assets/atlas_ui.css").read_text(encoding="utf-8") + "</style>",
+                unsafe_allow_html=True)
 
-    with st.sidebar:
-        st.header("Corpus et recherche")
-        mode = st.radio("Corpus", ["Atlas", "Mes fichiers"],
-                        captions=["Deux conversations synthétiques annotées",
-                                  "Quatre fichiers JSONL déjà annotés"])
-        files = {}
-        if mode == "Mes fichiers":
-            st.caption("Chargez les conversations, unités, relations et sujets conformes aux schémas du projet.")
-            for name, label in (
-                ("conversations", "Conversations"), ("units", "Unités"),
-                ("relations", "Relations"), ("topics", "Sujets"),
-            ):
-                files[name] = st.file_uploader(label, type="jsonl", key=f"upload_{name}")
-        methods = ["bm25"]
-        if DEFAULT_MODEL.exists():
-            methods.append("hybrid")
-        method = st.selectbox("Recherche", methods,
-                              index=1 if "hybrid" in methods else 0,
-                              format_func=lambda value: "Hybride (BM25 + E5)" if value == "hybrid" else "BM25")
-        if "hybrid" not in methods:
-            st.caption("Checkpoint E5 absent : seul BM25 est disponible.")
-        st.caption("Les brouillons restent des simulations. Aucun message ou événement n'est envoyé.")
+    with st.container(key="shell"):
+        navigation, workspace = st.columns([1, 3.45], gap="small")
 
-    st.title("Atlas · Mémoire sémantique")
-    st.write("Interrogez les conversations, comparez des décisions et préparez des brouillons avec leurs preuves.")
+        with navigation:
+            with st.container(key="nav"):
+                st.markdown('<div class="brand-line"><span class="brand-icon">✦</span> Atlas</div>',
+                            unsafe_allow_html=True)
+                with st.container(key="new_request"):
+                    st.button("＋  Nouvelle demande", on_click=_new_request)
 
-    if mode == "Atlas":
-        left, right = st.columns([2, 1])
-        with left:
-            st.selectbox("Essayer un scénario de recette", range(len(CASES)),
-                         format_func=lambda index: f"{index + 1}. {CASES[index]['description']}",
-                         index=None, placeholder="Choisir un exemple", key="example",
-                         on_change=_choose_example)
-        with right:
-            st.metric("Scénarios Atlas", len(CASES))
-    else:
-        st.caption("Posez une question sur les sujets annotés dans les fichiers chargés.")
+                st.markdown('<div class="nav-label">Espace de travail</div>', unsafe_allow_html=True)
+                mode = st.radio("Corpus", ["Atlas", "Mes fichiers"],
+                                captions=["Démo annotée", "JSONL annotés"],
+                                key="corpus_mode", on_change=_clear_result)
+                files = {}
+                if mode == "Mes fichiers":
+                    st.markdown('<div class="nav-label">Importer un corpus</div>',
+                                unsafe_allow_html=True)
+                    for name, label in (
+                        ("conversations", "Conversations"), ("units", "Unités"),
+                        ("relations", "Relations"), ("topics", "Sujets"),
+                    ):
+                        files[name] = st.file_uploader(label, type="jsonl", key=f"upload_{name}",
+                                                       on_change=_clear_result)
 
-    with st.form("ask"):
-        request = st.text_area("Votre demande", key="request", height=95,
-                               placeholder="Quelle est la décision actuelle sur le budget Atlas ?")
-        submitted = st.form_submit_button("Interroger le mini-agent", type="primary")
+                st.markdown('<div class="nav-label">Moteur</div>', unsafe_allow_html=True)
+                methods = ["bm25"]
+                if DEFAULT_MODEL.exists():
+                    methods.append("hybrid")
+                method = st.selectbox("Recherche", methods,
+                                      index=1 if "hybrid" in methods else 0,
+                                      format_func=lambda value: "Hybride (BM25 + E5)" if value == "hybrid" else "BM25",
+                                      key="search_method", on_change=_clear_result)
+                if "hybrid" not in methods:
+                    st.caption("Checkpoint E5 absent : BM25 reste disponible.")
 
-    if mode == "Mes fichiers" and not all(files.values()):
-        st.info("Chargez les quatre fichiers JSONL pour utiliser votre corpus.")
-        if submitted:
-            st.stop()
+                if mode == "Atlas":
+                    st.markdown('<div class="nav-label">Scénarios de démonstration</div>',
+                                unsafe_allow_html=True)
+                    for index, case in enumerate(CASES):
+                        st.button(case["description"], key=f"scenario_{index}",
+                                  on_click=_set_request, args=(case["request"],))
 
-    if submitted:
-        if not request.strip():
-            st.warning("Saisissez une demande.")
-            st.stop()
-        data = _uploaded_data(files) if mode == "Mes fichiers" else ()
-        signature = _signature(mode, method, data)
-        try:
-            if st.session_state.get("pipeline_signature") != signature:
-                with st.spinner("Chargement du corpus et de l'index…"):
-                    st.session_state["pipeline"] = _pipeline(mode, method, data)
-                    st.session_state["pipeline_signature"] = signature
-            with st.spinner("Analyse de la demande…"):
-                st.session_state["result"] = st.session_state["pipeline"].run(request.strip())
-            st.session_state["result_signature"] = signature
-        except (ValueError, FileNotFoundError, UnicodeError, json.JSONDecodeError) as error:
-            st.error(f"Impossible de traiter ce corpus ou cette demande : {error}")
-            st.stop()
+                st.markdown('<div class="nav-label">Actions</div>', unsafe_allow_html=True)
+                st.markdown('<div class="nav-help">Les brouillons sont simulés. Aucun message ou événement n’est envoyé.</div>',
+                            unsafe_allow_html=True)
 
-    result = st.session_state.get("result")
-    if not result:
-        st.stop()
-    current_data = _uploaded_data(files) if mode == "Mes fichiers" and all(files.values()) else ()
-    if mode == "Mes fichiers" and not all(files.values()):
-        st.stop()
-    if st.session_state.get("result_signature") != _signature(mode, method, current_data):
-        st.info("Le corpus ou la méthode a changé. Relancez la demande pour actualiser le résultat.")
-        st.stop()
+        with workspace:
+            with st.container(key="workspace"):
+                has_result = bool(st.session_state.get("result"))
+                st.markdown(
+                    '<div class="topbar"><span class="workspace-pill"><span class="small-orb"></span>'
+                    'Atlas <span aria-hidden="true">⌄</span></span>'
+                    '<span class="topbar-note">Démonstration locale · preuves vérifiables</span></div>',
+                    unsafe_allow_html=True,
+                )
+                if has_result:
+                    st.markdown('<div class="response-heading"><span class="small-orb"></span>'
+                                '<h1>Votre demande</h1></div>', unsafe_allow_html=True)
+                else:
+                    st.markdown(
+                        '<div class="hero"><div class="atlas-orb" aria-hidden="true"></div>'
+                        '<p class="hero-kicker">Bonjour !</p>'
+                        '<h1 class="hero-title">Comment puis-je vous aider aujourd’hui ?</h1></div>',
+                        unsafe_allow_html=True,
+                    )
 
-    st.divider()
-    if result["status"] == "clarify":
-        st.warning(result.get("message") or CLARIFICATIONS.get(
-            result.get("clarification_reason"), "Précisez votre demande pour continuer."))
-    elif result["status"] == "uncertain":
-        st.warning(result.get("message") or "Les preuves disponibles ne permettent pas de trancher.")
-    elif result["status"] == "not_found":
-        st.warning(result.get("message") or "Information introuvable.")
-    elif result["status"] == "ok":
-        st.success("Réponse construite à partir des sources")
+                with st.container(key="composer"):
+                    with st.form("ask"):
+                        request = st.text_area(
+                            "Votre demande", key="request", height=75,
+                            label_visibility="collapsed",
+                            placeholder="Posez votre question…",
+                        )
+                        mode_label, send = st.columns([4, 1])
+                        with mode_label:
+                            st.markdown(
+                                '<span class="composer-mode">✧  '
+                                + ("Recherche hybride" if method == "hybrid" else "Recherche BM25")
+                                + '</span>', unsafe_allow_html=True,
+                            )
+                        with send:
+                            submitted = st.form_submit_button("➤", type="primary",
+                                                               help="Interroger le mini-agent")
 
-    tab_result, tab_sources, tab_search = st.tabs(["Résultat", "Preuves citées", "Recherche"])
-    with tab_result:
-        if result["status"] == "draft":
-            _render_draft(result)
-        else:
-            _render_claims(result.get("sections") or {})
-            if result.get("missing"):
-                st.caption("Informations manquantes : " + ", ".join(result["missing"]))
-    with tab_sources:
-        _render_references(result.get("references") or [])
-    with tab_search:
-        _render_retrieval(result["retrieval"])
+                if mode == "Atlas" and not has_result:
+                    st.markdown('<div class="suggestion-label">✧ &nbsp; Suggestions</div>',
+                                unsafe_allow_html=True)
+                    with st.container(key="suggestions"):
+                        summary, compare, draft = st.columns(3, gap="small")
+                        for column, key, icon, title, description, prompt in (
+                            (summary, "suggest_summary", "◷", "Synthétiser le projet",
+                             "Décisions, risques et responsables.", "Construis un dossier Atlas."),
+                            (compare, "suggest_compare", "◌", "Comparer les dates",
+                             "Suivre les changements confirmés.",
+                             "Compare la date proposée et la date confirmée pour la livraison Atlas."),
+                            (draft, "suggest_draft", "✉", "Préparer un mail",
+                             "Créer un brouillon avec preuves.",
+                             "Prépare un mail à la responsable du budget Atlas."),
+                        ):
+                            with column:
+                                with st.container(key=key):
+                                    st.markdown(f'<div class="suggest-icon">{icon}</div>',
+                                                unsafe_allow_html=True)
+                                    st.button(title, key=f"{key}_button", on_click=_set_request,
+                                              args=(prompt,))
+                                    st.markdown(f'<div class="suggest-desc">{description}</div>',
+                                                unsafe_allow_html=True)
+
+                ready = mode == "Atlas" or all(files.values())
+                if not ready:
+                    st.info("Chargez les quatre fichiers JSONL annotés pour interroger votre corpus.")
+
+                if submitted and ready:
+                    if not request.strip():
+                        st.warning("Saisissez une demande.")
+                    else:
+                        data = _uploaded_data(files) if mode == "Mes fichiers" else ()
+                        signature = _signature(mode, method, data)
+                        try:
+                            if st.session_state.get("pipeline_signature") != signature:
+                                with st.spinner("Chargement du corpus et de l'index…"):
+                                    st.session_state["pipeline"] = _pipeline(mode, method, data)
+                                    st.session_state["pipeline_signature"] = signature
+                            with st.spinner("Analyse de la demande…"):
+                                st.session_state["result"] = st.session_state["pipeline"].run(request.strip())
+                            st.session_state["result_signature"] = signature
+                            st.rerun()
+                        except (ValueError, FileNotFoundError, UnicodeError, json.JSONDecodeError) as error:
+                            st.error(f"Impossible de traiter ce corpus ou cette demande : {error}")
+                            st.session_state.pop("result", None)
+
+                result = st.session_state.get("result")
+                if result and ready:
+                    current_data = _uploaded_data(files) if mode == "Mes fichiers" else ()
+                    if st.session_state.get("result_signature") != _signature(mode, method, current_data):
+                        st.info("Le corpus ou la méthode a changé. Relancez la demande pour actualiser le résultat.")
+                    else:
+                        with st.container(key="results"):
+                            if result["status"] == "clarify":
+                                st.warning(result.get("message") or CLARIFICATIONS.get(
+                                    result.get("clarification_reason"), "Précisez votre demande pour continuer."))
+                            elif result["status"] == "uncertain":
+                                st.warning(result.get("message") or "Les preuves disponibles ne permettent pas de trancher.")
+                            elif result["status"] == "not_found":
+                                st.warning(result.get("message") or "Information introuvable.")
+                            elif result["status"] == "ok":
+                                st.success("Réponse construite à partir des sources")
+
+                            tab_result, tab_sources, tab_search = st.tabs(
+                                ["Résultat", "Preuves citées", "Recherche"])
+                            with tab_result:
+                                if result["status"] == "draft":
+                                    _render_draft(result)
+                                else:
+                                    _render_claims(result.get("sections") or {})
+                                    if result.get("missing"):
+                                        st.caption("Informations manquantes : " + ", ".join(result["missing"]))
+                            with tab_sources:
+                                _render_references(result.get("references") or [])
+                            with tab_search:
+                                _render_retrieval(result["retrieval"])
+                            st.download_button(
+                                "↓  Exporter le résultat JSON",
+                                data=json.dumps(result, ensure_ascii=False, indent=2),
+                                file_name="atlas_resultat.json", mime="application/json",
+                            )
 
 
 if __name__ == "__main__":
